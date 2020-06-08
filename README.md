@@ -1,4 +1,13 @@
 # FaultInjector
 
+Primi passi:
 
-1) Primi passi: trovare funzione dentro binario
+1) Todo: prendi stdout in c++ da hexdump
+2) 
+3)
+
+
+
+
+
+
