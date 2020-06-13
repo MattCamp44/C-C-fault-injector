@@ -5,6 +5,6 @@ DONE:
 
 TODO:
 - Bufferizzare la scrittura del file per modificare righe
-
+- Trovare una funzione nel file binario
 
 
