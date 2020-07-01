@@ -8,3 +8,6 @@ TODO:
 - Trovare una funzione nel file binario
 
 
+source:
+- https://gist.github.com/endolith/147203
+
