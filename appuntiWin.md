@@ -1,11 +1,21 @@
-- Serve : 
+ 
 
-1) un modo per settare i breakpoint sul programma prima di creare ed eseguire il processo (forse appoggiandosi a LLDB debugger che ha una libreria che espone un interfaccia compatibile con C++)
+Soluzione :
+
+fare tutto in unix, usare la libreria [GDB/MI](https://sourceware.org/gdb/onlinedocs/gdb/GDB_002fMI.html) per interagire con il codice del programma, stopparlo scegliendo le funzioni e quant'altro.
+Da GDB o da C++ riusciamo a prendere i puntatori agli indirizzi di memoria virtuale che il processo usa, tipo lo stack pointer dei thread oppure l'heap ecc.
+Avendo gli indirizzi a quel punto utilizzare [asm](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) per modificare il valore dei registri ecc.
+
+(Aspettando in tutto ciò se su stack overflow qualcuno mi suggerisce una libreria o debugger da utilizzare su windows, a quel punto si può gestire il lato modifiche HW da codice utilizzando, almeno in parte le windows api tipo debugapi.h e memory.h per il thread context, heap ecc.)
+
+
+Deprecato:
+~~1) un modo per settare i breakpoint sul programma prima di creare ed eseguire il processo (forse appoggiandosi a LLDB debugger che ha una libreria che espone un interfaccia compatibile con C++) **probabilmente devo attaccarmi al debug di gdb con delle api (https://sourceware.org/gdb/papers/libgdb2/libgdb_1.html#SEC1)**
 2) capire cosa si può modificare in questo modo
 3) settare un thread context e vedere che succede 
 4) interpretare il thread context
 5) guardate sotto nota **!!**
-6) **trovare funzione migliore di CreateProcess() per attaccarsi al processo e magari vederlo meglio**
+6) **trovare funzione migliore di CreateProcess() per attaccarsi al processo e magari vederlo meglio**~~
 
 nota :
 per settare i breakpoint o si usa LLDB (da vedere), oppure lo facciamo eseguendolo su un gdb che ci setta i breakpoint (lo fai all'inizio dell esecuzione), quando arriva ad un breakpoint il controllo passa all'applicazione che permette di gestire e cambiare il contenuto del context thread e anche dell'heap, visto che il context punta allo stack si può pensare di (forse ?) eseguire uno script in assembly che fa qualche cosa in particolare.
@@ -17,7 +27,7 @@ Guardare anche qui per [SetBreakpoint](https://docs.microsoft.com/en-us/windows-
 Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/_debugger/) da li ci sono funzioni per fare quasi tutto in termini di manipolazione dei processi e dei dati annessi a quei processi
 ## 15/09/2020
 
-Modificato il codice con menù, per ora solo 3 opzioni.
+Vedere sopra in soluzione:
 
 nota:
 Il thread su cui eseguo le operazioni ora è quello che fa partire CreateProcess, quindi il thread dovrebbe essere quello, in sostanza dovrei rifarmi al processo.
