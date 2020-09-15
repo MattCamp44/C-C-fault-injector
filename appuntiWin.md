@@ -1,11 +1,11 @@
 - Serve : 
 
 1) un modo per settare i breakpoint sul programma prima di creare ed eseguire il processo (forse appoggiandosi a LLDB debugger che ha una libreria che espone un interfaccia compatibile con C++)
-2) capire oltre allo stack del thread che tiene il processo che altro modificare
+2) capire cosa si può modificare in questo modo
 3) settare un thread context e vedere che succede 
 4) interpretare il thread context
 5) guardate sotto nota **!!**
-
+6) **trovare funzione migliore di CreateProcess() per attaccarsi al processo e magari vederlo meglio**
 
 nota :
 per settare i breakpoint o si usa LLDB (da vedere), oppure lo facciamo eseguendolo su un gdb che ci setta i breakpoint (lo fai all'inizio dell esecuzione), quando arriva ad un breakpoint il controllo passa all'applicazione che permette di gestire e cambiare il contenuto del context thread e anche dell'heap, visto che il context punta allo stack si può pensare di (forse ?) eseguire uno script in assembly che fa qualche cosa in particolare.
@@ -15,6 +15,15 @@ Guardare anche qui per [SetBreakpoint](https://docs.microsoft.com/en-us/windows-
 
 **!!**
 Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/_debugger/) da li ci sono funzioni per fare quasi tutto in termini di manipolazione dei processi e dei dati annessi a quei processi
+## 15/09/2020
+
+Modificato il codice con menù, per ora solo 3 opzioni.
+
+nota:
+Il thread su cui eseguo le operazioni ora è quello che fa partire CreateProcess, quindi il thread dovrebbe essere quello, in sostanza dovrei rifarmi al processo.
+In ogni caso essendo su windows ogni processo crea almeno un thread per eseguire il main, quindi dovrei riuscire ad attaccarmi a quel thread in caso.
+
+
 
 ## 14/09/2020
 
