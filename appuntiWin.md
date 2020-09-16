@@ -5,6 +5,9 @@ Soluzione :
 vedere [qui](http://sysprogs.com/GDBServerFoundation/dox/_simple_win32_server_2_simple_win32_server_8cpp-example.html) cosa fa questo server facendolo partire.
 A quel punto si potrebbe rivedere la stessa cosa ma in seno ai softerror, ovvero cambiare cosa fanno le api e magari fornire un interfaccia per interagire con il server.
 
+    #include "stdafx.h"
+Serve scaricare questa libreria
+
 
 Deprecato:
 ~~fare tutto in unix, usare la libreria [GDB/MI](https://sourceware.org/gdb/onlinedocs/gdb/GDB_002fMI.html) per interagire con il codice del programma, stopparlo scegliendo le funzioni e quant'altro.
