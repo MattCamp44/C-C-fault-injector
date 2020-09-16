@@ -1,12 +1,17 @@
  
-
+## Appunti vari
 Soluzione :
 
-fare tutto in unix, usare la libreria [GDB/MI](https://sourceware.org/gdb/onlinedocs/gdb/GDB_002fMI.html) per interagire con il codice del programma, stopparlo scegliendo le funzioni e quant'altro.
+vedere [qui](http://sysprogs.com/GDBServerFoundation/dox/_simple_win32_server_2_simple_win32_server_8cpp-example.html) cosa fa questo server facendolo partire.
+A quel punto si potrebbe rivedere la stessa cosa ma in seno ai softerror, ovvero cambiare cosa fanno le api e magari fornire un interfaccia per interagire con il server.
+
+
+Deprecato:
+~~fare tutto in unix, usare la libreria [GDB/MI](https://sourceware.org/gdb/onlinedocs/gdb/GDB_002fMI.html) per interagire con il codice del programma, stopparlo scegliendo le funzioni e quant'altro.
 Da GDB o da C++ riusciamo a prendere i puntatori agli indirizzi di memoria virtuale che il processo usa, tipo lo stack pointer dei thread oppure l'heap ecc.
 Avendo gli indirizzi a quel punto utilizzare [asm](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) per modificare il valore dei registri ecc.
-
-(Aspettando in tutto ciò se su stack overflow qualcuno mi suggerisce una libreria o debugger da utilizzare su windows, a quel punto si può gestire il lato modifiche HW da codice utilizzando, almeno in parte le windows api tipo debugapi.h e memory.h per il thread context, heap ecc.)
+Per attuare questa soluzione però bisogna capire come usare assembly, cosa farci di preciso ecc.
+(Aspettando in tutto ciò se su stack overflow qualcuno mi suggerisce una libreria o debugger da utilizzare su windows, a quel punto si può gestire il lato modifiche HW da codice utilizzando, almeno in parte le windows api tipo debugapi.h e memory.h per il thread context, heap ecc.)~~
 
 
 Deprecato:
@@ -25,6 +30,17 @@ Guardare anche qui per [SetBreakpoint](https://docs.microsoft.com/en-us/windows-
 
 **!!**
 Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/_debugger/) da li ci sono funzioni per fare quasi tutto in termini di manipolazione dei processi e dei dati annessi a quei processi
+## 16/09/2020
+
+tento di eseguire il programma tramite il debugger, l'idea è quella di avviare con il debugger (GDB) il processo e settare i brakpoint da gdb, a quel punto aspettarli dal programma e quando si raggiunge si eseguono le le funzioni di Set/GetThreadContext per i context del/dei thread/s.
+
+Se si potesse scrivere sullo stdin di un altro processo da me creato sarebbe good.
+
+Bisogna avviare i processi in 3 shell separate altrimenti GDB non vede il processo (anzi non si vede nemmeno dal taskmanager), con flag PROCESS_DEBUG il processo non viene creato e GDB infatti non lo vede
+
+usare FLAG -O0 -ggdb
+
+
 ## 15/09/2020
 
 Vedere sopra in soluzione:
