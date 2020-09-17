@@ -218,7 +218,7 @@ Ogni thread crea una struttura dati *TLS (Thread Local Storage)* nella memoria v
 # Teoria
 ## Debug Event e Breakpoint
 
-preso da [qui](https://www.microsoftpressstore.com/articles/article.aspx?p=2201303)
+appunti di [qui](https://www.microsoftpressstore.com/articles/article.aspx?p=2201303) e [qui](https://www.codeproject.com/Articles/132742/Writing-Windows-Debugger-Part-2)
 
 il sistema operativo genera diversi tipi di debug events, ogni volta che viene caricato un modulo oppure quando viene generato un processo dal target del debugger e quando viene generata un eccezione.
 I breakpoint sono dei *debug event*, infatti vengono generati forzando una eccezione processo nel processo target.
@@ -247,3 +247,21 @@ Per implementare i breakpoint si utilizza un tipo (utilizzato anche per le altre
 `This scheme sounds straightforward, but there is a catch: how is the debugger able to insert the int 3 instruction before the execution of the target process is resumed (using the g command) after a breakpoint hit? Surely, the debugger can’t simply insert the debug break instruction before the target’s execution is resumed because the next instruction to execute is supposed to be the original one from the target and not the int 3 instruction. The way the debugger solves this dilemma is the same way it is able to support single-stepping, which is by using the TF (“trap flag”) bit of the EFLAGS register on x86 and x64 processors to force the target thread to execute one instruction at a time. This single-step flag causes the CPU to issue an interrupt (int 1) after every instruction it executes. This allows the thread of the breakpoint to execute the original target instruction before the debugger is immediately given a chance to handle the new single-step SEH exception—which it does by restoring the debug break instruction again, as well as by resetting the TF flag so that the CPU single-step mode is disabled again.`
 
 In sostanza il debugger come fa a sostituire l'istruzione con la int3 dopo aver preso un breakpoint ? anche perche` dovrebbe eseguire la prossima che il programma prevede, infatti lo fa settando la flag TF (TRAP FLAG) e quindi forza la cpu ad eseguire un istruzione alla volta generando un interrupt (int1) dopo ogni istruzione.
+
+
+
+Debugbreak *{int3}*, bisogna mettere questa istruzione per ottenere un breakpoint, e va messa come prossima istruzione del processo.
+Questo e\` fondamentale e bisogna farlo nell'entry point del processo ovvero la prima istruzione, in questo modo possiamo controllare l'esecuzione del programma, solitamente viene messo nel main ma non e\` l'entry point.
+
+devo scrivere il breakpoint code, {int3} 0xCC nello spazio di memoria riservato alla prima istruzione, il primo byte (little ending?) e basta con CC.
+
+La strategia e' (vediamo se funziona), faccio partire il processo con le flag sue e a quel punto faccio WaitForDebugEvent(), questo intercettera' la creazione del processo che viene di default visto come debugevent.
+A quel punto prendo il primo indirizzo di memoria del processo (codice su articolo) 
+A quel punto memorizziamo cosa c'era nel primo byte, ci scriviamo 0xCC e facciamo il flush dell'istruction cache e vado avanti con COntinueDEbugEvent
+
+Il problema ora e' il seguente : quando il processore legge l'istruzione vede **CC** e ritorna l'eccezione, ma nel frattempo legge tutta l'istruzione, quindi devo spostare l'istruction pointer di 1 byte indietro e rimettere la vecchia istruzione (manipolo tutto con get/set thread context e la struttura CONTEXT)
+
+il codice e i passaggi sono tutti nell'articolo (il secondo in particolare) 
+(nota: servono le flag THREAD_GET_CONTEXT e THREAD_SET_CONTEXT come permessi, penso siano su process info)
+
+TRAP FRAME e EXCEPTION_SINGLE_STEP
