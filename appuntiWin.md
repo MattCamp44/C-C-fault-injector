@@ -9,15 +9,20 @@
   - [14/09/2020](#14092020)
 - [Teoria](#teoria)
   - [Debug Event e Breakpoint](#debug-event-e-breakpoint)
-
+- [Codice](#codice)
+    - [17/09/2020](#17092020-1)
+    
 
 Soluzione :
+attualmente si basa tutto sull'uso delle api messe a disposizone da windows per fare il debugger, in particolare basandosi su queste 3 risorse [1](https://www.codeproject.com/Articles/43682/Writing-a-basic-Windows-debugger) [2](https://www.codeproject.com/Articles/132742/Writing-Windows-Debugger-Part-2) [3](https://www.microsoftpressstore.com/articles/article.aspx?p=2201303)
 
-vedere [qui](http://sysprogs.com/GDBServerFoundation/dox/_simple_win32_server_2_simple_win32_server_8cpp-example.html) cosa fa questo server facendolo partire.
+
+
+Dprecato :
+~~vedere [qui](http://sysprogs.com/GDBServerFoundation/dox/_simple_win32_server_2_simple_win32_server_8cpp-example.html) cosa fa questo server facendolo partire.
 A quel punto si potrebbe rivedere la stessa cosa ma in seno ai softerror, ovvero cambiare cosa fanno le api e magari fornire un interfaccia per interagire con il server.
-
     #include "stdafx.h"
-Serve scaricare questa libreria
+Serve scaricare questa libreria~~
 
 
 Deprecato:
@@ -30,21 +35,22 @@ Per attuare questa soluzione però bisogna capire come usare assembly, cosa farc
 
 Deprecato:
 ~~1) un modo per settare i breakpoint sul programma prima di creare ed eseguire il processo (forse appoggiandosi a LLDB debugger che ha una libreria che espone un interfaccia compatibile con C++) **probabilmente devo attaccarmi al debug di gdb con delle api (https://sourceware.org/gdb/papers/libgdb2/libgdb_1.html#SEC1)**
-2) capire cosa si può modificare in questo modo
-3) settare un thread context e vedere che succede 
-4) interpretare il thread context
-5) guardate sotto nota **!!**
-6) **trovare funzione migliore di CreateProcess() per attaccarsi al processo e magari vederlo meglio**~~
+1) capire cosa si può modificare in questo modo
+2) settare un thread context e vedere che succede 
+3) interpretare il thread context
+4) guardate sotto nota **!!**
+5) **trovare funzione migliore di CreateProcess() per attaccarsi al processo e magari vederlo meglio**~~
 
-nota :
+~~nota :
 per settare i breakpoint o si usa LLDB (da vedere), oppure lo facciamo eseguendolo su un gdb che ci setta i breakpoint (lo fai all'inizio dell esecuzione), quando arriva ad un breakpoint il controllo passa all'applicazione che permette di gestire e cambiare il contenuto del context thread e anche dell'heap, visto che il context punta allo stack si può pensare di (forse ?) eseguire uno script in assembly che fa qualche cosa in particolare.
-Oppure bisognerebbe capire se DebugBreak() funziona per quello che ci serve oppure no
+Oppure bisognerebbe capire se DebugBreak() funziona per quello che ci serve oppure no~~
 
 Guardare anche qui per [SetBreakpoint](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/dbgeng/nf-dbgeng-idebugcontrol3-addbreakpoint)
 
 **!!**
 Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/_debugger/) da li ci sono funzioni per fare quasi tutto in termini di manipolazione dei processi e dei dati annessi a quei processi
 
+***
 
 # Appunti Giorno
 
@@ -265,3 +271,56 @@ il codice e i passaggi sono tutti nell'articolo (il secondo in particolare)
 (nota: servono le flag THREAD_GET_CONTEXT e THREAD_SET_CONTEXT come permessi, penso siano su process info)
 
 TRAP FRAME e EXCEPTION_SINGLE_STEP
+
+in questo caso non e' un breakpoint ma una flag nel processo che fa la trap ad ogni step.
+
+Per fare il wlking del codice c'e' bisogno di implementare step-in anche dentro alle funzioni.
+
+***
+
+# Codice
+### 17/09/2020
+(preso da [qui](https://www.codeproject.com/Articles/43682/Writing-a-basic-Windows-debugger))
+DBG_EXCEPTION_NOT_HANDLED al posto di DBG_CONTINUE
+informa il gestore debug object che l'eccezione non e' stata gestita
+
+    struct DEBUG_EVENT
+    {
+        DWORD dwDebugEventCode;
+        DWORD dwProcessId;
+        DWORD dwThreadId;
+        union {
+            EXCEPTION_DEBUG_INFO Exception;
+            CREATE_THREAD_DEBUG_INFO CreateThread;
+            CREATE_PROCESS_DEBUG_INFO CreateProcessInfo;
+            EXIT_THREAD_DEBUG_INFO ExitThread;
+            EXIT_PROCESS_DEBUG_INFO ExitProcess;
+            LOAD_DLL_DEBUG_INFO LoadDll;
+            UNLOAD_DLL_DEBUG_INFO UnloadDll;
+            OUTPUT_DEBUG_STRING_INFO DebugString;
+            RIP_INFO RipInfo;
+        } u;
+    };
+
+questa e' la struttura  che descrive un debugevent e ce ne sono di 9 + 20 sottocategorie, in dwDebugEvent c'e' il codice
+
+Un eccezione che adesso non considero ma potrebbe essere utile e' OUTPUT_DEBUG_STRING_EVENT con la corrispondente API da utilizzare dentro il codice del programma target
+
+CREATE_PROCESS_DEBUG_INFO questo evento viene generato quando viene creato un processo, la parte interessante e' CREATE_PROCESS_DEBUG_INFO che e' una struttura : 
+
+
+    struct CREATE_PROCESS_DEBUG_INFO
+    {
+        HANDLE hFile;   // The handle to the physical file (.EXE)
+        HANDLE hProcess; // Handle to the process
+        HANDLE hThread;  // Handle to the main/initial thread of process
+        LPVOID lpBaseOfImage; // base address of the executable image
+        DWORD dwDebugInfoFileOffset;
+        DWORD nDebugInfoSize;
+        LPVOID lpThreadLocalBase;
+        LPTHREAD_START_ROUTINE lpStartAddress;
+        LPVOID lpImageName;  // Pointer to first byte of image name (in Debuggee)
+        WORD fUnicode; // If image name is Unicode.
+    }
+  
+  ###nota quando faccio continueDebugEvent devo utilizzare il process id e il thread id che questa struttura mi da che e' (o puo' essere ?)  differente da prima perche' windows usa handle diversi per scopi differenti

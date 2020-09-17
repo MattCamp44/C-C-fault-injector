@@ -1,0 +1,338 @@
+/*
+#include <iostream>
+#include <Windows.h>
+#include <windows.h>
+#include <debugapi.h>
+#include <process.h>
+#include <processthreadsapi.h>
+#include <string>
+#include <tchar.h>
+#include <WinBase.h>
+#include <map>
+using namespace std;
+
+DWORD WINAPI startProces(LPVOID proces);
+
+enum Command {
+	InvalidCommand,//InvalidCOmmnd
+	GetContext,
+	SetBreakpoint,
+	Exit
+};
+
+HANDLE thread;
+HANDLE sem;
+DWORD pid;
+HANDLE mainThreadHandle;
+
+Command resolveCommand(string input) {
+	static const std::map<string, Command> options{
+
+		{"c",GetContext},
+		{"b",SetBreakpoint},
+		{"e",Exit}
+		
+		};
+
+	auto itr = options.find(input);
+	if (itr != options.end()) { // if not found return iterator to end 
+		return itr->second;
+	}
+	return InvalidCommand;
+
+}
+void help() {
+	cout << "	How to use :" << endl;
+	cout << "	c : SetContext" << endl;
+	cout << "	b : SetBreakpoint" << endl;
+	cout << "	e : Exit" << endl;
+} 
+void getSystemInfo() {
+	// questo servirà, quando si legge il context del thread bisogna farlo con un offset che dipende dal processore
+	//appunti su file appunti.md
+	SYSTEM_INFO sysinfo;
+	GetSystemInfo(&sysinfo);
+	cout << "[Main] Proccessor type:"<<sysinfo.dwProcessorType << endl; // info sul processore
+}
+
+void setBreakpoint() {
+	
+	
+}
+
+BOOL ContextManager() {
+	cout << "[Main] Try to suspend thread " << endl;
+
+	DWORD sCount = 0;
+	if ((sCount = SuspendThread(thread)) == -1) {
+		cout << "[Main] Fail to suspend thread..exit" << endl;
+		return 0;
+	}
+
+	cout << "[Main] Thread is currently suspended, suspend count :" << sCount << endl;
+
+	CONTEXT ctx;
+
+	if (!GetThreadContext(mainThreadHandle, &ctx)) {
+		cout << "[Main] Thread context error.."<< GetLastError() << endl;
+		return false;
+	}
+	cout << "[Main] Read context :" << endl;
+
+	cout << "	Dr0:" << ctx.Dr0 << endl;
+	cout << "	Dr1:" << ctx.Dr1 << endl;
+	cout << "	Dr2:" << ctx.Dr2 << endl;
+	cout << "	Dr3:" << ctx.Dr3 << endl;
+	cout << "	Dr6:" << ctx.Dr6 << endl;
+	cout << "	Dr7:" << ctx.Dr7 << endl;
+
+	cout << "	Eax:" << ctx.Eax << endl;
+	cout << "	Ebp:" << ctx.Ebp << endl;
+
+	cout << "	Ebx:" << ctx.Ebx << endl;
+	cout << "	Eax:" << ctx.Eax << endl;
+
+	cout << "	Ecx:" << ctx.Ecx << endl;
+	cout << "	istruction pointer :" << ctx.Eip << endl;
+	cout << "	stack pointer :" << ctx.Esp << endl;
+
+	cout << "[Main] Try to modify and new context.." << endl;
+
+	// modifico context
+	ctx.Dr0 = 1;
+	if (!SetThreadContext(mainThreadHandle, &ctx)) {
+		cout << "[Main] Fail to set thread context..exit" << GetLastError() << endl;
+		return 0;
+	}
+	cout << "[Main] Context Modified" << endl;
+
+	return true;
+}
+
+int main(int argc, char* argv[]) {
+
+	BOOL attached = false;
+	
+	if (argc == 0) {
+		cout << "[Main] error, give me an .exe file" << endl;
+		return 1;
+	}
+	
+
+	char* progToRun = argv[1];
+
+
+	cout << "[Main] Start" << endl;
+
+	
+
+	getSystemInfo();
+
+	//------ Start the program to Debug
+
+	sem = CreateSemaphore(NULL, 0, 1, NULL);
+	if (sem == nullptr) {
+	
+		cout << "[Main] Error in CreateSemaphore..exit" << endl;
+		exit(1);
+	}
+	cout << "[Main] Creation of Process that hold the program to test execution" << endl;
+
+	STARTUPINFO info = { sizeof(info) };
+	PROCESS_INFORMATION processInfo;
+	info.wShowWindow = SW_SHOW;
+	LPTSTR cmd = _tcsdup(TEXT("ProcToDebug.exe"));
+
+	if (!CreateProcess(NULL,   // No module name (use command line)
+		cmd,        // Command line
+		NULL,           // Process handle not inheritable
+		NULL,           // Thread handle not inheritable
+		TRUE,          // Set handle inheritance to FALSE
+		DEBUG_PROCESS |DEBUG_ONLY_THIS_PROCESS ,              // No creation flags
+		NULL,           // Use parent's environment block
+		NULL,           // Use parent's starting directory 
+		&info,            // Pointer to STARTUPINFO structure
+		&processInfo)) {
+
+
+		cout << "[Main] Process Creation fail...exit" << endl;
+		exit(1);
+
+	}
+	
+	pid = processInfo.dwProcessId; // take PID of process under test
+	mainThreadHandle = processInfo.hThread; // need for Get/SetThreadContext
+	
+	STARTUPINFO gdbInfo = { sizeof(info) };
+	PROCESS_INFORMATION gdbProcessInfo;
+	gdbInfo.wShowWindow = SW_SHOW;
+	
+	cout << "[Main] Process created PID : " << pid << endl;
+
+	/*
+	cout <<"[Main] Run GDB debugger.." << endl;
+	LPTSTR cmd2 = _tcsdup(TEXT("gdb"));
+	if (!CreateProcess(NULL,cmd2,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&gdbInfo,&gdbProcessInfo)) {
+		cout << "[Main] fail to run GDB..exit"<<endl;
+		exit(1);
+	}
+	cout << "[Main] GDB running" << endl;
+	*/
+	//WaitForSingleObject(processInfo.hProcess, INFINITE); // wait the process termination
+
+	Sleep(1000);
+
+//	system("pause");
+	/*
+	attached = DebugActiveProcess(pid);
+
+	if (!attached) {
+		cout << "[Main]  Error DebugActiveProcess..." << GetLastError() << endl;
+	}
+
+	cout << "[Main] Debug Attached :" << attached << endl;
+
+	BOOL present;
+	if (CheckRemoteDebuggerPresent(processInfo.hProcess,&present)) {
+		if (present == TRUE) {
+			cout << "[Main] The debug is present" << endl;
+		}
+		else {
+			cout << "[Main] The debug is not present...exit" << endl;
+			exit(1);
+		}
+	}
+	else {
+		cout << "[Main] Error checking remote debug...exit" << endl;
+		exit(1);
+	}
+
+
+	
+	Sleep(1000);
+	cout << endl;
+
+	string incmd;
+	BOOL stop = true;
+	help();
+	LPDEBUG_EVENT dbEvent = nullptr;
+	while (stop) {
+		/* non sembra vedere gli eventi che genera gdb, nemmeno se compilato con -g
+		if (!WaitForDebugEvent(dbEvent,INFINITE)) {
+			cout << "[Main] error in WaitForDebugEvent.." << GetLastError() << endl;
+			exit(0);
+		}
+		cout << "[Main] DebugEvent Reched" << endl;
+		*/
+		cout << "[Main] Command..";
+		cin >> incmd;
+		int cmd = resolveCommand(incmd);
+		switch (cmd)
+		{
+		case InvalidCommand:
+			cout << "Invalid command" << endl;
+			help();
+			break;
+		case GetContext:
+			// funzione sotto
+			if (!ContextManager())
+				cout << "[Main] something goes wrong in context" << endl;
+			break;
+		case SetBreakpoint:
+			setBreakpoint();
+			break;
+		case Exit:
+			stop = false;
+			break;
+		default:
+			break;
+		}
+	}
+	
+	return 1;
+}
+*/
+/*
+int temp() {
+
+	
+
+	cout << endl;
+
+
+	
+	cout << "[Main] Try to suspend thread " << endl;
+
+	DWORD sCount = 0;
+	if ((sCount = SuspendThread(thread)) == -1) {
+		cout << "[Main] Fail to suspend thread..exit" << endl;
+		return 0;
+	}
+
+	cout << "[Main] Thread is currently suspended, suspend count :" << sCount << endl;
+
+	cout << "[Main] Try to get thread context" << endl;
+
+	CONTEXT ctx;
+	ctx.ContextFlags = CONTEXT_ALL;
+	//PWOW64_CONTEXT ctx = {};
+	if (GetThreadContext(thread,&ctx) == 0) {
+		cout << "[Main] Not able to take thread context..exit :" << GetLastError() << endl;
+		return 1;
+	}
+
+	cout << "[Main] Read context :" << endl;
+
+	cout << "	Dr0:" << ctx.Dr0 << endl;
+	cout << "	Dr1:" << ctx.Dr1 << endl;
+	cout << "	Dr2:" << ctx.Dr2 << endl;
+	cout << "	Dr3:" << ctx.Dr3 << endl;
+	cout << "	Dr6:" << ctx.Dr6 << endl;
+	cout << "	Dr7:" << ctx.Dr7 << endl;
+	
+	cout << "	Eax:" << ctx.Eax << endl;
+	cout << "	Ebp:" << ctx.Ebp << endl;
+
+	cout << "	Ebx:"<< ctx.Ebx << endl;
+	cout << "	Eax:" << ctx.Eax << endl;
+
+	cout << "	Ecx:" << ctx.Ecx << endl;
+	cout << "	istruction pointer :" << ctx.Eip << endl;
+	cout << "	stack pointer :" << ctx.Esp << endl;
+
+	cout << "[Main] Try to modify and new context.." << endl;
+
+	// modifico context
+	ctx.Dr0 = 1 ;
+	if (!SetThreadContext(thread, &ctx)) {
+		cout << "[Main] Fail to set thread context..exit" << GetLastError() << endl;
+		return 0;
+	}
+	cout << "[Main] Context Modified" << endl;
+
+	cout << "[Main] try to resume thread.." << endl;
+	if (ResumeThread(thread) == -1) {
+		cout << "[Main] Fail to resume thread..exit" << GetLastError() << endl;
+		return 0;
+	}
+	cout << "[Main] thread resumed" << endl;
+	DebugActiveProcessStop(pid);
+
+	cout << "[Main] Debug Detached" << endl;
+
+	cout << "[Main] End" << endl;
+
+	return 0;
+}
+*/
+
+
+
+
+	
+
+// forse utile => http://www.debuginfo.com/examples/dbgexamples.html --- https://microsoft.public.win32.programmer.kernel.narkive.com/sB47K0EV/debugactiveprocess-returning-access-is-denied
+
+// context data structure => https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-arm64_nt_context
+
+// Wow64 context https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-wow64_context
