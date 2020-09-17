@@ -16,6 +16,7 @@
 Soluzione :
 attualmente si basa tutto sull'uso delle api messe a disposizone da windows per fare il debugger, in particolare basandosi su queste 3 risorse [1](https://www.codeproject.com/Articles/43682/Writing-a-basic-Windows-debugger) [2](https://www.codeproject.com/Articles/132742/Writing-Windows-Debugger-Part-2) [3](https://www.microsoftpressstore.com/articles/article.aspx?p=2201303)
 
+un idea per creare i breakpoint, se il programma lavora con le api di windows basta che in qualsiasi punto del codice si chiami DebugBreak() e viene generata un eccezione che il processo debugger puo' intercettareS
 
 
 Dprecato :
