@@ -335,3 +335,20 @@ int temp() {
 // context data structure => https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-arm64_nt_context
 
 // Wow64 context https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-wow64_context
+
+/*
+
+
+// problema: ddlName assume valori esadecimali che non si riescono a printare 
+				WCHAR* ddlName[BUFSIZE];
+				//ZeroMemory(ddlName, SIZE * sizeof(WCHAR));
+				DWORD n = GetFinalPathNameByHandle(debug_event->u.LoadDll.hFile, *ddlName, FILE_NAME_NORMALIZED, VOLUME_NAME_DOS);
+				cout << "Unicode char :" <<debug_event->u.LoadDll.fUnicode << endl;
+				if (n == 0) {
+					
+					cout << "can't find ddl name" << endl;
+					break;
+				}
+				wcout << n << "  name of ddl :"<< ddlName << endl;
+				cout << GetLastError() << " : " << ERROR_PATH_NOT_FOUND << " " << ERROR_NOT_ENOUGH_MEMORY << " " << ERROR_INVALID_PARAMETER;
+*/

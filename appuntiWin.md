@@ -3,6 +3,7 @@
 
 
 - [Appunti Giorno](#appunti-giorno)
+  - [18/09/2020](#18092020)
   - [17/09/2020](#17092020)
   - [16/09/2020](#16092020)
   - [15/09/2020](#15092020)
@@ -54,6 +55,17 @@ Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](
 ***
 
 # Appunti Giorno
+
+## 18/09/2020
+Si puo' effettuare il debugger anche di codice non C/C++ (testato python)
+
+Cerco di mettere un breakpoint nel main e provo a printare lo stack e magari a caricare i simboli
+
+Per mettere un BP nell'entrypoint del programma devo sostituire il primo byte con 0xCC(204) che e' il codice relativo al BP.
+su windbg bisogna fare il disassembly per vedere la prima istruzione e le successive
+
+per quanto rigurada la libreria Dbghelp.h i riferimenti a quelle funzioni non sono risolti dal linker di VS e l'applicazione non parte, per fare il walking dello stack serve la stessa libreria quindi bohboh.
+
 
 ## 17/09/2020
 continuo utilizzando debugapi per tentare di fermare il processo e farlo ripartire.
