@@ -2,6 +2,7 @@
 ## Appunti vari
 
 
+- [Note](#note)
 - [Appunti Giorno](#appunti-giorno)
   - [18/09/2020](#18092020)
   - [17/09/2020](#17092020)
@@ -12,7 +13,6 @@
   - [Debug Event e Breakpoint](#debug-event-e-breakpoint)
 - [Codice](#codice)
     - [17/09/2020](#17092020-1)
-    
 
 Soluzione :
 attualmente si basa tutto sull'uso delle api messe a disposizone da windows per fare il debugger, in particolare basandosi su queste 3 risorse [1](https://www.codeproject.com/Articles/43682/Writing-a-basic-Windows-debugger) [2](https://www.codeproject.com/Articles/132742/Writing-Windows-Debugger-Part-2) [3](https://www.microsoftpressstore.com/articles/article.aspx?p=2201303)
@@ -54,6 +54,9 @@ Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](
 
 ***
 
+# Note
+
+per far funzionare la libreria Dbghelp.h bisogna aggingere a mano la libreria al linker, in configuration properties->Configuration properties->linker->input->Additional Dependencies aggiungere **Dbghelp.h**
 # Appunti Giorno
 
 ## 18/09/2020
@@ -65,6 +68,7 @@ Per mettere un BP nell'entrypoint del programma devo sostituire il primo byte co
 su windbg bisogna fare il disassembly per vedere la prima istruzione e le successive
 
 per quanto rigurada la libreria Dbghelp.h i riferimenti a quelle funzioni non sono risolti dal linker di VS e l'applicazione non parte, per fare il walking dello stack serve la stessa libreria quindi bohboh.
+
 
 
 ## 17/09/2020
