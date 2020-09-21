@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\Giovanni\source\repos\FaultInjector\FaultInjector\main.cpp(129,9): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\Giovanni\source\repos\FaultInjector\FaultInjector\main.cpp(131,9): warning C4129: '_': unrecognized character escape sequence
+  FaultInjector.vcxproj -> C:\Users\Giovanni\source\repos\FaultInjector\Debug\FaultInjector.exe
