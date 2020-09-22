@@ -4,6 +4,8 @@
 
 - [Note](#note)
 - [Appunti Giorno](#appunti-giorno)
+  - [22/09/2020](#22092020)
+  - [21/09/2020](#21092020)
   - [18/09/2020](#18092020)
   - [17/09/2020](#17092020)
   - [16/09/2020](#16092020)
@@ -58,6 +60,20 @@ Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](
 
 per far funzionare la libreria Dbghelp.h bisogna aggingere a mano la libreria al linker, in configuration properties->Configuration properties->linker->input->Additional Dependencies aggiungere **Dbghelp.h**
 # Appunti Giorno
+## 22/09/2020
+
+provo a implementare il BP nella prima istruzione del programma
+
+
+## 21/09/2020
+
+aggiunto progetto al repository
+trovato modo di scrivere la memoria del processo, a questo punto unendo il contesto dei Thread (e dei thread, volendo memorizzarli) possiamo mettere l'errore ovunque vogliamo, quindi da dove cominciano le librerie o qualsiasi altra cosa, la cosa da fare ora e' riuscire a printare lo stack e a mettere i breakpoint (magari anche poter fare il walking del codice)
+
+- per la grandezza del processo guardare la api GetMemoryProcessInfo che ritorna una struttura _PROCESS_MEMORY_COUNTERS  che ha un attributo che e' la grandezza del working set
+
+- per la seconda shell scrivere classe
+
 
 ## 18/09/2020
 Si puo' effettuare il debugger anche di codice non C/C++ (testato python)
