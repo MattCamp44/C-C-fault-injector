@@ -4,6 +4,7 @@
 
 - [Note](#note)
 - [Appunti Giorno](#appunti-giorno)
+  - [24/09/2020](#24092020)
   - [22/09/2020](#22092020)
   - [21/09/2020](#21092020)
   - [18/09/2020](#18092020)
@@ -60,10 +61,16 @@ Inoltre le funzioni che mette a disposizione windows per il debugger sono [qui](
 
 per far funzionare la libreria Dbghelp.h bisogna aggingere a mano la libreria al linker, in configuration properties->Configuration properties->linker->input->Additional Dependencies aggiungere **Dbghelp.h**
 # Appunti Giorno
+## 24/09/2020
+
+in windows >> nm nome.exe comando che estrae i simboli dall'eseguibile
+
+quando si vanno a caricare i simboli del main si ho notato che il tipo di simboli che viene caricato e' SymDeferred, da [qui](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/deferred-symbol-loading#:~:text=By%20default%2C%20symbol%20information%20is,it%20encounters%20an%20unrecognized%20symbol.)
+si capisce che in effetti i simboli non vengono caricati fintanto che questi non vengono chiamati questa tecnica viene detta *deferred symbol loading*, quindi devo trovare in modo di caricarli indipendentemente da questo (forse c'e' un modo per disabilitare questa opzione)
+
 ## 22/09/2020
 
 provo a implementare il BP nella prima istruzione del programma
-
 
 ## 21/09/2020
 
