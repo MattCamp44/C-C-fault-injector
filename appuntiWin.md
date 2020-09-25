@@ -66,7 +66,7 @@ per far funzionare la libreria Dbghelp.h bisogna aggingere a mano la libreria al
 in windows >> nm nome.exe comando che estrae i simboli dall'eseguibile
 
 quando si vanno a caricare i simboli del main si ho notato che il tipo di simboli che viene caricato e' SymDeferred, da [qui](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/deferred-symbol-loading#:~:text=By%20default%2C%20symbol%20information%20is,it%20encounters%20an%20unrecognized%20symbol.)
-si capisce che in effetti i simboli non vengono caricati fintanto che questi non vengono chiamati questa tecnica viene detta *deferred symbol loading*, quindi devo trovare in modo di caricarli indipendentemente da questo (forse c'e' un modo per disabilitare questa opzione)
+si capisce che in effetti i simboli non vengono caricati fintanto che questi non vengono chiamati questa tecnica viene detta *deferred symbol loading*, quindi devo trovare in modo di caricarli indipendentemente da questo (forse c'e' un modo per disabilitarla)
 
 ## 22/09/2020
 
