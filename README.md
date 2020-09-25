@@ -31,8 +31,13 @@ Selezione localita' dei guasti iniettati
 - Main/Funzione 
 - Stack/Heap
 
-Vedere rappresentazione DWARF ( gcc -g ) per sezioni del codice 
+TODOs
+- Avere accesso tutti gli indirizzi di memoria espliciti del programma, per poter scegliere dove bloccare e dove iniettare -> DWARF sembra la via
+- Formattare output log nei tipi di output sopra
 
+
+Vedere rappresentazione DWARF ( gcc -g ) per sezioni del codice 
+https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/
 
 // qt (GUI) 
 // segnalazione ad eventi -> 
