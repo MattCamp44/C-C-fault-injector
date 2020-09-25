@@ -31,6 +31,9 @@ Selezione localita' dei guasti iniettati
 - Main/Funzione 
 - Stack/Heap
 
+Vedere rappresentazione DWARF ( gcc -g ) per sezioni del codice 
+
+
 // qt (GUI) 
 // segnalazione ad eventi -> 
 // bus library 
