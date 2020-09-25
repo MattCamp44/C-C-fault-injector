@@ -14,7 +14,7 @@ source:
 
 Appunti chiamata 25/09/2020
 
-file lista di guasti 
+File lista di guasti 
 - Tempo 
 - Luogo
 - Output
