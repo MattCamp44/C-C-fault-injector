@@ -15,9 +15,9 @@ source:
 Appunti chiamata 25/09/2020
 
 file lista di guasti 
--Tempo 
--Luogo
--Output
+- Tempo 
+- Luogo
+- Output
 
 Tipi di output 
 - Output corretto 
@@ -26,10 +26,10 @@ Tipi di output
 - ENG (non finisce mai) -> guarda tempo di esecuzione con timeout 
 
 Selezione localita' dei guasti iniettati
--tutta memoria 
--dati/istruzioni 
--main/funzione 
--stack/heap
+- Tutta la memoria 
+- Dati/Istruzioni 
+- Main/Funzione 
+- Stack/Heap
 
 // qt (GUI) 
 // segnalazione ad eventi -> 
