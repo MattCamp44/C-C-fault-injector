@@ -24,8 +24,11 @@ int Debugger::start(char * progName){
 
                 //traceme
                 printf("i'm the child \n");
-                ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
-                execl(progName,progName,nullptr);
+                if(ptrace(PTRACE_TRACEME,0,nullptr,nullptr) < 0){
+                    printf("ptrace error");
+                    return 1;
+                }
+                execl("/bin/ls","ls",nullptr);
 
             }else{
                 printf("i'm the father \n");
@@ -46,6 +49,7 @@ int Debugger::start(char * progName){
                 }
 
                 printf("returned code : %d \n",statusCode);
+                waitpid(pid,nullptr,1);
             }
             return 0;
 };
