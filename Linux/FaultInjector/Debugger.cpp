@@ -12,7 +12,7 @@ Debugger::Debugger(){
 
 
 int Debugger::start(char * progName){
-
+            int nistr = 0;
             pid = fork();
 
             if(pid < 0) {
@@ -41,7 +41,9 @@ int Debugger::start(char * progName){
                     printf("error in waitpid");
                     return 0;
                 }
+
                 while(WIFSTOPPED(statusCode)){
+                    nistr++;
                     if (WIFEXITED(statusCode)) {
                     printf("process exited, status=%d\n", WEXITSTATUS(statusCode));
                 } else if (WIFCONTINUED(statusCode)) {
@@ -49,15 +51,17 @@ int Debugger::start(char * progName){
                 } else if(WIFSTOPPED(statusCode)){
                     printf("stopped \n");
                 }
-                printf("single step\n");
+                
                 if (ptrace(PTRACE_SINGLESTEP, pid, 0, 0) < 0) {
                     perror("ptrace error single step \n");
-                     return 1;
+                     break;
                   }
                 }
+                
                 wait(nullptr);
-                printf("back to single step \n");
+                
                 
             }
+            printf("eseguite %d istruzioni \n",nistr);
             return 0;
 };
