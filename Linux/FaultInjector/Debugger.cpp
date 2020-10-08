@@ -28,12 +28,12 @@ int Debugger::start(char * progName){
                     printf("ptrace error");
                     return 1;
                 }
-                execl("/bin/ls","ls",nullptr);
+                execl("Debugee1","Debugee1",nullptr);
 
             }else{
                 printf("i'm the father \n");
                 
-                int option = WUNTRACED | WCONTINUED;
+                int option = 0;
                 int statusCode;
                 int waitcode = waitpid(pid,&statusCode,option);
 
@@ -41,15 +41,23 @@ int Debugger::start(char * progName){
                     printf("error in waitpid");
                     return 0;
                 }
-                
-                 if (WIFEXITED(statusCode)) {
+                while(WIFSTOPPED(statusCode)){
+                    if (WIFEXITED(statusCode)) {
                     printf("process exited, status=%d\n", WEXITSTATUS(statusCode));
                 } else if (WIFCONTINUED(statusCode)) {
                     printf("continued\n");
+                } else if(WIFSTOPPED(statusCode)){
+                    printf("stopped \n");
                 }
-
-                printf("returned code : %d \n",statusCode);
-                waitpid(pid,nullptr,1);
+                printf("single step\n");
+                if (ptrace(PTRACE_SINGLESTEP, pid, 0, 0) < 0) {
+                    perror("ptrace error single step \n");
+                     return 1;
+                  }
+                }
+                wait(nullptr);
+                printf("back to single step \n");
+                
             }
             return 0;
 };
