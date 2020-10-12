@@ -1,0 +1,9 @@
+
+.debug_info
+
+.debug_str
+
+.debug_aranges
+
+.debug_frame
+

@@ -14,15 +14,16 @@ class Controller{
 // rilancia il debugger il numero di volte necessario
 private :
     //Debugger dbg;
+    char * progName;
 
 public:
 Controller(){
     //dbg = Debugger();
+    progName = (char *) "Debugee1";
 };
 void start(){
     fprintf(stdout,"Controller start \n");
     
-    //dbg.start();
     return;
 };
 };
