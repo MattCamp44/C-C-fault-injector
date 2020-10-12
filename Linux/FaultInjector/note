@@ -5,7 +5,7 @@ int option = PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEEXEC
 				 | PTRACE_O_TRACEEXIT;
 
 Prossima features : Mettere BP in un punto di una funzione funzione
-					- estrarre simboli da exe
+					- estrarre simboli da exe, forse con regex + python
 					- trovare inizio e fine in memoria della funzione scelta (lo spazio di indirizzi)
 					- mettere in un punto casuale dello spazio sopracitato un BP 
 					- far riprendere il programma
