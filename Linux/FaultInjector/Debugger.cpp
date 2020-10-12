@@ -36,6 +36,7 @@ int Debugger::start(char * progName){
                 int option = 0;
                 int statusCode;
                 int waitcode = waitpid(pid,&statusCode,option);
+                
 
                 if(waitcode == -1){
                     printf("error in waitpid");
@@ -52,8 +53,8 @@ int Debugger::start(char * progName){
                     printf("stopped \n");
                 }
                 
-                if (ptrace(PTRACE_SINGLESTEP, pid, 0, 0) < 0) {
-                    perror("ptrace error single step \n");
+                if (ptrace(PTRACE_CONT, pid, 0, 0) < 0) {
+                    perror("ptrace CONT  \n");
                      break;
                   }
                 }
