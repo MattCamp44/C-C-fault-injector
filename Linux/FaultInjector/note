@@ -1,0 +1,2 @@
+in proc/sys/kernel/yama/ptrace_scope si trova l'impostazione per la protezione di ptrace, se 0 tutti 
+i processi possono fare debugging di altri.

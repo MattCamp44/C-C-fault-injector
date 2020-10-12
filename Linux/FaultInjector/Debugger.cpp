@@ -21,17 +21,17 @@ int Debugger::start(char * progName){
 
             if(pid == 0){
                 // indirizzare stdout e stderr al file di uscita
-
+                printf("my pid %d \n",getpid());
                 //traceme
                 printf("i'm the child \n");
                 if(ptrace(PTRACE_TRACEME,0,nullptr,nullptr) < 0){
                     printf("ptrace error");
                     return 1;
                 }
-                execl("Debugee1","Debugee1",nullptr);
+                execl("Debugee1","",nullptr);
 
             }else{
-                printf("i'm the father \n");
+                printf("i'm the father of PID : %d \n",pid);
                 
                 int option = 0;
                 int statusCode;
@@ -51,11 +51,18 @@ int Debugger::start(char * progName){
                     printf("continued\n");
                 } else if(WIFSTOPPED(statusCode)){
                     printf("stopped \n");
-                }
+                } else if (WIFSIGNALED(statusCode)){
+                    printf("signaled");
+                } 
                 
-                if (ptrace(PTRACE_CONT, pid, 0, 0) < 0) {
+                if (ptrace(PTRACE_CONT, pid, nullptr, nullptr) < 0) {
                     perror("ptrace CONT  \n");
-                     break;
+                    sleep(5);
+                    //break;
+                    if(ptrace(PTRACE_ATTACH,pid,nullptr,nullptr) < 0){
+                        perror("Attach failed :");
+                        break;
+                    }
                   }
                 }
                 
