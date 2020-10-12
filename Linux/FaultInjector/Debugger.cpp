@@ -28,7 +28,7 @@ int Debugger::start(char * progName){
                     printf("ptrace error");
                     return 1;
                 }
-                execl("Debugee1","",nullptr);
+                execl("Debugee1","Debugee1",nullptr);
 
             }else{
                 printf("i'm the father of PID : %d \n",pid);
@@ -59,10 +59,6 @@ int Debugger::start(char * progName){
                     perror("ptrace CONT  \n");
                     sleep(5);
                     //break;
-                    if(ptrace(PTRACE_ATTACH,pid,nullptr,nullptr) < 0){
-                        perror("Attach failed :");
-                        break;
-                    }
                   }
                 }
                 
