@@ -59,7 +59,7 @@ int Debugger::start(char * progName){
                   }
                 }
                 
-                wait(nullptr);
+                wait(&statusCode);
                 
                 
             }
