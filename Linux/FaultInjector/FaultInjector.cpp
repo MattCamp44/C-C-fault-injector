@@ -5,29 +5,6 @@
 #include <sys/wait.h>
 
 
-class Controller{
-    // prende file eseguibile
-// fa objdump per indirizzi
-// crea pipe per raccogliere output
-// comunica al Debugger dove metterre i BP e dove eseguire gli injecto e quanti
-// prende output dal debugger 
-// rilancia il debugger il numero di volte necessario
-private :
-    //Debugger dbg;
-    char * progName;
-
-public:
-Controller(){
-    //dbg = Debugger();
-    progName = (char *) "Debugee1";
-};
-void start(){
-    fprintf(stdout,"Controller start \n");
-    
-    return;
-};
-};
-
 class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
@@ -72,10 +49,42 @@ void start(){
 };
 };
 
+class Controller{
+    // prende file eseguibile
+// fa objdump per indirizzi
+// crea pipe per raccogliere output
+// comunica al Debugger dove metterre i BP e dove eseguire gli injecto e quanti
+// prende output dal debugger 
+// rilancia il debugger il numero di volte necessario
+private :
+    //Debugger dbg;
+    char * progName;
+
+public:
+Controller(){
+    //dbg = Debugger();
+    progName = (char *) "Debugee1";
+};
+void start(){
+    fprintf(stdout,"Controller start \n");
+    
+    Debugger dbg;
+
+    dbg.start();
+    
+    return;
+};
+};
+
 int main(){
 
+
+
     printf("Start \n");
-    Debugger dbg;
-    dbg.start();
+
+    Controller controller;
+
+    controller.start();
+
     printf("Stop \n");
 }
