@@ -14,16 +14,23 @@
 
 using namespace std;
 
-vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
+vector<string> ExtractFunctionNames(){
 
+    fstream ObjDumpFile;
+
+    ObjDumpFile.open("dump",ios::in);
     vector<string> FunctionNames;
 
     unsigned int curLine = 0;
     string search = FIND_SYMBOL_STRING;
     string line;
-        while(getline(ObjDumpFile, line)) { // I changed this, see below
+    
+        while(getline(ObjDumpFile, line) ) { // I changed this, see below
+
+        cout << "Tellg(): " << ObjDumpFile.tellg() << endl;
+
         curLine++;
-        cout << line << endl;
+        //cout << line << endl;
             if (line.find(search, 0) != string::npos) {
                 cout << "found: " << search << "line: " << line << endl;
     
@@ -31,6 +38,10 @@ vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
     
         }
 
+    cout << "Before Close()" << endl;
+    ObjDumpFile.close();
+
+    cout << "After Close()" << endl;
     }
 
 
@@ -39,11 +50,11 @@ vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
 
 int main(){
     
-    fstream fileInput;
 
-    fileInput.open("dump",ios::in);
+    vector<string> SymbolNames = ExtractFunctionNames();
 
-    ExtractFunctionNames(fileInput);
+
+    cout << "Function ends" << endl;
 
 
     }
