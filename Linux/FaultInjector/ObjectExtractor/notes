@@ -1,0 +1,15 @@
+objdump -s -j .text prog | grep '^ 4' | cut -d' ' -f3-6 | tr -d ' ' | sed 's/../0x&,/g'
+
+objdump -d
+
+
+identifica funzioni -> subprogram
+
+
+
+
+
+
+
+
+
