@@ -43,10 +43,23 @@ https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/
 // segnalazione ad eventi -> 
 // bus library 
 
+https://reverseengineering.stackexchange.com/questions/6759/how-to-extract-functions-from-one-executable-to-include-link-in-another
 
+Forma ideale per selezione indirizzi:
 
+Funzione1:
+0x001 
+0x002
+...
 
+Funzione2:
+...
 
+Funzione3:
+...
+
+Main:
+...
 
 
 
