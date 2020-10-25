@@ -58,10 +58,19 @@ vector<string> ExtractAddresses(FunctionObject functionobject){
         
        if (line.find(functionobject.getlinkagename(), 0) != string::npos) {
 
+            while(line != ""){
+                getline(objdumpfile, line) ;
+                if(line!= ""){
+                    
+                    cout << line.substr(2,6) << endl;
 
-        
+                    addresses.emplace_back(line.substr(2,6));
+                
+                }
+            }
             
-            
+        return addresses;
+
             }
 
         }
@@ -102,11 +111,18 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
                         linkagename = line.substr(50); 
     
                         linkagename.erase( remove( linkagename.begin(), linkagename.end(), '"') , linkagename.end() );
+
+                        cout << functionname << ": \n";
+
+                        vector<string> addresses = ExtractAddresses(FunctionObject(functionname,linkagename));
+
+                        cout << endl;
                 }
                     else 
                         linkagename = "main";
 
                     FunctionObjects.emplace_back(FunctionObject(functionname,linkagename));
+
             }
 
             

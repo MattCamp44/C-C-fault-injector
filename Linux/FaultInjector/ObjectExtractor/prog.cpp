@@ -12,7 +12,14 @@ class ClassB{};
 class ClassC{};
 
 
-void FunctionA(){}
+void FunctionA(){
+    
+    int a;
+
+    for(a = 0; a < 200; a++);
+    
+    
+    }
 void FunctionB(){}
 void FunctionC(){}
 void FunctionD(){}
