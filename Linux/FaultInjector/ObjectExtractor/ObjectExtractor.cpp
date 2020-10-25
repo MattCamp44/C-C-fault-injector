@@ -11,28 +11,41 @@
 
 #define FIND_SYMBOL_STRING "subprogram"
 
-
 using namespace std;
+
+
+
+class FunctionObject {
+    
+    string FunctionName;
+
+    //uint_8 addresses[2];  //beginning, end
+    
+    string LinkingName;
+    
+    
+    
+    };
+
+
+
+
+
+
 
 vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
 
     vector<string> FunctionNames;
 
-    unsigned int curLine = 0;
-    string search = FIND_SYMBOL_STRING;
     string line;
     
-        while(getline(ObjDumpFile, line) ) { // I changed this, see below
+        while(getline(ObjDumpFile, line) ) { 
 
-        //cout << "Tellg(): " << ObjDumpFile.tellg() << endl;
 
-        curLine++;
-        //cout << line << endl;
-           if (line.find(search, 0) != string::npos) {
-         //       cout << "found: " << search << "line: " << line << endl;
-                    getline(ObjDumpFile, line); 
-                    getline(ObjDumpFile, line); 
+           if (line.find(FIND_SYMBOL_STRING, 0) != string::npos) {
                     
+                    getline(ObjDumpFile, line); 
+                    getline(ObjDumpFile, line); 
                     
 
                     FunctionNames.emplace_back(line.substr(50));
@@ -41,16 +54,14 @@ vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
     
         }
 
-    cout << "Before Close()" << endl;
+
     ObjDumpFile.close();
 
-    cout << "After Close()" << endl;
 
     return FunctionNames;
+
+
     }
-
-
-
 
 
 int main(){
@@ -62,7 +73,6 @@ int main(){
     vector<string> SymbolNames = ExtractFunctionNames(ObjDumpFile);
 
 
-    cout << "Function ends" << endl;
 
     for(auto a : SymbolNames)
         cout << a << endl;
