@@ -3,7 +3,7 @@
 
 
 //Prende in input un ObjectDump e ritorna i nomi delle funzioni
-
+#include <algorithm>
 #include<fstream>
 #include<iostream>
 #include<vector>
@@ -20,27 +20,55 @@ class FunctionObject {
     string FunctionName;
 
     //uint_8 addresses[2];  //beginning, end
+    string beginningaddr;
+    string endaddr;
+    vector<string> addresses;
     
-    string LinkingName;
+    string linkageName;
     
 
     public:
     
-    FunctionObject(string FunctionName, string LinkingName){
+    FunctionObject(string FunctionName, string linkageName){
         
         this->FunctionName = FunctionName;
-        this->LinkingName = LinkingName;
+        this->linkageName = linkageName;
 
         }
     
     string getname(){return this->FunctionName;}
-    string getlinkingname(){return this->LinkingName;}
+    string getlinkagename(){return this->linkageName;}
 
 
     };
 
 
 
+vector<string> ExtractAddresses(FunctionObject functionobject){
+    
+    vector<string> addresses;
+
+    fstream objdumpfile;
+    objdumpfile.open("objdump",ios::in);
+
+
+    string line;
+
+    while(getline(objdumpfile, line) ) { 
+        
+       if (line.find(functionobject.getlinkagename(), 0) != string::npos) {
+
+
+        
+            
+            
+            }
+
+        }
+    
+    
+    
+    }
 
 
 
@@ -50,7 +78,7 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
     vector<FunctionObject> FunctionObjects;
 
     string line;
-    string linkingname;
+    string linkagename;
     string functionname;
 
         while(getline(ObjDumpFile, line) ) { 
@@ -63,21 +91,25 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
                     
                     functionname = line.substr(50);
 
-                    //FunctionNames.emplace_back(line.substr(50));
-                    
+                    functionname.erase( remove( functionname.begin(), functionname.end(), '"') , functionname.end() );
+
                     if(functionname.find("main") == string::npos){
 
                         getline(ObjDumpFile, line); 
                         getline(ObjDumpFile, line); 
                         getline(ObjDumpFile, line); 
 
-                        linkingname = line.substr(50); 
+                        linkagename = line.substr(50); 
     
+                        linkagename.erase( remove( linkagename.begin(), linkagename.end(), '"') , linkagename.end() );
                 }
-                    else linkingname = "main";
-                    FunctionObjects.emplace_back(FunctionObject(functionname,linkingname));
+                    else 
+                        linkagename = "main";
+
+                    FunctionObjects.emplace_back(FunctionObject(functionname,linkagename));
             }
 
+            
         
     
         }
@@ -103,7 +135,7 @@ int main(){
 
 
     for(auto a : SymbolNames)
-        cout << a.getname() << a.getlinkingname() << endl;
+        cout << a.getname() << " " << a.getlinkagename() << " " << endl;
 
     }
 
