@@ -32,7 +32,10 @@ vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
          //       cout << "found: " << search << "line: " << line << endl;
                     getline(ObjDumpFile, line); 
                     getline(ObjDumpFile, line); 
-                    FunctionNames.emplace_back(line);
+                    
+                    
+
+                    FunctionNames.emplace_back(line.substr(50));
     
             }
     
