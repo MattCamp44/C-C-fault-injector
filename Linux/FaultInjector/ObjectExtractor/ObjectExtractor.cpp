@@ -14,11 +14,8 @@
 
 using namespace std;
 
-vector<string> ExtractFunctionNames(){
+vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
 
-    fstream ObjDumpFile;
-
-    ObjDumpFile.open("dump",ios::in);
     vector<string> FunctionNames;
 
     unsigned int curLine = 0;
@@ -27,12 +24,15 @@ vector<string> ExtractFunctionNames(){
     
         while(getline(ObjDumpFile, line) ) { // I changed this, see below
 
-        cout << "Tellg(): " << ObjDumpFile.tellg() << endl;
+        //cout << "Tellg(): " << ObjDumpFile.tellg() << endl;
 
         curLine++;
         //cout << line << endl;
-            if (line.find(search, 0) != string::npos) {
-                cout << "found: " << search << "line: " << line << endl;
+           if (line.find(search, 0) != string::npos) {
+         //       cout << "found: " << search << "line: " << line << endl;
+                    getline(ObjDumpFile, line); 
+                    getline(ObjDumpFile, line); 
+                    FunctionNames.emplace_back(line);
     
             }
     
@@ -42,6 +42,8 @@ vector<string> ExtractFunctionNames(){
     ObjDumpFile.close();
 
     cout << "After Close()" << endl;
+
+    return FunctionNames;
     }
 
 
@@ -50,12 +52,17 @@ vector<string> ExtractFunctionNames(){
 
 int main(){
     
+    fstream ObjDumpFile;
 
-    vector<string> SymbolNames = ExtractFunctionNames();
+    ObjDumpFile.open("dump",ios::in);
+
+    vector<string> SymbolNames = ExtractFunctionNames(ObjDumpFile);
 
 
     cout << "Function ends" << endl;
 
+    for(auto a : SymbolNames)
+        cout << a << endl;
 
     }
 
