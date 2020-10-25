@@ -23,8 +23,20 @@ class FunctionObject {
     
     string LinkingName;
     
+
+    public:
     
+    FunctionObject(string FunctionName, string LinkingName){
+        
+        this->FunctionName = FunctionName;
+        this->LinkingName = LinkingName;
+
+        }
     
+    string getname(){return this->FunctionName;}
+    string getlinkingname(){return this->LinkingName;}
+
+
     };
 
 
@@ -33,12 +45,14 @@ class FunctionObject {
 
 
 
-vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
+vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
 
-    vector<string> FunctionNames;
+    vector<FunctionObject> FunctionObjects;
 
     string line;
-    
+    string linkingname;
+    string functionname;
+
         while(getline(ObjDumpFile, line) ) { 
 
 
@@ -47,10 +61,24 @@ vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
                     getline(ObjDumpFile, line); 
                     getline(ObjDumpFile, line); 
                     
+                    functionname = line.substr(50);
 
-                    FunctionNames.emplace_back(line.substr(50));
+                    //FunctionNames.emplace_back(line.substr(50));
+                    
+                    if(functionname.find("main") == string::npos){
+
+                        getline(ObjDumpFile, line); 
+                        getline(ObjDumpFile, line); 
+                        getline(ObjDumpFile, line); 
+
+                        linkingname = line.substr(50); 
     
+                }
+                    else linkingname = "main";
+                    FunctionObjects.emplace_back(FunctionObject(functionname,linkingname));
             }
+
+        
     
         }
 
@@ -58,7 +86,7 @@ vector<string> ExtractFunctionNames(fstream& ObjDumpFile){
     ObjDumpFile.close();
 
 
-    return FunctionNames;
+    return FunctionObjects;
 
 
     }
@@ -70,12 +98,12 @@ int main(){
 
     ObjDumpFile.open("dump",ios::in);
 
-    vector<string> SymbolNames = ExtractFunctionNames(ObjDumpFile);
+    vector<FunctionObject> SymbolNames = ExtractFunctionNames(ObjDumpFile);
 
 
 
     for(auto a : SymbolNames)
-        cout << a << endl;
+        cout << a.getname() << a.getlinkingname() << endl;
 
     }
 
