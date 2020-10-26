@@ -3,7 +3,8 @@
 #include <iostream>
 #include <sys/ptrace.h>
 #include <sys/wait.h>
-
+#include <vector>
+#include <iostream>
 
 
 class Debugger{
@@ -11,6 +12,8 @@ class Debugger{
 private:
     int pid;
     char * progName;
+    int64_t WhereAddress = 0x000000000000117d ;
+
 public:
 Debugger(){
     this->pid = 0;

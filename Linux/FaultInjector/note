@@ -9,3 +9,5 @@ Prossima features : Mettere BP in un punto di una funzione funzione
 					- trovare inizio e fine in memoria della funzione scelta (lo spazio di indirizzi)
 					- mettere in un punto casuale dello spazio sopracitato un BP 
 					- far riprendere il programma
+
+Non e' necessario intercettare la syscall execl() poiche' e' quella che sblocca il tracer quando esegue wait() 
