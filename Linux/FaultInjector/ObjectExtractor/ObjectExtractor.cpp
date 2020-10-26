@@ -20,8 +20,6 @@ class FunctionObject {
     string FunctionName;
 
     //uint_8 addresses[2];  //beginning, end
-    string beginningaddr;
-    string endaddr;
     vector<string> addresses;
     
     string linkageName;
@@ -35,10 +33,17 @@ class FunctionObject {
         this->linkageName = linkageName;
 
         }
+    FunctionObject(string FunctionName, string linkageName, vector<string> addresses){
+        
+        this->FunctionName = FunctionName;
+        this->linkageName = linkageName;
+        this->addresses = addresses;
+
+        }
     
     string getname(){return this->FunctionName;}
     string getlinkagename(){return this->linkageName;}
-
+    vector<string> getaddresses(){return this->addresses;}
 
     };
 
@@ -62,7 +67,6 @@ vector<string> ExtractAddresses(FunctionObject functionobject){
                 getline(objdumpfile, line) ;
                 if(line!= ""){
                     
-                    cout << line.substr(2,6) << endl;
 
                     addresses.emplace_back(line.substr(2,6));
                 
@@ -112,16 +116,14 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
     
                         linkagename.erase( remove( linkagename.begin(), linkagename.end(), '"') , linkagename.end() );
 
-                        cout << functionname << ": \n";
 
-                        vector<string> addresses = ExtractAddresses(FunctionObject(functionname,linkagename));
 
-                        cout << endl;
                 }
                     else 
                         linkagename = "main";
 
-                    FunctionObjects.emplace_back(FunctionObject(functionname,linkagename));
+                    vector<string> addresses = ExtractAddresses(FunctionObject(functionname,linkagename));
+                    FunctionObjects.emplace_back(FunctionObject(functionname,linkagename,addresses));
 
             }
 
@@ -150,9 +152,11 @@ int main(){
 
 
 
-    for(auto a : SymbolNames)
-        cout << a.getname() << " " << a.getlinkagename() << " " << endl;
-
+    for(auto a : SymbolNames){
+        cout << a.getname() << " " << a.getlinkagename() << " "  << endl;
+        for(auto b : a.getaddresses())
+            cout << b << endl;
+        }
     }
 
 
