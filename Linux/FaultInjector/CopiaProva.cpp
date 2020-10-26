@@ -59,8 +59,8 @@ void start(){
 void readRegs(int istr){
     struct user_regs_struct regs;
     ptrace(PTRACE_GETREGS,pid,0,&regs);
-    unsigned long peeked_istr = ptrace(PTRACE_PEEKTEXT,pid,regs.rip,0);
-    printf("istruction [%d] \n RIP : 0x%lld \n istruction : 0x%ld \n rax : %lld \n",istr,regs.rip,peeked_istr,regs.rax);
+    long peeked_istr = ptrace(PTRACE_PEEKTEXT,pid,(void *)regs.rip,0);
+    printf("istruction [%d] \n RIP : 0x%08x \n istruction : 0x%08x \n rax : %08x \n",istr,regs.rip,peeked_istr,regs.rax);
     return;
 };
 };
