@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sys/user.h>
 #include <sys/reg.h>
-#include <sys/user.h>
+#include <sys/types.h>
 
 class Debugger{
 // classe che fa da debugger e injetta gli errori
@@ -20,7 +20,7 @@ public:
 Debugger(){
     this->pid = 0;
     progName = nullptr;
-    WhereAddress = 0x000000000000117d ; // punto nel main
+    WhereAddress = 0x0000000000001169 ; // punto nel main
 };
 void start(){
     fprintf(stdout,"Debugger start \n");
@@ -33,22 +33,53 @@ void start(){
 
     }else{
         int status;
+        struct user_regs_struct regs;
+        
         printf("father \n");
         wait(&status);
         int istr = 0;
 
+        // INSERT BP
+        ptrace(PTRACE_GETREGS,pid,0,&regs);
+        // take the istructiono ad WhereAddress
+        unsigned data = ptrace(PTRACE_PEEKTEXT,pid,(void *) WhereAddress,0);
+        printf("IP reg : %d \n",regs.rip);
+        printf("the original istruction is 0x%081x \n now writing 0xCC istruction \n",data);
+        unsigned data_bp = (data & 0xFFFFFFFFFFFFFF00) | 0xCC; // only the last byte containt meaningfull istruction
+
+        ptrace(PTRACE_POKETEXT,pid,(void *)WhereAddress,(void *)data_bp);
+
+
+        ptrace(PTRACE_CONT,pid,0,0);
+
+
         while(1){
                         
             istr++;
+
+            /*
             if(ptrace(PTRACE_SINGLESTEP,pid,nullptr,nullptr)){
                 perror("ptrace");
                 break;
             }
+            */
+
             wait(&status);
             if(WIFEXITED(status)){
                 printf("process exited \n");
                 break;
             }
+            if(WIFSTOPPED(status)){
+                printf("process stopped\n");
+                break;
+            }
+            ptrace(PTRACE_GETREGS,pid,0,regs);
+            printf("child IP : 0x%081llx \n",regs.rip);
+            ptrace(PTRACE_POKETEXT,pid,(void*)WhereAddress,(void *)data);
+            printf("Process istruction restored \n now decrese IP \n");
+            regs.rip -= 1;
+            ptrace(PTRACE_SETREGS,pid,0,&regs);
+            ptrace(PTRACE_CONT,pid,0,0);
         }
         printf("tot istructions %d\n",istr);
     }
