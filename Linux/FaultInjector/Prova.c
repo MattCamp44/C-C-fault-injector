@@ -37,6 +37,7 @@ void run_target(const char* programname)
 
 void run_debugger(pid_t child_pid)
 {
+        
     int wait_status;
     struct user_regs_struct regs;
 
@@ -49,21 +50,23 @@ void run_debugger(pid_t child_pid)
     ptrace(PTRACE_GETREGS, child_pid, 0, &regs);
     procmsg("Child started. RIP = 0x%016x\n", regs.rip);
 
-    long addr = 0x004000cb;//0x004000da;
-    unsigned data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)addr, 0);
-    procmsg("Original data at 0x%016x: 0x%016x\n", addr, data);
+    
+    unsigned long long int addr = 0x0000000008001169;//0x004000da;
+    unsigned long long int data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)regs.rip,NULL);
+    procmsg("Original data at 0x%08x: 0x%08x\n", addr, data);
 
     //test
-    unsigned data_u = data;
+    unsigned long long int data_u = data;
     procmsg("test data_u: 0x%08x\n", data_u);
 
     /* Write the trap instruction 'int 3' into the address */
-    long data_with_trap = (data & 0xFFFFFFFFFFFFFF00) | 0xCC;
+    unsigned long long int data_with_trap = (data & 0xFFFFFFFFFFFFFF00) | 0xCC;
+    procmsg("Data with trap : 0x%016llx \n",data_with_trap);
     ptrace(PTRACE_POKETEXT, child_pid, (void*)addr, (void*)data_with_trap);
 
     /* See what's there again... */
-    long readback_data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)addr, 0);
-    procmsg("After trap,set breakpoint, data at 0x%016x: 0x%016x\n", addr, readback_data);
+    unsigned long long int readback_data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)addr, 0);
+    procmsg("After trap,set breakpoint, data at 0x%016llx: 0x%016llx\n", addr, readback_data);
 
     /* Let the child run to the breakpoint and wait for it to
     ** reach it
@@ -99,6 +102,7 @@ void run_debugger(pid_t child_pid)
        readback_data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)(addr+offset), 0);
        procmsg("After restore, data at 0x%llx: 0x%llx\n", addr+offset, readback_data);
      }
+
 
 
 

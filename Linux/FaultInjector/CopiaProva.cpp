@@ -1,14 +1,15 @@
-#include <unistd.h>
+#include <stdio.h>
+#include <stdarg.h>
 #include <stdlib.h>
-#include <iostream>
+#include <signal.h>
+#include <syscall.h>
 #include <sys/ptrace.h>
+#include <sys/types.h>
 #include <sys/wait.h>
-#include <vector>
-#include <iostream>
-#include <sys/user.h>
 #include <sys/reg.h>
 #include <sys/user.h>
-
+#include <unistd.h>
+#include <errno.h>
 class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
@@ -33,7 +34,7 @@ void start(){
         printf("father \n");
         wait(&status);
         int istr = 0;
-
+        
         while(1){
                         
             istr++;
@@ -59,14 +60,14 @@ void start(){
 void readRegs(int istr){
     struct user_regs_struct regs;
     ptrace(PTRACE_GETREGS,pid,0,&regs);
-    long peeked_istr = ptrace(PTRACE_PEEKTEXT,pid,(void *)regs.rip,0);
-    printf("istruction [%d] \n RIP : 0x%08x \n istruction : 0x%08x \n rax : %08x \n",istr,regs.rip,peeked_istr,regs.rax);
+    unsigned int peeked_istr = ptrace(PTRACE_PEEKDATA,pid,(void *)regs.rip,0);
+    printf("istruction [%d] \n RIP : 0x%08llx \n istruction : 0x%08x \n rax : %08llx \n",istr,regs.rip,peeked_istr,regs.rax);
     return;
 };
 };
 
 class Controller{
-    // prende file eseguibile
+// prende file eseguibile
 // fa objdump per indirizzi
 // crea pipe per raccogliere output
 // comunica al Debugger dove metterre i BP e dove eseguire gli injecto e quanti
