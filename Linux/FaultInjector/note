@@ -64,3 +64,161 @@ perm sono i permessi che ogni pagina ha e si possono cambiare con mprotect, se v
 
 Quindi se vogliamo scrivere la memoria del processo dobbiamo prendere i dati da quel file e usare quegli indirizzi.
 
+(info prese da https://www.youtube.com/watch?v=OBDuoqyZ4UA&ab_channel=CoolCamera)
+Per ricostrutire la symbol table e la dyn simbol table posso utilizzare il comando
+
+		readelf --symbol Debugee1
+
+	 Num:    Value          Size Type    Bind   Vis    Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_deregisterTMCloneTab
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@GLIBC_2.2.5 (2)
+     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 (2)
+     4: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     5: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_registerTMCloneTable
+     6: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND sleep@GLIBC_2.2.5 (2)
+     7: 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (2)
+
+Symbol table '.symtab' contains 66 entries:
+     Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000318     0 SECTION LOCAL  DEFAULT    1 
+     2: 0000000000000338     0 SECTION LOCAL  DEFAULT    2 
+     3: 0000000000000358     0 SECTION LOCAL  DEFAULT    3 
+     4: 000000000000037c     0 SECTION LOCAL  DEFAULT    4 
+     5: 00000000000003a0     0 SECTION LOCAL  DEFAULT    5 
+     6: 00000000000003c8     0 SECTION LOCAL  DEFAULT    6 
+     7: 0000000000000488     0 SECTION LOCAL  DEFAULT    7 
+     8: 0000000000000510     0 SECTION LOCAL  DEFAULT    8 
+     9: 0000000000000520     0 SECTION LOCAL  DEFAULT    9 
+    10: 0000000000000540     0 SECTION LOCAL  DEFAULT   10 
+    11: 0000000000000600     0 SECTION LOCAL  DEFAULT   11 
+    12: 0000000000001000     0 SECTION LOCAL  DEFAULT   12 
+    13: 0000000000001020     0 SECTION LOCAL  DEFAULT   13 
+    14: 0000000000001050     0 SECTION LOCAL  DEFAULT   14 
+    15: 0000000000001060     0 SECTION LOCAL  DEFAULT   15 
+    16: 0000000000001080     0 SECTION LOCAL  DEFAULT   16 
+    17: 0000000000001218     0 SECTION LOCAL  DEFAULT   17 
+    18: 0000000000002000     0 SECTION LOCAL  DEFAULT   18 
+    19: 0000000000002034     0 SECTION LOCAL  DEFAULT   19 
+    20: 0000000000002078     0 SECTION LOCAL  DEFAULT   20 
+    21: 0000000000003db0     0 SECTION LOCAL  DEFAULT   21 
+    22: 0000000000003db8     0 SECTION LOCAL  DEFAULT   22 
+    23: 0000000000003dc0     0 SECTION LOCAL  DEFAULT   23 
+    24: 0000000000003fb0     0 SECTION LOCAL  DEFAULT   24 
+    25: 0000000000004000     0 SECTION LOCAL  DEFAULT   25 
+    26: 0000000000004010     0 SECTION LOCAL  DEFAULT   26 
+    27: 0000000000000000     0 SECTION LOCAL  DEFAULT   27 
+    28: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c
+    29: 00000000000010b0     0 FUNC    LOCAL  DEFAULT   16 deregister_tm_clones
+    30: 00000000000010e0     0 FUNC    LOCAL  DEFAULT   16 register_tm_clones
+    31: 0000000000001120     0 FUNC    LOCAL  DEFAULT   16 __do_global_dtors_aux
+    32: 0000000000004010     1 OBJECT  LOCAL  DEFAULT   26 completed.8059
+    33: 0000000000003db8     0 OBJECT  LOCAL  DEFAULT   22 __do_global_dtors_aux_fin
+    34: 0000000000001160     0 FUNC    LOCAL  DEFAULT   16 frame_dummy
+    35: 0000000000003db0     0 OBJECT  LOCAL  DEFAULT   21 __frame_dummy_init_array_
+    36: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS Debugee1.c
+    37: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c
+    38: 000000000000217c     0 OBJECT  LOCAL  DEFAULT   20 __FRAME_END__
+    39: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS 
+    40: 0000000000003db8     0 NOTYPE  LOCAL  DEFAULT   21 __init_array_end
+    41: 0000000000003dc0     0 OBJECT  LOCAL  DEFAULT   23 _DYNAMIC
+    42: 0000000000003db0     0 NOTYPE  LOCAL  DEFAULT   21 __init_array_start
+    43: 0000000000002034     0 NOTYPE  LOCAL  DEFAULT   19 __GNU_EH_FRAME_HDR
+    44: 0000000000003fb0     0 OBJECT  LOCAL  DEFAULT   24 _GLOBAL_OFFSET_TABLE_
+    45: 0000000000001000     0 FUNC    LOCAL  DEFAULT   12 _init
+    46: 0000000000001210     5 FUNC    GLOBAL DEFAULT   16 __libc_csu_fini
+    47: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_deregisterTMCloneTab
+    48: 0000000000004000     0 NOTYPE  WEAK   DEFAULT   25 data_start
+    49: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND puts@@GLIBC_2.2.5
+    50: 0000000000004010     0 NOTYPE  GLOBAL DEFAULT   25 _edata
+    51: 0000000000001218     0 FUNC    GLOBAL HIDDEN    17 _fini
+    52: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@@GLIBC_
+    53: 0000000000004000     0 NOTYPE  GLOBAL DEFAULT   25 __data_start
+    54: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+    55: 0000000000004008     0 OBJECT  GLOBAL HIDDEN    25 __dso_handle
+    56: 0000000000002000     4 OBJECT  GLOBAL DEFAULT   18 _IO_stdin_used
+    57: 00000000000011a0   101 FUNC    GLOBAL DEFAULT   16 __libc_csu_init
+    58: 0000000000004018     0 NOTYPE  GLOBAL DEFAULT   26 _end
+    59: 0000000000001080    47 FUNC    GLOBAL DEFAULT   16 _start
+    60: 0000000000004010     0 NOTYPE  GLOBAL DEFAULT   26 __bss_start
+    61: 0000000000001169    49 FUNC    GLOBAL DEFAULT   16 main
+    62: 0000000000004010     0 OBJECT  GLOBAL HIDDEN    25 __TMC_END__
+    63: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_registerTMCloneTable
+    64: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND sleep@@GLIBC_2.2.5
+    65: 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@@GLIBC_2.2 
+
+per tirare fuori informazioni dall'header per la codifica ecc
+
+readelf -h <nome_binary>
+
+readelf -l Prog altre informazioni su come le sezioni (program headers) vengono caricate in memoria
+
+lf file type is DYN (Shared object file)
+Entry point 0x1080
+There are 13 program headers, starting at offset 64
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000000040 0x0000000000000040
+                 0x00000000000002d8 0x00000000000002d8  R      0x8
+  INTERP         0x0000000000000318 0x0000000000000318 0x0000000000000318
+                 0x000000000000001c 0x000000000000001c  R      0x1
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+  LOAD           0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000630 0x0000000000000630  R      0x1000
+  LOAD           0x0000000000001000 0x0000000000001000 0x0000000000001000
+                 0x0000000000000225 0x0000000000000225  R E    0x1000
+  LOAD           0x0000000000002000 0x0000000000002000 0x0000000000002000
+                 0x0000000000000180 0x0000000000000180  R      0x1000
+  LOAD           0x0000000000002db0 0x0000000000003db0 0x0000000000003db0
+                 0x0000000000000260 0x0000000000000268  RW     0x1000
+  DYNAMIC        0x0000000000002dc0 0x0000000000003dc0 0x0000000000003dc0
+                 0x00000000000001f0 0x00000000000001f0  RW     0x8
+  NOTE           0x0000000000000338 0x0000000000000338 0x0000000000000338
+                 0x0000000000000020 0x0000000000000020  R      0x8
+  NOTE           0x0000000000000358 0x0000000000000358 0x0000000000000358
+                 0x0000000000000044 0x0000000000000044  R      0x4
+  GNU_PROPERTY   0x0000000000000338 0x0000000000000338 0x0000000000000338
+                 0x0000000000000020 0x0000000000000020  R      0x8
+  GNU_EH_FRAME   0x0000000000002034 0x0000000000002034 0x0000000000002034
+                 0x0000000000000044 0x0000000000000044  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000002db0 0x0000000000003db0 0x0000000000003db0
+                 0x0000000000000250 0x0000000000000250  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.gnu.property .note.gnu.build-id .note.ABI-tag .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt 
+   03     .init .plt .plt.got .plt.sec .text .fini 
+   04     .rodata .eh_frame_hdr .eh_frame 
+   05     .init_array .fini_array .dynamic .got .data .bss 
+   06     .dynamic 
+   07     .note.gnu.property 
+   08     .note.gnu.build-id .note.ABI-tag 
+   09     .note.gnu.property 
+   10     .eh_frame_hdr 
+   11     
+   12     .init_array .fini_array .dynamic .got 
+
+   Gli header sono array di strutture in cui ognuna descrive un segmento o altre informazioni che il SO ha bisogno di 
+   sapere per caricare il programma ed ha questa struttura :
+
+	info prese qua : https://docs.oracle.com/cd/E19683-01/816-1386/chapter6-83432/index.html#:~:text=An%20executable%20or%20shared%20object,prepare%20the%20program%20for%20execution.&text=Program%20headers%20are%20meaningful%20only%20for%20executable%20and%20shared%20object%20files.
+
+   typedef struct {
+        Elf32_Word      p_type; // tipo di segmento, maggiori info a https://docs.oracle.com/cd/E19683-01/816-1386/6m7qcoblk/index.html#chapter6-69880
+        Elf32_Off       p_offset; // offset dall inizio del file 
+        Elf32_Addr      p_vaddr;  // indirizzo virtuale da 
+        Elf32_Addr      p_paddr;
+        Elf32_Word      p_filesz;
+        Elf32_Word      p_memsz;
+        Elf32_Word      p_flags;
+        Elf32_Word      p_align;
+} Elf32_Phdr;
+
+qui c'e' un po' tutto quello che serve 
