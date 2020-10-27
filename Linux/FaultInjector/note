@@ -11,3 +11,56 @@ Prossima features : Mettere BP in un punto di una funzione funzione
 					- far riprendere il programma
 
 Non e' necessario intercettare la syscall execl() poiche' e' quella che sblocca il tracer quando esegue wait() 
+
+Come viene gestito lo spazio degli indirizzi in linux (almeno) :
+
+l'output di objdump -d <nome binary> ci ritorna l'OFFSET di dove verra' caricato il simbolo, non l'indirizzo
+virtuale finale, quello viene scelto runtime.
+ASLR Address Space Layout Randomization che e' una features che utilizza linux per ragioni di sicurezza, 
+all'indirizzo finale viene aggiunto un offset calcolato in maniera random per evitare di mettere sempre nello
+stesso spazio di memoria il processo.
+Gli indirizzi che vengono restituiti da objdump sono relativi e vanno sommati con lo spazio degli indirizzi
+che il programma ha scelto.
+Inoltre lo spazio di memoria virtuale (non ho capito perche') non e' contiguo, ma vengono allocate delle zone di
+memoria disgiunte in cui viene caricato il binary e tutte  le librerie condivise.
+Queste informazioni si trovano in :
+
+		/proc/$pid_processo/maps 
+
+la cartella che viene creata per il processo contiene altre informazioni oltre al file maps che contiene il 
+mapping degli indirizzi :
+
+sudo cat  /proc/3496/maps
+
+address range			  perm offset	device inodde			pathname
+
+7f9c36600000-7f9c36625000 r--p 00000000 00:00 1712701            /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f9c36625000-7f9c3679d000 r-xp 00025000 00:00 1712701            /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f9c3679d000-7f9c367e7000 r--p 0019d000 00:00 1712701            /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f9c367e7000-7f9c367e8000 ---p 001e7000 00:00 1712701            /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f9c367e8000-7f9c367eb000 r--p 001e7000 00:00 1712701            /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f9c367eb000-7f9c367ee000 rw-p 001ea000 00:00 1712701            /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f9c367ee000-7f9c367f2000 rw-p 00000000 00:00 0
+7f9c36800000-7f9c36801000 r--p 00000000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c36801000-7f9c36823000 r-xp 00001000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c36823000-7f9c36824000 r-xp 00023000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c36824000-7f9c3682b000 r--p 00024000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c3682b000-7f9c3682c000 r--p 0002b000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c3682d000-7f9c3682e000 r--p 0002c000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c3682e000-7f9c3682f000 rw-p 0002d000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f9c3682f000-7f9c36832000 rw-p 00000000 00:00 0
+7f9c3683c000-7f9c3683d000 r--p 00000000 00:00 28301              /home/colo/FaultInjector/repo/Linux/FaultInjector/TestPid
+7f9c3683d000-7f9c3683e000 r-xp 00001000 00:00 28301              /home/colo/FaultInjector/repo/Linux/FaultInjector/TestPid
+7f9c3683e000-7f9c3683f000 r--p 00002000 00:00 28301              /home/colo/FaultInjector/repo/Linux/FaultInjector/TestPid
+7f9c3683f000-7f9c36840000 r--p 00002000 00:00 28301              /home/colo/FaultInjector/repo/Linux/FaultInjector/TestPid
+7f9c36840000-7f9c36841000 rw-p 00003000 00:00 28301              /home/colo/FaultInjector/repo/Linux/FaultInjector/TestPid
+7fffe0a91000-7fffe0ab2000 rw-p 00000000 00:00 0                  [heap]
+7fffe73a0000-7fffe7ba0000 rw-p 00000000 00:00 0                  [stack]
+7fffe8196000-7fffe8197000 r-xp 00000000 00:00 0                  [vdso]
+
+address e' ovviamente il range di indirizzi continui in cui viene allocato il binary specificato nel campo pathname
+perm sono i permessi che ogni pagina ha e si possono cambiare con mprotect, se violo uno dei permessi => segmentation fault.
+(maggiori info https://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps )
+
+Quindi se vogliamo scrivere la memoria del processo dobbiamo prendere i dati da quel file e usare quegli indirizzi.
+
