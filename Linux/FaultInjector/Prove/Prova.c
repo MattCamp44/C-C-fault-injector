@@ -51,7 +51,10 @@ void run_debugger(pid_t child_pid)
     procmsg("Child started. RIP = 0x%016x\n", regs.rip);
 
     
-    unsigned long long int addr = 0x0000000000001169;
+    long long int addr = 0x0000000000001169;
+    printf("Indirizzo BP : ");
+    scanf("%lld \n",&addr);
+    printf("the addr is : %lld",addr);
     unsigned long long int data = ptrace(PTRACE_PEEKTEXT, child_pid, (void*)addr,NULL);
     procmsg("Original data at 0x%08x: 0x%08x\n", addr, data);
 
@@ -140,9 +143,10 @@ int main(int argc, char** argv)
     child_pid = fork();
     if (child_pid == 0)
         run_target(argv[1]);
-    else if (child_pid > 0)
+    else if (child_pid > 0){
+        printf("PID : %d \n",child_pid);
         run_debugger(child_pid);
-    else {
+    } else {
         perror("fork");
         return -1;
     }
