@@ -1,14 +1,14 @@
+Riassumento su BP :
+
+Considernado che i per trovare l'indirizzo di una istruzione non possiamo utilizzare soltanto objdump perche' quello
+ci da gli offset relativi alle istruzione ma ci manca il segmento dobbiamo trovare una correlazione tra ELF e binary
+mappato, una volta ottenuto quello allora possiamo pensare di mettere il BP.
+
 in proc/sys/kernel/yama/ptrace_scope si trova l'impostazione per la protezione di ptrace, se 0 tutti 
 i processi possono fare debugging di altri.
 
 int option = PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEEXEC
 				 | PTRACE_O_TRACEEXIT;
-
-Prossima features : Mettere BP in un punto di una funzione funzione
-					- estrarre simboli da exe, forse con regex + python
-					- trovare inizio e fine in memoria della funzione scelta (lo spazio di indirizzi)
-					- mettere in un punto casuale dello spazio sopracitato un BP 
-					- far riprendere il programma
 
 Non e' necessario intercettare la syscall execl() poiche' e' quella che sblocca il tracer quando esegue wait() 
 

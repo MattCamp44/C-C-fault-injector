@@ -10,6 +10,8 @@
 #include <sys/user.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string>
+
 class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
