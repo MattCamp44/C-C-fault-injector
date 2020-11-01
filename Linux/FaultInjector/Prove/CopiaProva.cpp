@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string>
+#include <string.h>
 
 class Debugger{
 // classe che fa da debugger e injetta gli errori
@@ -35,6 +36,8 @@ void start(){
         int status;
         printf("father \n");
         wait(&status);
+        ReadAddrs(pid);
+        return ;
         int istr = 0;
         
         while(1){
@@ -64,6 +67,25 @@ void readRegs(int istr){
     ptrace(PTRACE_GETREGS,pid,0,&regs);
     unsigned int peeked_istr = ptrace(PTRACE_PEEKDATA,pid,(void *)regs.rip,0);
     printf("istruction [%d] \n RIP : 0x%08llx \n istruction : 0x%08x \n rax : %08llx \n",istr,regs.rip,peeked_istr,regs.rax);
+    return;
+};
+void ReadAddrs(int pid){
+
+    // leggo proc/$pid/map e creo file 
+    
+    chdir("/");
+    
+
+    std::string commandStr = "cat proc/";
+    std::string pid_s = std::to_string(pid);
+    commandStr.append(pid_s);
+    commandStr.append("/maps >> /home/colo/FaultInjector/repo/Linux/FaultInjector/addrs.txt");
+    char command[commandStr.size()+1];
+    strcpy(command,commandStr.c_str());
+    system ((char *) &command);
+    
+    chdir("/home/colo/FaultInjector/repo/Linux/FaultInjector/Prove"); // mi rimetto sulla directory corrente
+    
     return;
 };
 };
