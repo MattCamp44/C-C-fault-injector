@@ -8,6 +8,8 @@
 #include <sys/user.h>
 #include <sys/reg.h>
 #include <sys/user.h>
+#include <string>
+#include <string.h>
 
 class Debugger{
 // classe che fa da debugger e injetta gli errori
@@ -34,9 +36,10 @@ void start(){
     }else{
         int status;
         printf("father \n");
+        
         wait(&status);
         int istr = 0;
-
+        ReadAddrs(pid); // read the address range of the process at creation time
         while(1){
                         
             istr++;
@@ -52,6 +55,30 @@ void start(){
         }
         printf("tot istructions %d\n",istr);
     }
+
+    return;
+};
+void ReadAddrs(int pid){
+
+    // leggo proc/$pid/map e creo file 
+    
+    chdir("/");
+    
+
+    std::string commandStr = "cat proc/";
+    std::string pid_s = std::to_string(pid);
+    commandStr.append(pid_s);
+    commandStr.append("/maps > /home/colo/FaultInjector/repo/Linux/FaultInjector/addrs.txt");
+    char command[commandStr.size()+1];
+    strcpy(command,commandStr.c_str());
+    if(system ((char *) &command) == -1){
+        printf("Error in system() %d \n",errno);
+        return;
+    }
+    
+    chdir("/home/colo/FaultInjector/repo/Linux/FaultInjector/Prove"); // mi rimetto sulla directory corrente
+    
+    printf("Addresses readed \n");
 
     return;
 };

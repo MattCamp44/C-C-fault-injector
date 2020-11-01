@@ -1,0 +1,13 @@
+7f269d900000-7f269d901000 r--p 00000000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f269d901000-7f269d923000 r-xp 00001000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f269d923000-7f269d924000 r-xp 00023000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f269d924000-7f269d92b000 r--p 00024000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f269d92b000-7f269d92c000 r--p 0002b000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f269d92d000-7f269d92f000 rw-p 0002c000 00:00 1712697            /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f269d92f000-7f269d930000 rw-p 00000000 00:00 0
+7f269d939000-7f269d93a000 r--p 00000000 00:00 1713347            /home/colo/FaultInjector/repo/Linux/FaultInjector/Debugee1
+7f269d93a000-7f269d93b000 r-xp 00001000 00:00 1713347            /home/colo/FaultInjector/repo/Linux/FaultInjector/Debugee1
+7f269d93b000-7f269d93c000 r--p 00002000 00:00 1713347            /home/colo/FaultInjector/repo/Linux/FaultInjector/Debugee1
+7f269d93c000-7f269d93e000 rw-p 00002000 00:00 1713347            /home/colo/FaultInjector/repo/Linux/FaultInjector/Debugee1
+7ffff01b1000-7ffff09b1000 rw-p 00000000 00:00 0                  [stack]
+7ffff0aff000-7ffff0b00000 r-xp 00000000 00:00 0                  [vdso]
