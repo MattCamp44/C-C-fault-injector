@@ -79,7 +79,7 @@ void ReadAddrs(int pid){
     std::string commandStr = "cat proc/";
     std::string pid_s = std::to_string(pid);
     commandStr.append(pid_s);
-    commandStr.append("/maps >> /home/colo/FaultInjector/repo/Linux/FaultInjector/addrs.txt");
+    commandStr.append("/maps > /home/colo/FaultInjector/repo/Linux/FaultInjector/addrs.txt");
     char command[commandStr.size()+1];
     strcpy(command,commandStr.c_str());
     system ((char *) &command);
