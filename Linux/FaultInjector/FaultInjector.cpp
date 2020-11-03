@@ -10,6 +10,7 @@
 #include <sys/user.h>
 #include <string>
 #include <string.h>
+#include <fstream>
 
 class Debugger{
 // classe che fa da debugger e injetta gli errori
@@ -68,7 +69,7 @@ void ReadAddrs(int pid){
     std::string commandStr = "cat proc/";
     std::string pid_s = std::to_string(pid);
     commandStr.append(pid_s);
-    commandStr.append("/maps > /home/colo/FaultInjector/repo/Linux/FaultInjector/addrs.txt");
+    commandStr.append("/maps > /home/colo/FaultInjector/repo/Linux/FaultInjector/map_table.txt");
     char command[commandStr.size()+1];
     strcpy(command,commandStr.c_str());
     if(system ((char *) &command) == -1){

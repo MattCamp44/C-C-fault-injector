@@ -1,3 +1,11 @@
+Appunti ELF : 
+
+- Segmenti : vengono utilizzati soltanto runtime
+- Section : venogono usati soltanto a link time
+
+Il ELF HEADER punta ai Program Header ogni Segmento
+ha il suo Program Header
+
 Riassumento su BP :
 
 Considernado che i per trovare l'indirizzo di una istruzione non possiamo utilizzare soltanto objdump perche' quello

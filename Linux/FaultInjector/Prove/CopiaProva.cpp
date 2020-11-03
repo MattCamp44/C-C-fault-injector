@@ -12,10 +12,25 @@
 #include <errno.h>
 #include <string>
 #include <string.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+#include <vector>
 
+
+#define MAX_PATH 256 // path al file map table nel range della map table
+#define PERM 4 // numero caratteri per rappresentare permessi
 class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
+    struct addrRange {
+        unsigned char StartAddr;
+        unsigned char EndAddr;
+        char perm[PERM];
+        char path[MAX_PATH];
+    }; 
+    
     int pid;
     char * progName;
 public:
@@ -67,6 +82,10 @@ void readRegs(int istr){
     ptrace(PTRACE_GETREGS,pid,0,&regs);
     unsigned int peeked_istr = ptrace(PTRACE_PEEKDATA,pid,(void *)regs.rip,0);
     printf("istruction [%d] \n RIP : 0x%08llx \n istruction : 0x%08x \n rax : %08llx \n",istr,regs.rip,peeked_istr,regs.rax);
+
+    
+
+
     return;
 };
 void ReadAddrs(int pid){
@@ -84,8 +103,54 @@ void ReadAddrs(int pid){
     strcpy(command,commandStr.c_str());
     system ((char *) &command);
     
-    chdir("/home/colo/FaultInjector/repo/Linux/FaultInjector/Prove"); // mi rimetto sulla directory corrente
+    chdir("/home/colo/FaultInjector/repo/Linux/FaultInjector/"); // mi rimetto sulla directory corrente
     
+    // read file
+    
+    std::ifstream addrsFile("addrs.txt");
+    char * line = nullptr;
+    std::string line_s;
+    FILE * fd = fopen("addrs.txt","r");
+    int n;
+    size_t size;
+    int pos;
+    int pos1;
+    long addr[12];
+    std::string sAddr;
+    std::string eAddr;
+    std::string perms;
+    std::string path;
+    std::vector<addrRange> addrsVec;
+    addrRange addrRange_t;
+    while((n = getline(&line,&size,fd) != -1)){
+        
+            line_s = static_cast<std::string>(line);
+            pos = line_s.find_first_of('-');
+            // 12 caratteri per l'indirizzo
+            
+            sAddr = line_s.substr(0,pos);
+            eAddr = line_s.substr(pos+1,pos);
+            perms = line_s.substr(2*pos+2,4);
+            /*
+            pos1 = line_s.find_first_of("/");
+            if(pos1 == std::string::npos){
+                pos1 = line_s.find_first_of("[");
+            }
+            */
+            //path = line_s.substr(pos1);
+            std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms <<std::endl;
+            //std::cout << "path :" << path << std::endl;
+            
+
+            // conversione char e long implicita posso fare questo sotto molto grezzamente
+            // converto le string in long
+            strcpy((char *) &addr,sAddr.c_str());
+            
+            std::cout << "long sAddr :" << addr << std::endl; 
+
+    }
+
+
     return;
 };
 };
