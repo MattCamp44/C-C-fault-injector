@@ -20,14 +20,14 @@
 
 
 #define MAX_PATH 256 // path al file map table nel range della map table
-#define PERM 4 // numero caratteri per rappresentare permessi
+#define PERM 5 // numero caratteri per rappresentare permessi
 class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
     struct addrRange {
-        unsigned char StartAddr;
-        unsigned char EndAddr;
-        char perm[PERM];
+        unsigned long * StartAddr;
+        unsigned long * EndAddr;
+        char perms[PERM];
         char path[MAX_PATH];
     }; 
     
@@ -51,8 +51,8 @@ void start(){
         int status;
         printf("father \n");
         wait(&status);
-        ReadAddrs(pid);
-        return ;
+        std::vector<addrRange> address = ReadAddrs(pid);
+        
         int istr = 0;
         
         while(1){
@@ -62,7 +62,7 @@ void start(){
                 perror("ptrace");
                 break;
             }
-            if(istr % 1000 == 0  ) readRegs(istr); // 1/1000 delle volte
+            //if(istr % 1000 == 0  ) readRegs(istr); 1/1000 delle volte
             wait(&status);
 
             
@@ -82,13 +82,9 @@ void readRegs(int istr){
     ptrace(PTRACE_GETREGS,pid,0,&regs);
     unsigned int peeked_istr = ptrace(PTRACE_PEEKDATA,pid,(void *)regs.rip,0);
     printf("istruction [%d] \n RIP : 0x%08llx \n istruction : 0x%08x \n rax : %08llx \n",istr,regs.rip,peeked_istr,regs.rax);
-
-    
-
-
     return;
 };
-void ReadAddrs(int pid){
+std::vector<addrRange> ReadAddrs(int pid){
 
     // leggo proc/$pid/map e creo file 
     
@@ -115,13 +111,14 @@ void ReadAddrs(int pid){
     size_t size;
     int pos;
     int pos1;
-    long addr[12];
+    unsigned long addr[12];
     std::string sAddr;
     std::string eAddr;
     std::string perms;
     std::string path;
     std::vector<addrRange> addrsVec;
-    addrRange addrRange_t;
+    addrRange address;
+
     while((n = getline(&line,&size,fd) != -1)){
         
             line_s = static_cast<std::string>(line);
@@ -131,25 +128,22 @@ void ReadAddrs(int pid){
             sAddr = line_s.substr(0,pos);
             eAddr = line_s.substr(pos+1,pos);
             perms = line_s.substr(2*pos+2,4);
-            /*
-            pos1 = line_s.find_first_of("/");
-            if(pos1 == std::string::npos){
-                pos1 = line_s.find_first_of("[");
-            }
-            */
-            //path = line_s.substr(pos1);
-            std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms <<std::endl;
-            //std::cout << "path :" << path << std::endl;
             
+            //std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms <<std::endl;
+            strcpy((char *) address.StartAddr,sAddr.c_str());
+            strcpy((char *) address.EndAddr,eAddr.c_str());
+            //std::cout << "long sAddr :" << addr << std::endl; 
+            strcpy(address.perms,perms.c_str());
+            // manca da estrarre path 
+            addrsVec.emplace_back(address);
 
-            // conversione char e long implicita posso fare questo sotto molto grezzamente
-            // converto le string in long
-            strcpy((char *) &addr,sAddr.c_str());
-            
-            std::cout << "long sAddr :" << addr << std::endl; 
-            
+    
     }
+    return addrsVec;
+};
+void inject(std::vector<addrRange> adressesRange){
 
+    //cambio permessia accesso alle pagine tramite mprotect
 
     return;
 };
