@@ -139,6 +139,7 @@ std::vector<addrRange> ReadAddrs(int pid){
 
     
     }
+    std::cout << "Address readed" << std::endl;
     return addrsVec;
 };
 void inject(std::vector<addrRange> adressesRange){

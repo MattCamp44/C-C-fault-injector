@@ -229,4 +229,13 @@ Program Headers:
         Elf32_Word      p_align;
 } Elf32_Phdr;
 
-qui c'e' un po' tutto quello che serve 
+qui c'e' un po' tutto quello che serve.
+
+Ora avendo gli indirizzi di nmaps devo collegare gli offset con i range di indirizzi di memoria così ottengo
+la corrispondenza indirizzo simbolo, i segmenti di memoria di Debugee1 sono 
+
+1: 7f08096e7000-7f08096e8000 r--p /home/.../Prove/Debugee1
+2: 7f08096e8000-7f08096e9000 r-xp /home/.../Prove/Debugee1
+3: 7f08096e9000-7f08096ea000 r--p /home/.../Prove/Debugee1
+4: 7f08096ea000-7f08096ec000 rw-p /home/.../Prove/Debugee1
+
