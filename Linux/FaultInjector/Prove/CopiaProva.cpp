@@ -144,7 +144,7 @@ std::vector<addrRange> ReadAddrs(int pid){
 };
 void inject(std::vector<addrRange> adressesRange){
 
-    // (forse non necessario) cambio permessia accesso alle pagine tramite mprotect
+    // (forse non necessario) cambio permessi accesso alle pagine tramite mprotect
 
     return;
 };
