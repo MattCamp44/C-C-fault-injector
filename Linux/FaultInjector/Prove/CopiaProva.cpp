@@ -27,8 +27,8 @@ private:
     struct addrRange {
         unsigned long * StartAddr;
         unsigned long * EndAddr;
-        char perms[PERM];
-        char path[MAX_PATH];
+        char * perms;
+        char * path;
     }; 
     
     int pid;
@@ -111,7 +111,7 @@ std::vector<addrRange> ReadAddrs(int pid){
     size_t size;
     int pos;
     int pos1;
-    unsigned long addr[12];
+    unsigned char addr[12];
     std::string sAddr;
     std::string eAddr;
     std::string perms;
@@ -129,12 +129,27 @@ std::vector<addrRange> ReadAddrs(int pid){
             eAddr = line_s.substr(pos+1,pos);
             perms = line_s.substr(2*pos+2,4);
             
-            //std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms <<std::endl;
-            strcpy((char *) address.StartAddr,sAddr.c_str());
-            strcpy((char *) address.EndAddr,eAddr.c_str());
-            //std::cout << "long sAddr :" << addr << std::endl; 
-            strcpy(address.perms,perms.c_str());
-            // manca da estrarre path 
+            pos = line_s.find_last_of("/");
+            if(pos != std::string::npos){
+                path = line_s.substr(pos);
+            }else if((pos = line_s.find_first_of("[")) != std::string::npos){
+                path = line_s.substr(pos);
+            }
+
+            //std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms << " path :" << path << std::endl;
+            
+            address.StartAddr = ( unsigned long *) sAddr.c_str();
+            address.EndAddr =   ( unsigned long *) eAddr.c_str();
+            address.perms = (char *) perms.c_str();
+            address.path = (char *) path.c_str();
+
+            /*
+            std::cout << "address.StartAddr :" << address.StartAddr << std::endl; 
+            std::cout << "address.EndAddr :" << address.EndAddr << std::endl; 
+            std::cout << "address.perm :" << address.perms << std::endl; 
+            std::cout << "address.path :" << address.path << std::endl; 
+            */
+
             addrsVec.emplace_back(address);
 
     
