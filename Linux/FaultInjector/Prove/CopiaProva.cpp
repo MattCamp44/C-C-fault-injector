@@ -174,13 +174,10 @@ void inject(std::vector<addrRange> addrs){
     }
     
     unsigned long * addrMain = ad.StartAddr;
-    std ::cout << "qui f" << std::endl;
     unsigned long  offsetMain = 0x1169;
-    std ::cout << "qui f e "<< *addrMain << std::endl;
-    unsigned long finalAddr = (*addrMain + offsetMain); // segmentation fault
+    unsigned long finalAddr = (*addrMain + offsetMain); // segmentation fault ??
     
     std ::cout << "addrMain :" << addrMain << " offsetMain :" << offsetMain << "final address : " << finalAddr << std::endl;
-
 
     return;
 };
