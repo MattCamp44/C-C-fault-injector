@@ -52,7 +52,7 @@ void start(){
         printf("father \n");
         wait(&status);
         std::vector<addrRange> address = ReadAddrs(pid);
-        
+        inject(address);
         int istr = 0;
         
         while(1){
@@ -143,12 +143,14 @@ std::vector<addrRange> ReadAddrs(int pid){
             address.perms = (char *) perms.c_str();
             address.path = (char *) path.c_str();
 
-            /*
+            
             std::cout << "address.StartAddr :" << address.StartAddr << std::endl; 
+            /*
             std::cout << "address.EndAddr :" << address.EndAddr << std::endl; 
             std::cout << "address.perm :" << address.perms << std::endl; 
-            std::cout << "address.path :" << address.path << std::endl; 
             */
+            std::cout << "address.path :" << address.path << std::endl; 
+            
 
             addrsVec.emplace_back(address);
 
@@ -157,9 +159,28 @@ std::vector<addrRange> ReadAddrs(int pid){
     std::cout << "Address readed" << std::endl;
     return addrsVec;
 };
-void inject(std::vector<addrRange> adressesRange){
+void inject(std::vector<addrRange> addrs){
 
     // (forse non necessario) cambio permessi accesso alle pagine tramite mprotect
+    int i = 0;
+    addrRange ad ;
+    while(i <= addrs.size()){ // trovo il primo range con path = /Debugee1
+        ad = addrs[i];
+        std ::cout << "qui" << std::endl;
+        if(strcmp((char *) "/Debugee1",ad.path) == 0){
+            break;
+        }
+        i++;
+    }
+    
+    unsigned long * addrMain = ad.StartAddr;
+    std ::cout << "qui f" << std::endl;
+    unsigned long  offsetMain = 0x1169;
+    std ::cout << "qui f e "<< *addrMain << std::endl;
+    unsigned long finalAddr = (*addrMain + offsetMain); // segmentation fault
+    
+    std ::cout << "addrMain :" << addrMain << " offsetMain :" << offsetMain << "final address : " << finalAddr << std::endl;
+
 
     return;
 };
