@@ -25,10 +25,10 @@ class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
     struct addrRange {
-        unsigned long * StartAddr;
-        unsigned long * EndAddr;
-        char * perms;
-        char * path;
+        char StartAddr[16+1];
+        char EndAddr[16+1];
+        char perms[4];
+        char path[126];
     }; 
     
     int pid;
@@ -126,7 +126,9 @@ std::vector<addrRange> ReadAddrs(int pid){
             // 12 caratteri per l'indirizzo
             
             sAddr = line_s.substr(0,pos);
+            sAddr.append("0000"); // 4 zeri di offset per completare indirizzo (non sono sicuro)
             eAddr = line_s.substr(pos+1,pos);
+            eAddr.append("0000");
             perms = line_s.substr(2*pos+2,4);
             
             pos = line_s.find_last_of("/");
@@ -138,47 +140,42 @@ std::vector<addrRange> ReadAddrs(int pid){
 
             //std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms << " path :" << path << std::endl;
             
-            address.StartAddr = ( unsigned long *) sAddr.c_str();
-            address.EndAddr =   ( unsigned long *) eAddr.c_str();
-            address.perms = (char *) perms.c_str();
-            address.path = (char *) path.c_str();
+            strcpy(address.StartAddr,sAddr.c_str());
+            strcpy(address.EndAddr,eAddr.c_str());
+            strcpy(address.perms,perms.c_str());
+            strcpy(address.path,path.c_str());
 
-            
-            std::cout << "address.StartAddr :" << address.StartAddr << std::endl; 
             /*
+            std::cout << "address.StartAddr :" << address.StartAddr << std::endl; 
             std::cout << "address.EndAddr :" << address.EndAddr << std::endl; 
             std::cout << "address.perm :" << address.perms << std::endl; 
             */
             std::cout << "address.path :" << address.path << std::endl; 
             
 
-            addrsVec.emplace_back(address);
-
-    
+            addrsVec.push_back(address);
     }
-    std::cout << "Address readed" << std::endl;
+    
     return addrsVec;
 };
-void inject(std::vector<addrRange> addrs){
-
+void inject(std::vector<addrRange> addrsVec){
+    
     // (forse non necessario) cambio permessi accesso alle pagine tramite mprotect
     int i = 0;
     addrRange ad ;
-    while(i <= addrs.size()){ // trovo il primo range con path = /Debugee1
-        ad = addrs[i];
-        std ::cout << "qui" << std::endl;
-        if(strcmp((char *) "/Debugee1",ad.path) == 0){
+    for(int i= 0; i< addrsVec.size();i++){
+       std::cout << "path : " << addrsVec[i].path << std::endl;    
+        if(strcmp("/Debugee1",addrsVec[i].path) == 0){
+            std::cout << "trovato : " << std::endl;
+            ad = addrsVec[i];
             break;
         }
-        i++;
     }
     
-    unsigned long * addrMain = ad.StartAddr;
-    unsigned long  offsetMain = 0x1169;
-    unsigned long finalAddr = (*addrMain + offsetMain); // segmentation fault ??
     
-    std ::cout << "addrMain :" << addrMain << " offsetMain :" << offsetMain << "final address : " << finalAddr << std::endl;
-
+    char * offsetMain = (char *) "1169";
+    char * finalAddr = strncat(ad.StartAddr,offsetMain,16*sizeof(char)); // unione indirizzi sbagliata
+    std::cout << "final address : " << finalAddr << std::endl;
     return;
 };
 };
