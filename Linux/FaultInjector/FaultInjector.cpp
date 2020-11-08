@@ -11,6 +11,7 @@
 #include <string>
 #include <string.h>
 #include <fstream>
+#include <sys/personality.h>
 
 class Debugger{
 // classe che fa da debugger e injetta gli errori
@@ -31,12 +32,13 @@ void start(){
     pid = fork();
     if(pid == 0){
         printf("child \n");
+        personality(ADDR_NO_RANDOMIZE);
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl("Debugee1","Debugee1",nullptr);
 
     }else{
         int status;
-        printf("father \n");
+        printf("father, child PID = %d \n", pid);
         
         wait(&status);
         int istr = 0;
