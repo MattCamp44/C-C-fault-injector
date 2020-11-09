@@ -17,6 +17,8 @@
 #include <sstream>
 #include <algorithm>
 #include <vector>
+#include <bits/stdc++.h>
+#include <algorithm>
 
 
 #define MAX_PATH 256 // path al file map table nel range della map table
@@ -112,10 +114,12 @@ std::vector<addrRange> ReadAddrs(int pid){
     int pos;
     int pos1;
     unsigned char addr[12];
+    
     std::string sAddr;
     std::string eAddr;
     std::string perms;
     std::string path;
+
     std::vector<addrRange> addrsVec;
     addrRange address;
 
@@ -127,8 +131,10 @@ std::vector<addrRange> ReadAddrs(int pid){
             
             sAddr = line_s.substr(0,pos);
             sAddr.append("0000"); // 4 zeri di offset per completare indirizzo (non sono sicuro)
+           
             eAddr = line_s.substr(pos+1,pos);
             eAddr.append("0000");
+          
             perms = line_s.substr(2*pos+2,4);
             
             pos = line_s.find_last_of("/");
@@ -138,24 +144,26 @@ std::vector<addrRange> ReadAddrs(int pid){
                 path = line_s.substr(pos);
             }
 
-            //std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms :"<< perms << " path :" << path << std::endl;
+            std::cout << "sAddr :" << sAddr << " eAddr :" << eAddr << " perms : "<< perms << " path : " << path << std::endl;
+        
             
+
             strcpy(address.StartAddr,sAddr.c_str());
             strcpy(address.EndAddr,eAddr.c_str());
             strcpy(address.perms,perms.c_str());
             strcpy(address.path,path.c_str());
 
-            /*
-            std::cout << "address.StartAddr :" << address.StartAddr << std::endl; 
-            std::cout << "address.EndAddr :" << address.EndAddr << std::endl; 
-            std::cout << "address.perm :" << address.perms << std::endl; 
-            */
-            std::cout << "address.path :" << address.path << std::endl; 
+            
+            //std::cout << "address.StartAddr :" << address.StartAddr << std::endl; 
+            //std::cout << "atol : " << atoll((const char *)address.StartAddr) << std::endl;
+            //std::cout << "address.EndAddr :" << address.EndAddr << std::endl; 
+            std::cout << "address.perms :" << address.perms << std::endl; 
+            //std::cout << "address.path :" << address.path << std::endl; 
             
 
             addrsVec.push_back(address);
     }
-    
+    std::cout << "Address readed " << std::endl;
     return addrsVec;
 };
 void inject(std::vector<addrRange> addrsVec){
@@ -164,18 +172,18 @@ void inject(std::vector<addrRange> addrsVec){
     int i = 0;
     addrRange ad ;
     for(int i= 0; i< addrsVec.size();i++){
-       std::cout << "path : " << addrsVec[i].path << std::endl;    
-        if(strcmp("/Debugee1",addrsVec[i].path) == 0){
+       std::cout << "perms : " << addrsVec[i].perms << std::endl;    
+        if(strcmp("/Debugee1\n",addrsVec[i].path) == 0){
             std::cout << "trovato : " << std::endl;
             ad = addrsVec[i];
             break;
         }
     }
     
-    
     char * offsetMain = (char *) "1169";
-    char * finalAddr = strncat(ad.StartAddr,offsetMain,16*sizeof(char)); // unione indirizzi sbagliata
-    std::cout << "final address : " << finalAddr << std::endl;
+    // concatenare offset e indriizzo
+    
+
     return;
 };
 };
