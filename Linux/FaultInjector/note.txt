@@ -1,3 +1,35 @@
+Nota : possiamo capire la sezione codice dal fatto che il permesso relativo a quel segmento sia eseguibile rx-- (?)
+
+Comando pmap :
+
+pmap 480
+480:   ./WaitFor 1000
+00007fd2dcb90000    148K r---- libc-2.31.so
+00007fd2dcbb5000   1504K r-x-- libc-2.31.so
+00007fd2dcd2d000    296K r---- libc-2.31.so
+00007fd2dcd77000      4K ----- libc-2.31.so
+00007fd2dcd78000     12K r---- libc-2.31.so
+00007fd2dcd7b000     12K rw--- libc-2.31.so
+00007fd2dcd7e000     16K rw---   [ anon ]
+00007fd2dcd90000      4K r---- ld-2.31.so
+00007fd2dcd91000    136K r-x-- ld-2.31.so
+00007fd2dcdb3000      4K r-x-- ld-2.31.so
+00007fd2dcdb4000     28K r---- ld-2.31.so
+00007fd2dcdbb000      4K r---- ld-2.31.so
+00007fd2dcdbd000      4K r---- ld-2.31.so
+00007fd2dcdbe000      4K rw--- ld-2.31.so
+00007fd2dcdbf000     12K rw---   [ anon ]
+00007fd2dcdc5000      4K r---- WaitFor
+00007fd2dcdc6000      4K r-x-- WaitFor
+00007fd2dcdc7000      4K r---- WaitFor
+00007fd2dcdc8000      4K r---- WaitFor
+00007fd2dcdc9000      4K rw--- WaitFor
+00007fffc5160000    132K rw---   [ anon ]
+00007fffcd2f5000   8192K rw---   [ anon ]
+00007fffce1bf000      4K r-x--   [ anon ]
+ total            10536K
+
+
 
 https://man7.org/linux/man-pages/man7/vdso.7.html segmento vsdo
 
