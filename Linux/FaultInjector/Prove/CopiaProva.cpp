@@ -50,8 +50,10 @@ void start(){
     if(pid == 0){
         printf("child \n");
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
-        //personality(ADDR_COMPAT_LAYOUT);
+
+        personality(ADDR_COMPAT_LAYOUT);
         personality(ADDR_NO_RANDOMIZE);
+        
         execl("Debugee2","Debugee2",nullptr);
 
     }else{
@@ -59,7 +61,7 @@ void start(){
         printf("father \n");
         wait(&status);
         std::vector<addrRange> address = ReadAddrs(pid);
-        inject(address);
+        
         int istr = 0;
         
         while(1){
@@ -70,6 +72,7 @@ void start(){
                 break;
             }
             //if(istr % 1000 == 0  ) readRegs(istr); 1/1000 delle volte
+            inject(address);
             wait(&status);
 
             
@@ -198,7 +201,7 @@ void placeBP(char * addr){
     uint64_t addr_offset = (uint64_t) 0x1149;
     addr_s = addr_s + addr_offset; 
     std::cout << "addr_s : " << addr_s << std::endl;
-    auto data = ptrace(PTRACE_PEEKDATA,pid,(void *) addr_s,nullptr);
+    auto data = ptrace(PTRACE_PEEKDATA,pid,(void *) 0x080001149,nullptr);
     if(data == -1){
         printf("errno : %s \n", strerror(errno) );
     }
