@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <sys/reg.h>
 #include <sys/user.h>
+#include <sys/personality.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string>
@@ -26,6 +27,7 @@
 class Debugger{
 // classe che fa da debugger e injetta gli errori
 private:
+
     struct addrRange {
         char StartAddr[16+1];
         char EndAddr[16+1];
@@ -35,6 +37,7 @@ private:
     
     int pid;
     char * progName;
+
 public:
 Debugger(){
     this->pid = 0;
@@ -47,7 +50,9 @@ void start(){
     if(pid == 0){
         printf("child \n");
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
-        execl("Debugee1","Debugee1",nullptr);
+        //personality(ADDR_COMPAT_LAYOUT);
+        personality(ADDR_NO_RANDOMIZE);
+        execl("Debugee2","Debugee2",nullptr);
 
     }else{
         int status;
@@ -173,7 +178,7 @@ void inject(std::vector<addrRange> addrsVec){
     addrRange ad ;
     for(int i= 0; i< addrsVec.size();i++){
        std::cout << "perms : " << addrsVec[i].perms << std::endl;    
-        if(strcmp("/Debugee1\n",addrsVec[i].path) == 0){
+        if(strcmp("/Debugee2\n",addrsVec[i].path) == 0){
             std::cout << "trovato : " << std::endl;
             ad = addrsVec[i];
             break;
@@ -181,13 +186,28 @@ void inject(std::vector<addrRange> addrsVec){
     }
     
     char * offsetMain = (char *) "1169";
-    // concatenare offset e indriizzo
     
+    
+    placeBP(ad.StartAddr);
+    return;
+};
 
+void placeBP(char * addr){
+    
+    uint64_t addr_s = (uint64_t) atoi(addr);
+    uint64_t addr_offset = (uint64_t) 0x1149;
+    addr_s = addr_s + addr_offset; 
+    std::cout << "addr_s : " << addr_s << std::endl;
+    auto data = ptrace(PTRACE_PEEKDATA,pid,(void *) addr_s,nullptr);
+    if(data == -1){
+        printf("errno : %s \n", strerror(errno) );
+    }
+    std::cout << "data : " << data << std::endl;
+    
+    // 1149 offset
     return;
 };
 };
-
 class Controller{
 // prende file eseguibile
 // fa objdump per indirizzi
