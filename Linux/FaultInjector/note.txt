@@ -1,4 +1,15 @@
-Nota : possiamo capire la sezione codice dal fatto che il permesso relativo a quel segmento sia eseguibile rx-- (?)
+Su  /ptrace ci sono 2 file ip_bin.txt e ip.txt su questi due file ci sono (quasi) tutti gli indirizzi che il program
+counter ha visto durante l'esecuzione del programma quindi ci sono anche tutti gli indirizzi dei simboli che ha visto
+(su ip.txt tutti anche quelli relativi alle librerie dinamiche, su ip_bin.txt invece sono quelli appartenenti al binary),
+e infatti si puo' vedere come con le impostazioni di personality :
+
+                personality(ADDR_COMPAT_LAYOUT);
+                personality(ADDR_NO_RANDOMIZE);
+
+gli indirizzi che vengono assegnati al binary sono sempre gli stessi e sullo stesso range (guardare su file) e gli offset 
+sono semplicemente :
+                         8000000 + <offset>
+                         
 
 Comando pmap :
 

@@ -44,10 +44,13 @@ Debugger(){
     progName = nullptr;
 };
 void start(){
+    
     fprintf(stdout,"Debugger start \n");
     int pid = 0;
     pid = fork();
+
     if(pid == 0){
+
         printf("child \n");
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
 
