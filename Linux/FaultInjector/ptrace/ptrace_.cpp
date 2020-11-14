@@ -145,7 +145,7 @@ void handleBP(unsigned long int saved_data,int pid){
     auto data = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
     std::cout << "data before remove BP : " << std::hex << data << std::endl;
     std::cout << "BP reached time to handle it " << std::endl;
-    if(ptrace(PTRACE_POKEDATA,pid,0x8001149,data) < 0){
+    if(ptrace(PTRACE_POKEDATA,pid,0x8001149,saved_data) < 0){
        perror("PTRACE_POKEDATA : ");
     }
 
