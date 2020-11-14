@@ -113,13 +113,50 @@ std::vector<addrRange> ReadAddrs(int pid){
     return addrsVec;
 };
 
-void readP(std::vector<addrRange> address,int pid){
+void Inject(std::vector<addrRange> address,int pid){
 
 
     return;
 
 }
+unsigned long int placeBP(int pid){
+    // per ora soolo su main -> 0x8001149
+   auto data = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
+   std::cout << "data before placing BP : " << std::hex << data << std::endl;
+   uint8_t savedData = static_cast<uint8_t>(data & 0xff); // salvo il byte meno significativo della variabile (visto che e' little ending e' il piu')
+   
+   uint64_t int3 = 0xCC;
+   uint64_t dataBP = ((data & ~0xff) | int3);
+   if(ptrace(PTRACE_POKEDATA,pid,0x8001149,dataBP) < 0){
+       perror("PTRACE_POKEDATA : ");
+   }else{
+       std::cout << "BP placed : " << std::hex << dataBP << std::endl;
+   }
+
+   auto data1 = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
+   std::cout << "Data after placed BP : " << std::hex << data1 << std::endl;
+    ptrace(PTRACE_CONT,pid,nullptr,nullptr);
+   return data;
+}
+void handleBP(unsigned long int saved_data,int pid){
+    
+    
+    //leggere dati prima di mettere i nuovi (per curiosita')
+    auto data = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
+    std::cout << "data before remove BP : " << std::hex << data << std::endl;
+    std::cout << "BP reached time to handle it " << std::endl;
+    if(ptrace(PTRACE_POKEDATA,pid,0x8001149,data) < 0){
+       perror("PTRACE_POKEDATA : ");
+    }
+
+    auto data1 = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
+    std::cout << "data after remove BP : " << std::hex << data1 << std::endl;
+    ptrace(PTRACE_CONT,pid,nullptr,nullptr);
+    return;
+}
 int main(){
+            int firstBP = 0;
+            unsigned long int saved_data;
             std::ofstream file;
             file.open("ip.txt");
 
@@ -161,47 +198,48 @@ int main(){
                 printf("Starting debugging loop \n");
                 long count = 0;
                 while(1){
-                count++;
-                if (WIFEXITED(statusCode)) {
-                    printf("process exited,num istr %ld ,status=%d\n",count, WEXITSTATUS(statusCode));
-                    break;
+                    count++;
+                    if (WIFEXITED(statusCode)) {
+                        printf("process exited,num istr %ld ,status=%d\n",count, WEXITSTATUS(statusCode));
+                        break;
 
-                } else if (WIFCONTINUED(statusCode)) {
-                    printf("continued\n");
-                } else if(WIFSTOPPED(statusCode)){
-                    //printf("stopped \n");
-                    // qui posso leggere
+                    } else if (WIFCONTINUED(statusCode)) {
+                        printf("continued\n");
+                    } else if(WIFSTOPPED(statusCode)){
+                        //printf("stopped \n");
+                        // qui posso leggere
+                        
+                    //struct user_regs_struct regs;
+                    //ptrace(PTRACE_GETREGS,pid,nullptr,&regs);
+
+                    //std::cout << "regs :"<< std::hex << regs.rip << std::endl;
+                    //unsigned long long int rip = regs.rip;
+                    //file << std::hex << rip;
+                    //file << "\n";
+                    //data = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
+                    //std::cout << "dara readed at ip :" << std::hex << rip << " : " << std::hex << data << std::endl;
                     
-                struct user_regs_struct regs;
-                ptrace(PTRACE_GETREGS,pid,nullptr,&regs);
+                    if(firstBP == 1){
+                        handleBP(saved_data,pid);
+                        firstBP = 2;
+                    }else if(firstBP == 0){
+                        saved_data = placeBP(pid);
+                        firstBP = 1;
+                    }
 
-                //std::cout << "regs :"<< std::hex << regs.rip << std::endl;
-                
-                unsigned long long int rip = regs.rip;
-                file << std::hex << rip;
-                file << "\n";
-                
 
-                } else if (WIFSIGNALED(statusCode)){
-                    printf("signaled");
+                    } else if (WIFSIGNALED(statusCode)){
+                        printf("signaled");
+                    }
+
+                    if((count % 1000) == 0) std::cout << "count " << count << std::endl;
+
+                    
+                    
+                    wait(&statusCode);
+                    }
+                
                 }
-
-                if(ptrace(PTRACE_SINGLESTEP,pid,nullptr,nullptr) < 0){
-                    perror("ptrace Single step");
-                }
-                
-                //std::cout << "single step" << std::endl;
-
-                /*
-                if (ptrace(PTRACE_CONT, pid, nullptr, nullptr) < 0) {
-                    perror("ptrace CONT ");                   
-                  }
-                */
-                
-                wait(&statusCode);
-                }
-               
-            }
             file.close();
             printf("Fine \n");
             return 0;
