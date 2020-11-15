@@ -1,0 +1,3 @@
+/home/colo/FaultInjector/repo/Linux/FaultInjector/boost_cmake_prova/CMakeFiles/edit_cache.dir
+/home/colo/FaultInjector/repo/Linux/FaultInjector/boost_cmake_prova/CMakeFiles/rebuild_cache.dir
+/home/colo/FaultInjector/repo/Linux/FaultInjector/boost_cmake_prova/CMakeFiles/Prova.dir

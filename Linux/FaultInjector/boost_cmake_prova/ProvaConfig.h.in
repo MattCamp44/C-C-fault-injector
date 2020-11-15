@@ -1,0 +1,2 @@
+#define Prova_VERSION_MAJOR @Prova_VERSION_MAJOR@
+#define Prova_VERSION_MINOR @Prova_VERSION_MINOR@

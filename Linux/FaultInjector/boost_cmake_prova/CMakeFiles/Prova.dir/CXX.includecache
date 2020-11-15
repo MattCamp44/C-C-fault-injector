@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/colo/FaultInjector/repo/Linux/FaultInjector/boost_cmake_prova/Prova.cpp
+ProvaConfig.h
+-
+iostream
+-
+
+ProvaConfig.h
+
