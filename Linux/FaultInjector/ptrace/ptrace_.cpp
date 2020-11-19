@@ -140,12 +140,12 @@ unsigned long int placeBP(int pid){
 }
 void handleBP(unsigned long int saved_data,int pid){
     
-    
+    uint64_t ad = 0x8001149 ;
     //leggere dati prima di mettere i nuovi (per curiosita')
-    auto data = ptrace(PTRACE_PEEKDATA,pid,0x8001149,nullptr);
+    auto data = ptrace(PTRACE_PEEKDATA,pid,ad,nullptr);
     std::cout << "data before remove BP : " << std::hex << data << std::endl;
     std::cout << "BP reached time to handle it " << std::endl;
-    if(ptrace(PTRACE_POKEDATA,pid,0x8001149,saved_data) < 0){
+    if(ptrace(PTRACE_POKEDATA,pid,ad,saved_data) < 0){
        perror("PTRACE_POKEDATA : ");
     }
 

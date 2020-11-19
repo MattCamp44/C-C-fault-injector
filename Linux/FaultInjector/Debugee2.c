@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+
+void function1(){
+    printf("here\n");
+};
 int main(){
     printf("START\n");
     printf("1 \n");
@@ -9,5 +13,6 @@ int main(){
     printf("5 \n");
     printf("6 \n");
     printf("7 \n");
+    function1();
     printf("END\n");
 }
