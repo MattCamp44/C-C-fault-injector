@@ -2,7 +2,7 @@
 //Restituisce un'array di indirizzi
 
 
-//Prende in input un ObjectDump e ritorna i nomi delle funzioni
+//Prende in input un Dwarfdump e un ObjectDump e ritorna i nomi delle funzioni e i loro indirizzi relativi
 #include <algorithm>
 #include<fstream>
 #include<iostream>
@@ -33,6 +33,7 @@ class FunctionObject {
         this->linkageName = linkageName;
 
         }
+    
     FunctionObject(string FunctionName, string linkageName, vector<string> addresses){
         
         this->FunctionName = FunctionName;
@@ -40,6 +41,8 @@ class FunctionObject {
         this->addresses = addresses;
 
         }
+
+    
     
     string getname(){return this->FunctionName;}
     string getlinkagename(){return this->linkageName;}
@@ -51,7 +54,10 @@ class FunctionObject {
 
 vector<string> ExtractAddresses(FunctionObject functionobject){
     
+    
+
     vector<string> addresses;
+
 
     fstream objdumpfile;
     objdumpfile.open("objdump",ios::in);
@@ -65,7 +71,8 @@ vector<string> ExtractAddresses(FunctionObject functionobject){
 
             while(line != ""){
                 getline(objdumpfile, line) ;
-                if(line!= ""){
+
+                if(line!= "" ){
                     
 
                     addresses.emplace_back(line.substr(2,6));
@@ -95,10 +102,10 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
     string functionname;
 
         while(getline(ObjDumpFile, line) ) { 
+                
 
 
            if (line.find(FIND_SYMBOL_STRING, 0) != string::npos) {
-                    
                     getline(ObjDumpFile, line); 
                     getline(ObjDumpFile, line); 
                     
@@ -120,7 +127,8 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
 
                 }
                     else 
-                        linkagename = "main";
+   
+                        linkagename = "<main>";
 
                     vector<string> addresses = ExtractAddresses(FunctionObject(functionname,linkagename));
                     FunctionObjects.emplace_back(FunctionObject(functionname,linkagename,addresses));
@@ -141,6 +149,17 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
 
     }
 
+string getBaseAddress(int pid){
+
+    string commandStr = "cat /proc/";
+    string pid_s = to_string(pid);
+
+
+
+
+}
+
+
 
 int main(){
     
@@ -150,12 +169,16 @@ int main(){
 
     vector<FunctionObject> SymbolNames = ExtractFunctionNames(ObjDumpFile);
 
+    
 
+    //std::string commandStr = "cat proc/";
+    //std::string pid_s = std::to_string(pid);
 
+    
     for(auto a : SymbolNames){
         cout << a.getname() << " " << a.getlinkagename() << " "  << endl;
         for(auto b : a.getaddresses())
-            cout << b << endl;
+            cout << stoi(b,nullptr,16) << endl;
         }
     }
 
