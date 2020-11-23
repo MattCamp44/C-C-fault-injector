@@ -2,10 +2,15 @@ cmake_minimum_required(VERSION 3.10) # versione di cmake
 
 project(Prova VERSION 1.0) # nome progetto e versione, questa versione e quella di cmake sopra verranno scritti nell'header di configurazione
 
+FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED) # per aggiungere boost
+
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} ) # lo metto nella include directory
 
 add_executable(Prova Prova.cpp) # aggiunge eseguibile alla compilazione
 
 configure_file(ProvaConfig.h.in ProvaConfig.h) # header di configurazione, per ora contiene soltanto la versione
+
+TARGET_LINK_LIBRARIES( Prova LINK_PUBLIC ${Boost_LIBRARIES} )
 
 # il file di configurazione verrà scritto nel binary tree, questo aggiunge il path della directory nella lista dei path 
 # in cui guardare per includere file
