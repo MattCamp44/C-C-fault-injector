@@ -22,7 +22,7 @@ class FunctionObject {
     
     string FunctionName;
 
-    //uint_8 addresses[2];  //beginning, end
+    //uint64_t addresses[2];  //beginning, end
     vector<string> addresses;
     
     string linkageName;
