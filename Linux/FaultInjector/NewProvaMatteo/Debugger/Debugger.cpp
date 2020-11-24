@@ -4,12 +4,18 @@
 #include<vector>
 #include "../FunctionObject/FunctionObject.h"
 #include "../AddressSelector/AddressSelector.h"
-
+#include "../BreakPoint/BreakPoint.h"
+#include "../InjectionPoint/InjectionPoint.h"
 
 void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> addresses){
     
-    
+    BreakPoint breakpoint(pid,addresses[0]);
 
+    InjectionPoint injectionpoint(pid,addresses[1]);
+
+    breakpoint.Enable();
+
+    injectionpoint.InjectFirstBit();
 
 
 }
