@@ -8,6 +8,9 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
 #define FIND_SYMBOL_STRING "subprogram"
 
@@ -151,9 +154,19 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile){
 
 string getBaseAddress(int pid){
 
+    char curdir[500];
+    getcwd(curdir,sizeof(curdir)); 
+
     string commandStr = "cat /proc/";
     string pid_s = to_string(pid);
-
+    commandStr.append(pid_s);
+    commandStr.append("/maps > ");
+    commandStr.append(curdir);
+    commandStr.append("/addrs.txt");
+    cout << commandStr << endl ;
+    char command[commandStr.size()+1];
+    strcpy(command,commandStr.c_str());
+    //system ((char *) &command);
 
 
 
@@ -169,6 +182,7 @@ int main(){
 
     vector<FunctionObject> SymbolNames = ExtractFunctionNames(ObjDumpFile);
 
+    getBaseAddress(2);
     
 
     //std::string commandStr = "cat proc/";
@@ -178,7 +192,7 @@ int main(){
     for(auto a : SymbolNames){
         cout << a.getname() << " " << a.getlinkagename() << " "  << endl;
         for(auto b : a.getaddresses())
-            cout << stoi(b,nullptr,16) << endl;
+            cout << b << " stoull(b): " << stoull(b,nullptr,16) << endl;
         }
     }
 
