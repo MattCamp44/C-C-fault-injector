@@ -1,5 +1,9 @@
 injector: main.cpp ./FunctionObject/FunctionObject.h ./FunctionObject/FunctionObject.cpp ./Extractor/Extractor.cpp ./Extractor/Extractor.h objectfiles
-	g++ main.cpp ./FunctionObject/FunctionObject.h ./FunctionObject/FunctionObject.cpp ./Extractor/Extractor.cpp ./Extractor/Extractor.h -o injector
+	g++ -g -pthread -std=c++17 main.cpp ./FunctionObject/FunctionObject.h ./FunctionObject/FunctionObject.cpp ./Extractor/Extractor.cpp ./Extractor/Extractor.h -o injector
+
+
+
+
 
 objectfiles: ./debugee/prova.c ./Extractor/ObjectFiles/prova/objdump ./Extractor/ObjectFiles/prova/dwarfdump
 	gcc -g ./debugee/prova.c -o ./debugee/prova

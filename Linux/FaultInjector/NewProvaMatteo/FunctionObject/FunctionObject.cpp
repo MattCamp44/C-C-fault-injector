@@ -11,7 +11,7 @@ FunctionObject::FunctionObject(string FunctionName, string linkageName){
 
         }
     
-FunctionObject::FunctionObject(string FunctionName, string linkageName, vector<string> addresses){
+FunctionObject::FunctionObject(string FunctionName, string linkageName, vector<unsigned long> addresses){
         
         this->FunctionName = FunctionName;
         this->linkageName = linkageName;
@@ -23,4 +23,4 @@ FunctionObject::FunctionObject(string FunctionName, string linkageName, vector<s
     
     string  FunctionObject::getname(){return this->FunctionName;}
     string FunctionObject::getlinkagename(){return this->linkageName;}
-    vector<string> FunctionObject::getaddresses(){return this->addresses;}
+    vector<unsigned long> FunctionObject::getaddresses(){return this->addresses;}

@@ -6,15 +6,16 @@
 
 #include<vector>
 #include<string>
+#include<iostream>
+
 
 using namespace std;
 
 class FunctionObject {
-    
     string FunctionName;
 
-    //uint64_t addresses[2];  //beginning, end
-    vector<string> addresses;
+    //unsigned long addresses[2];  //beginning, end
+    vector<unsigned long> addresses;
     
     string linkageName;
     
@@ -23,13 +24,13 @@ class FunctionObject {
     
     FunctionObject(string FunctionName, string linkageName);
     
-    FunctionObject(string FunctionName, string linkageName, vector<string> addresses);
+    FunctionObject(string FunctionName, string linkageName, vector<unsigned long> addresses);
 
     
     
     string getname();
     string getlinkagename();
-    vector<string> getaddresses();
+    vector<unsigned long> getaddresses();
 
     };
 
