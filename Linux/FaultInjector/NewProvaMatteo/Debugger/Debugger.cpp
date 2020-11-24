@@ -5,11 +5,29 @@
 #include "../FunctionObject/FunctionObject.h"
 #include "../AddressSelector/AddressSelector.h"
 
+
+void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> addresses){
+    
+    
+
+
+
+}
+
+
+
+
 void Debugger(int pid, vector<FunctionObject> FunctionObjects){
 
     vector<unsigned long int> addresses = AddressSelector(FunctionObjects);
 
+    EnableInjectionPointsAndBreakpoint(pid,addresses);
+
+
 }
+
+
+
 
 
 
