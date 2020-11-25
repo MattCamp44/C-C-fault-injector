@@ -24,8 +24,8 @@ void BreakPoint::Enable(){
     unsigned long int int3 = 0xcc;
     unsigned long int data_with_int3 = ((data & ~0xff) | int3); //set bottom byte to 0xcc
     cout << "Breakpoint data with int3: " << data_with_int3 << endl;
-    //ptrace(PTRACE_POKEDATA, pid, address, data_with_int3);
-    data = ptrace(PTRACE_PEEKDATA, pid, address, nullptr);
+    ptrace(PTRACE_POKEDATA, pid, address, data_with_int3);
+    //data = ptrace(PTRACE_PEEKDATA, pid, address, nullptr);
     
     
 

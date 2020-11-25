@@ -33,7 +33,7 @@ int main(int argc, char ** argv){
 
         
 
-        sleep(1);
+        //sleep(1);
 
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
@@ -41,6 +41,7 @@ int main(int argc, char ** argv){
         Debugger(pid, functionObjects);
         
         cout << "after Debugger\n"; 
+        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
 
         waitpid(pid,nullptr,0);
@@ -56,7 +57,6 @@ int main(int argc, char ** argv){
         setbuf(stdout, 0);
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);
-        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
     }
 

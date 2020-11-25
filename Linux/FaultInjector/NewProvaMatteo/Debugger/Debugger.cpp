@@ -30,7 +30,7 @@ void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> &addr
 
     breakpoint.Enable();
 
-    injectionpoint.InjectFirstBit();
+    //injectionpoint.InjectFirstBit();
 
 
 }
