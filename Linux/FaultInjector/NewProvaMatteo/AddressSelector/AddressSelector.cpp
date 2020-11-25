@@ -5,7 +5,7 @@
 using namespace std;
 
 
-vector<unsigned long int> AddressSelector(vector<FunctionObject> FunctionObjects){
+vector<unsigned long int> AddressSelector(vector<FunctionObject> &FunctionObjects){
 
     
 
@@ -22,7 +22,7 @@ vector<unsigned long int> AddressSelector(vector<FunctionObject> FunctionObjects
     addresses.emplace_back(FunctionObjects[index].getaddresses()[4]);
 
 
-
+    return addresses;
 
 
 }

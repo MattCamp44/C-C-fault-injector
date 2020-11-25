@@ -8,7 +8,7 @@ using namespace std;
 
 //To be extended, think about an abstract class maybe?
 //Just to try do not use like this!!!
-vector<unsigned long int> AddressSelector(vector<FunctionObject> FunctionObjects);
+vector<unsigned long int> AddressSelector(vector<FunctionObject> &FunctionObjects);
 
 
 

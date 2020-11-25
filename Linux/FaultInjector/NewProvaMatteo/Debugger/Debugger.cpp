@@ -7,7 +7,22 @@
 #include "../BreakPoint/BreakPoint.h"
 #include "../InjectionPoint/InjectionPoint.h"
 
-void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> addresses){
+
+using namespace std;
+
+void continue_execution(int pid) {
+    ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+
+    int wait_status;
+    auto options = 0;
+    waitpid(pid, &wait_status, options);
+
+}
+
+
+
+
+void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> &addresses){
     
     BreakPoint breakpoint(pid,addresses[0]);
 
@@ -25,10 +40,16 @@ void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> addre
 
 void Debugger(int pid, vector<FunctionObject> FunctionObjects){
 
-    vector<unsigned long int> addresses = AddressSelector(FunctionObjects);
+
+    vector<unsigned long int> addresses;
+    addresses = AddressSelector(FunctionObjects);
 
     EnableInjectionPointsAndBreakpoint(pid,addresses);
 
+    continue_execution(pid);
+    cout << "Here" << endl;
+
+    return;
 
 }
 
@@ -39,14 +60,7 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
 
 
 
-void continue_execution(int pid) {
-    ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
-    int wait_status;
-    auto options = 0;
-    waitpid(pid, &wait_status, options);
-
-}
 
 
 
