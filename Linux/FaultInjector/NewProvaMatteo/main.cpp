@@ -41,7 +41,7 @@ int main(int argc, char ** argv){
         Debugger(pid, functionObjects);
         
         cout << "after Debugger\n"; 
-        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+        //ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
 
         waitpid(pid,nullptr,0);
