@@ -15,10 +15,10 @@ vector<unsigned long int> AddressSelector(vector<FunctionObject> &FunctionObject
             index = i;
     
     vector<unsigned long int> addresses;
-
+    
 
     //This should be somewhat random
-    addresses.emplace_back(FunctionObjects[index].getaddresses()[1]);
+    addresses.emplace_back(FunctionObjects[index].getaddresses()[10]);
     addresses.emplace_back(FunctionObjects[index].getaddresses()[4]);
 
 

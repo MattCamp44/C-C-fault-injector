@@ -41,8 +41,9 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
             }
             
             for(auto s : addresses){
-                cout << s << endl;
-                addresses_ui.emplace_back(stoull(s,nullptr,16) + base );
+                //cout << s << endl;
+                //addresses_ui.emplace_back(stoull(s,nullptr,16) + base );
+                addresses_ui.emplace_back(stoull(s,nullptr,16) );
             }
             return addresses_ui;
 
@@ -144,11 +145,11 @@ unsigned long int getBaseAddress(int pid){
     
     baseaddr = a.substr(0,8);
 
-    cout << baseaddr << endl;
+    cout << "Baseaddr: " << baseaddr << endl;
 
     base = stoull(baseaddr,nullptr,16);
 
-    cout << base << endl;
+    cout << "Base: " << base << endl;
 
     //commandStr.append("/maps > ");
     //commandStr.append(curdir);
@@ -192,7 +193,7 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
 
     
 
-    cout << pid << "  " << sizeof(unsigned long int) << " " << curdir << " " << dumpPath << endl;
+    //cout << pid << "  " << sizeof(unsigned long int) << " " << curdir << " " << dumpPath << endl;
 
     return FunctionObjectVector;
 

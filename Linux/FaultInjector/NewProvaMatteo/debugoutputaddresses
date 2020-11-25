@@ -1,0 +1,20 @@
+/proc/614/maps
+Baseaddr: 00400000
+Base: 4194304
+4195623
+Breakpoint data: ffffffffffffffff
+Breakpoint data with int3: ffffffffffffffcc
+Breakpoint data after repeeking: ffffffffffffffff
+Breakpoint enabled
+Injectionpoint data: ffffffffffffffff
+Breakpoint data after xor: fffffffffffffffe
+InjectionPoint enabled
+Here
+400526 : 4005c4bfe5894855
+400527 : 4005c4bfe58948
+40052a : fecce8004005c4bf
+40052f : b8fffffecce8
+400534 : fc35d00000000b8
+400539 : 410000441f0fc35d
+40053a : 57410000441f0fc3
+40053b : 4157410000441f0f

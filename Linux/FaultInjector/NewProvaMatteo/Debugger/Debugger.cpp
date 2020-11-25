@@ -45,9 +45,17 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
     addresses = AddressSelector(FunctionObjects);
 
     EnableInjectionPointsAndBreakpoint(pid,addresses);
-
+    // One continue for every peekdata I guess?
+    continue_execution(pid);
     continue_execution(pid);
     cout << "Here" << endl;
+
+    
+
+    //for(auto i : FunctionObjects[0].getaddresses())
+        //cout << i << " : " <<ptrace(PTRACE_PEEKDATA, pid, i, nullptr) << endl;
+
+    //continue_execution(pid);
 
     return;
 

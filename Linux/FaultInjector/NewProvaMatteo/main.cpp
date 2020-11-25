@@ -33,7 +33,7 @@ int main(int argc, char ** argv){
 
         
 
-        
+        sleep(1);
 
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
@@ -52,9 +52,11 @@ int main(int argc, char ** argv){
     else{
         //child
         //personality(ADDR_NO_RANDOMIZE);
+        //pause();
+        setbuf(stdout, 0);
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);
-        
+        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
     }
 
