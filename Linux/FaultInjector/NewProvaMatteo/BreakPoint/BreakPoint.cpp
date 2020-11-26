@@ -49,11 +49,14 @@ void BreakPoint::Enable(){
 
 void BreakPoint::Release(){
 
+    cout << "Peek at release: " << ptrace(PTRACE_PEEKDATA, pid, address, nullptr) << endl;
+
 
     ptrace(PTRACE_POKEDATA, pid, address, this->saved_data);
 
     cout << "Address=" << address  << " \nSaved_data=" << saved_data <<"\n Breakpoint released: peek :" << hex << ptrace(PTRACE_PEEKDATA, pid, address, nullptr) << endl;
 
+    cout << "Peek after release: " << ptrace(PTRACE_PEEKDATA, pid, address, nullptr) << endl;
 
 }
 

@@ -7,6 +7,7 @@
 #include "../BreakPoint/BreakPoint.h"
 #include "../InjectionPoint/InjectionPoint.h"
 #include <assert.h> 
+#include<sys/user.h>
 
 using namespace std;
 
@@ -72,16 +73,27 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
     
     EnableInjectionPoints(pid,addresses);
 
+    user_regs_struct regs;
+
 
     breakpoint.Release();
 
+    ptrace(PTRACE_GETREGS, pid, nullptr, &regs);
+
+    cout << "Program counter before singlestep: " << regs.rip << endl;
+
     ptrace(PTRACE_SINGLESTEP, pid, nullptr, nullptr);
+
+    cout << "Program counter after singlestep: " << regs.rip << endl;
+
 
     waitpid(pid,nullptr,0);
 
     ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
     waitpid(pid,nullptr,0);
+    cout << "Program counter after continue: " << regs.rip << endl;
+    //waitpid(pid,nullptr,0);
     //for(auto i : FunctionObjects[0].getaddresses())
         //cout << i << " : " <<ptrace(PTRACE_PEEKDATA, pid, i, nullptr) << endl;
 
