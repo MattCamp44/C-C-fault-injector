@@ -24,6 +24,11 @@ void continue_execution(int pid) {
 
 void EnableInjectionPointsAndBreakpoint(int pid, vector<unsigned long int> &addresses){
     
+    
+
+
+    cout << "Passing " << addresses[0] << endl;
+
     BreakPoint breakpoint(pid,addresses[0]);
 
     InjectionPoint injectionpoint(pid,addresses[1]);
@@ -55,7 +60,7 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
     //for(auto i : FunctionObjects[0].getaddresses())
         //cout << i << " : " <<ptrace(PTRACE_PEEKDATA, pid, i, nullptr) << endl;
 
-    continue_execution(pid);
+    //continue_execution(pid);
 
     return;
 

@@ -24,27 +24,36 @@ int main(int argc, char ** argv){
 
     }
     
+    setbuf(stdout, 0);
     int pid;
 
     if(pid = fork()){
         //parent
-        
+        //ptrace(PTRACE_ATTACH,pid,nullptr,nullptr);
         //ptrace(PTRACE_ATTACH,pid,nullptr,nullptr);
 
         
+        waitpid(pid,nullptr,0);
 
         //sleep(1);
+        
 
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
+        for(auto a : functionObjects){
+        cout << a.getname() << " " << a.getlinkagename() << " "  << endl;
+        for(auto b : a.getaddresses())
+            cout << b  << endl;
+        }
         
         Debugger(pid, functionObjects);
+        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+        sleep(2);
         
         cout << "after Debugger\n"; 
-        //ptrace(PTRACE_CONT, pid, nullptr, nullptr);
-
-
-        waitpid(pid,nullptr,0);
+        cout << "Single step" << endl;
+        //ptrace(PTRACE_SINGLESTEP, pid, nullptr, nullptr);
+        
 
     }
              
@@ -54,7 +63,7 @@ int main(int argc, char ** argv){
         //child
         //personality(ADDR_NO_RANDOMIZE);
         //pause();
-        setbuf(stdout, 0);
+    
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);
 
