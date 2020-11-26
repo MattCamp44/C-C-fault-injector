@@ -17,9 +17,9 @@ void InjectionPoint::InjectFirstBit(){
     cout << "Injectionpoint data: " << data << endl;
     data = data ^ 1;
     cout << "Breakpoint data after xor: " << data << endl;
-    ptrace(PTRACE_POKEDATA, pid, address, data);
+    //ptrace(PTRACE_POKEDATA, pid, address, data);
     cout << "InjectionPoint enabled\n";
-
+    cout << "NON STO INIETTANDO\n";
 
 }
 

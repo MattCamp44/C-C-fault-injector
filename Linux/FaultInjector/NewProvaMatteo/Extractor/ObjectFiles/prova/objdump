@@ -135,11 +135,11 @@ Disassembly of section .text:
   40054d:	e8 ae fe ff ff       	callq  400400 <puts@plt>
   400552:	bf 07 06 40 00       	mov    $0x400607,%edi
   400557:	e8 a4 fe ff ff       	callq  400400 <puts@plt>
-  40055c:	b8 00 00 00 00       	mov    $0x0,%eax
-  400561:	5d                   	pop    %rbp
-  400562:	c3                   	retq   
-  400563:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  40056a:	00 00 00 
+  40055c:	bf 0c 06 40 00       	mov    $0x40060c,%edi
+  400561:	e8 9a fe ff ff       	callq  400400 <puts@plt>
+  400566:	b8 00 00 00 00       	mov    $0x0,%eax
+  40056b:	5d                   	pop    %rbp
+  40056c:	c3                   	retq   
   40056d:	0f 1f 00             	nopl   (%rax)
 
 0000000000400570 <__libc_csu_init>:

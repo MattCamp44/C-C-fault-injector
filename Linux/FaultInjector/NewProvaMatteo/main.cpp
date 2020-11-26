@@ -37,17 +37,15 @@ int main(int argc, char ** argv){
 
         //sleep(1);
         
-
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
-        for(auto a : functionObjects){
-        cout << a.getname() << " " << a.getlinkagename() << " "  << endl;
-        for(auto b : a.getaddresses())
-            cout << b  << endl;
-        }
-        
+
         Debugger(pid, functionObjects);
-        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+
+        
+        
+
+
         sleep(2);
         
         cout << "after Debugger\n"; 
