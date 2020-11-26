@@ -13,6 +13,7 @@ BreakPoint::BreakPoint(int pid, unsigned long int address){
 }
 
 void BreakPoint::Enable(){
+    
     errno = 0;
     cout << "Breakpoint at: " << hex << address << endl;
     auto data = ptrace(PTRACE_PEEKDATA, pid, address, nullptr);

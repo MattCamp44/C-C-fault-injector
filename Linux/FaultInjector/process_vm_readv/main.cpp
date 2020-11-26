@@ -1,8 +1,10 @@
 #include<unistd.h>
 #include <sys/uio.h>
+#include<sys/ptrace.h>
+#include<sys/wait.h>
+#include<iostream>
 
-
-
+using namespace std;
 
 
 int main(){
@@ -12,28 +14,28 @@ int main(){
     pid = fork();
 
     if(pid){
-        //parent
-        struct iovec local[2];
-        struct iovec remote[1];
-        char buf1[10];
-        char buf2[10];
-        local[0].iov_base = buf1;
-        local[0].iov_len = 10;
-        local[1].iov_base = buf2;
-        local[1].iov_len = 10;
-        vector<unsigned long int> addrs = functionObjects[0].getaddresses();
-        remote[0].iov_base = (void *)addrs[0] ;
-        remote[0].iov_len = 20;
+       //parent
+       
+       auto data = ptrace(PTRACE_SINGLESTEP, pid, nullptr, nullptr);
+       
 
-        process_vm_readv(pid,local,2,remote,1,0);
+       cout << "Parent" << endl;
 
-        cout << buf1 << " " << buf2 << endl;
+       waitpid(pid,NULL,0);
 
     }
     else{
         //child
-
-
+        ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
+        sleep(1);
+        cout << "Child" << endl;
+        cout << "Child" << endl;
+        cout << "Child" << endl;
+        cout << "Child" << endl;
+        cout << "Child" << endl;
+        cout << "Child" << endl;
+        cout << "Child" << endl;
+        cout << "Child" << endl;
 
     }
 
