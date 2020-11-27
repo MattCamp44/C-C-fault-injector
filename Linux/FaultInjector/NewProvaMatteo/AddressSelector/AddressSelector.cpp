@@ -19,7 +19,7 @@ vector<unsigned long int> AddressSelector(vector<FunctionObject> &FunctionObject
 
     //This should be somewhat random
     addresses.emplace_back(FunctionObjects[index].getaddresses()[5]);
-    addresses.emplace_back(FunctionObjects[index].getaddresses()[4]);
+    addresses.emplace_back(static_cast<unsigned long int>(0x4005fc));
 
 
     return addresses;

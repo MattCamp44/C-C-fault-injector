@@ -65,7 +65,7 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
     
     //sleep(1);
     
-    //EnableInjectionPoints(pid,addresses);
+    EnableInjectionPoints(pid,addresses);
 
     user_regs_struct regs;
 
