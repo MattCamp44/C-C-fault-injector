@@ -46,11 +46,7 @@ int main(int argc, char ** argv){
         
 
 
-        sleep(2);
         
-        cout << "after Debugger\n"; 
-        cout << "Single step" << endl;
-        //ptrace(PTRACE_SINGLESTEP, pid, nullptr, nullptr);
         
 
     }

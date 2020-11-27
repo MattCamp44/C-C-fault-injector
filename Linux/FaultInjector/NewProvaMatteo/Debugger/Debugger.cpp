@@ -8,7 +8,8 @@
 #include "../InjectionPoint/InjectionPoint.h"
 #include <assert.h> 
 #include<sys/user.h>
-
+#include <sys/wait.h>
+#include <unistd.h>
 using namespace std;
 
 void continue_execution(int pid) {
@@ -44,11 +45,9 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
 
     vector<unsigned long int> addresses;
     addresses = AddressSelector(FunctionObjects);
-    cout << "Addresses: " << endl;
-    for(auto a : addresses)
-        cout << hex << a << endl;
+    
     assert(!addresses.empty());
-    //assert(!(addresses.size() >= 2));
+    
     
     //Pop head
     unsigned long int breakpointAddress = addresses[0];
@@ -57,21 +56,16 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
     
     breakpoint.Enable();
     
-    
-    //BreakPoint breakpoint = EnableBreakpoint(pid,breakpointAddress);
-
-    cout << "Saved data in debugger:" << breakpoint.GetSavedData() << endl;
-    // One continue for every peekdata I guess?
-    //continue_execution(pid);
-    //continue_execution(pid);
-    cout << "Here" << endl;
     //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
     ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
 
+
     waitpid(pid,nullptr,0);
     
-    EnableInjectionPoints(pid,addresses);
+    //sleep(1);
+    
+    //EnableInjectionPoints(pid,addresses);
 
     user_regs_struct regs;
 
@@ -80,11 +74,16 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
 
     ptrace(PTRACE_GETREGS, pid, nullptr, &regs);
 
-    cout << "Program counter before singlestep: " << regs.rip << endl;
+    //regs.rip = 0x400543 ;
+    regs.rip = breakpointAddress ;
 
-    ptrace(PTRACE_SINGLESTEP, pid, nullptr, nullptr);
+    ptrace(PTRACE_SETREGS, pid, nullptr, &regs);
 
-    cout << "Program counter after singlestep: " << regs.rip << endl;
+    //cout << "Program counter before singlestep: " << regs.rip << endl;
+    sleep(1);
+    ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+
+    //cout << "Program counter after singlestep: " << regs.rip << endl;
 
 
     waitpid(pid,nullptr,0);
@@ -92,7 +91,11 @@ void Debugger(int pid, vector<FunctionObject> FunctionObjects){
     ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
     waitpid(pid,nullptr,0);
-    cout << "Program counter after continue: " << regs.rip << endl;
+
+    ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+
+    waitpid(pid,nullptr,0);
+    //cout << "Program counter after continue: " << regs.rip << endl;
     //waitpid(pid,nullptr,0);
     //for(auto i : FunctionObjects[0].getaddresses())
         //cout << i << " : " <<ptrace(PTRACE_PEEKDATA, pid, i, nullptr) << endl;

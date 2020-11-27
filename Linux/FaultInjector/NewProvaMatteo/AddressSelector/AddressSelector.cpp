@@ -18,7 +18,7 @@ vector<unsigned long int> AddressSelector(vector<FunctionObject> &FunctionObject
     
 
     //This should be somewhat random
-    addresses.emplace_back(FunctionObjects[index].getaddresses()[6]);
+    addresses.emplace_back(FunctionObjects[index].getaddresses()[5]);
     addresses.emplace_back(FunctionObjects[index].getaddresses()[4]);
 
 

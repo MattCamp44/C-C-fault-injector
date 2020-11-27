@@ -128,7 +128,7 @@ unsigned long int getBaseAddress(int pid){
     commandStr.append(pid_s);
     commandStr.append("/maps");
     fstream mapsfile;
-    cout << commandStr << endl;
+
     mapsfile.open(commandStr,ios::in);
 
 
@@ -145,21 +145,11 @@ unsigned long int getBaseAddress(int pid){
     
     baseaddr = a.substr(0,8);
 
-    cout << "Baseaddr: " << baseaddr << endl;
+    
 
     base = stoull(baseaddr,nullptr,16);
 
-    cout << "Base: " << base << endl;
-
-    //commandStr.append("/maps > ");
-    //commandStr.append(curdir);
-    //TODO still progname problem
-    //commandStr.append("/Extractor/ObjectFiles/prova");
-    //commandStr.append("/addrs.txt");
-    //cout << commandStr << endl ;
-    //char command[commandStr.size()+1];
-    //strcpy(command,commandStr.c_str());
-    //system ((char *) &commandStr);
+    
 
     return base;
 
@@ -193,7 +183,7 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
 
     
 
-    //cout << pid << "  " << sizeof(unsigned long int) << " " << curdir << " " << dumpPath << endl;
+    
 
     return FunctionObjectVector;
 
