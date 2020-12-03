@@ -31,6 +31,9 @@ Selezione localita' dei guasti iniettati
 - Main/Funzione 
 - Stack/Heap
 
+TODO: Redirect input-output to file
+https://stackoverflow.com/questions/10150468/how-to-redirect-cin-and-cout-to-files
+
 TODOs
 - Avere accesso tutti gli indirizzi di memoria espliciti del programma, per poter scegliere dove bloccare e dove iniettare -> DWARF sembra la via
 - Formattare output log nei tipi di output sopra
