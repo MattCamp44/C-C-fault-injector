@@ -9,7 +9,7 @@
 
 
 
-void Debugger(int pid, vector<FunctionObject> FunctionObjects);
+void Debugger( vector<FunctionObject> FunctionObjects , char * prog);
 
 
 

@@ -29,8 +29,7 @@ int main(int argc, char ** argv){
 
     if(pid = fork()){
         //parent
-        //ptrace(PTRACE_ATTACH,pid,nullptr,nullptr);
-        //ptrace(PTRACE_ATTACH,pid,nullptr,nullptr);
+        
 
         
         waitpid(pid,nullptr,0);
@@ -39,8 +38,16 @@ int main(int argc, char ** argv){
         
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
+        ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+        
 
-        Debugger(pid, functionObjects);
+        //Wait for the golden run to finish
+        //Get offsets, timer etc.
+        waitpid(pid,nullptr,0);
+
+
+
+        Debugger(functionObjects , argv[1]);
 
         
         

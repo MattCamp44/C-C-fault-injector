@@ -42,7 +42,7 @@ void BreakPoint::Enable(){
 void BreakPoint::Release(){
 
     
-
+    this->saved_data = this->saved_data ^ 4;
 
     ptrace(PTRACE_POKEDATA, pid, address, this->saved_data);
 
