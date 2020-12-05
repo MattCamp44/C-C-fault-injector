@@ -77,8 +77,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             for(auto n : addresses)
                 cout << "Addresses: " << n << endl; 
 
-            addresses.erase(addresses.begin());
-            addresses.erase(addresses.begin());
+            
             //addresses = AddressSelector(FunctionObjects);
             //addresses[0] = i;
             //addresses[1] = i;
@@ -141,6 +140,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
                 //cout << i << " : " <<ptrace(PTRACE_PEEKDATA, pid, i, nullptr) << endl;
 
             //continue_execution(pid);
+            addresses.erase(addresses.begin());
+            addresses.erase(addresses.begin());
         }
 
         else{
