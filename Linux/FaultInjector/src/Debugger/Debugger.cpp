@@ -56,23 +56,29 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
     int pid;
     
     vector<unsigned long int> myaddresses;
+    vector<unsigned long int> myaddressesinstruction;
     //Check the campaign is working by modifying different lines in each run
     myaddresses.emplace_back(static_cast<unsigned long int>(0x4005f4));
     myaddresses.emplace_back(static_cast<unsigned long int>(0x4005f8));
     myaddresses.emplace_back(static_cast<unsigned long int>(0x4005fc));
     myaddresses.emplace_back(static_cast<unsigned long int>(0x400602));
-    myaddresses.emplace_back(static_cast<unsigned long int>(0x400602));
     myaddresses.emplace_back(static_cast<unsigned long int>(0x400607));
     myaddresses.emplace_back(static_cast<unsigned long int>(0x40060c));
 
+    myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40052a));
+    myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400534));
+    myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40053e));
+    myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400548));
+    myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400552));
+    myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40055c));
 
+    int index=0;
     //for(auto i : FunctionObjects[0].getaddresses()){
     for(auto i : myaddresses) {
         pid = fork();
         if(pid){
             //Parent
             waitpid(pid,nullptr,0);
-            cout << "Segfault check lol\n"; 
 
             for(auto n : addresses)
                 cout << "Addresses: " << n << endl; 
@@ -81,20 +87,21 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             //addresses = AddressSelector(FunctionObjects);
             //addresses[0] = i;
             //addresses[1] = i;
-
+            
+            addresses.emplace_back(myaddressesinstruction[index++]);
             addresses.emplace_back(i);
-            addresses.emplace_back(i);
+            cout << "Segfault check lol\n"; 
 
             assert(!addresses.empty());
             
             
             //Pop head
             unsigned long int breakpointAddress = addresses[0];
-            //addresses.erase(addresses.begin());
+            addresses.erase(addresses.begin());
             BreakPoint breakpoint(pid,breakpointAddress);
             
             breakpoint.Enable();
-            
+            sleep(1);
             //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
@@ -104,7 +111,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             
             //sleep(1);
             
-            //EnableInjectionPoints(pid,addresses);
+            EnableInjectionPoints(pid,addresses);
 
             user_regs_struct regs;
 
@@ -133,7 +140,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
-            waitpid(pid,nullptr,0);
+            //waitpid(pid,nullptr,0);
             //cout << "Program counter after continue: " << regs.rip << endl;
             //waitpid(pid,nullptr,0);
             //for(auto i : FunctionObjects[0].getaddresses())
@@ -141,13 +148,12 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             //continue_execution(pid);
             addresses.erase(addresses.begin());
-            addresses.erase(addresses.begin());
         }
 
         else{
             //child
             //freopen("newfile.txt", "w", stdout);
-            //ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
+            ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
         }
     }
