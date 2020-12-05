@@ -44,11 +44,7 @@ void EnableInjectionPoints(int pid, vector<unsigned long int> addresses ){
 void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
 
-    for(auto f : FunctionObjects){
-        cout << f.getname() << ":\n";
-        for(auto a : f.getaddresses())
-            cout << a << "\n";
-    }
+    
 
 
     vector<unsigned long int> addresses;
@@ -80,8 +76,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             //Parent
             waitpid(pid,nullptr,0);
 
-            for(auto n : addresses)
-                cout << "Addresses: " << n << endl; 
+            
 
             
             //addresses = AddressSelector(FunctionObjects);
@@ -90,7 +85,6 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             
             addresses.emplace_back(myaddressesinstruction[index++]);
             addresses.emplace_back(i);
-            cout << "Segfault check lol\n"; 
 
             assert(!addresses.empty());
             
@@ -101,7 +95,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             BreakPoint breakpoint(pid,breakpointAddress);
             
             breakpoint.Enable();
-            sleep(1);
+            //sleep(1);
             //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
@@ -126,7 +120,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             ptrace(PTRACE_SETREGS, pid, nullptr, &regs);
 
             //cout << "Program counter before singlestep: " << regs.rip << endl;
-            sleep(1);
+            //sleep(1);
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             //cout << "Program counter after singlestep: " << regs.rip << endl;
@@ -148,11 +142,21 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             //continue_execution(pid);
             addresses.erase(addresses.begin());
+
+            //Compare the two files
+
+            //popen("diff goldenoutput.txt injectedoutput.txt")
+            // ....read output and put on csvfile
+
+
+            remove("injectedoutput.txt");
+
+
         }
 
         else{
             //child
-            //freopen("newfile.txt", "w", stdout);
+            freopen("injectedoutput.txt", "w", stdout);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
         }

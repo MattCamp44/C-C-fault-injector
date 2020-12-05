@@ -51,7 +51,8 @@ int main(int argc, char ** argv){
 
         
         
-
+        //TODO: remove goldenoutput and injectedoutput files after comparing them
+            remove("goldenoutput.txt");
 
         
         
@@ -64,6 +65,8 @@ int main(int argc, char ** argv){
         //child
         //personality(ADDR_NO_RANDOMIZE);
         //pause();
+        FILE * fp;
+        freopen("goldenoutput.txt", "w", stdout);
     
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);

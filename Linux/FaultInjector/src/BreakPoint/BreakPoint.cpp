@@ -36,8 +36,8 @@ void BreakPoint::Enable(){
     unsigned long int data_with_int3 = ((data & ~0xff) | int3); //set bottom byte to 0xcc
     auto poke_exit_break = ptrace(PTRACE_POKEDATA, pid, address, data_with_int3);
     
-    cout << "Breakpoint data: " << data << endl;
-    cout << "Breakpoint poke: " << poke_exit_break << endl;
+    //cout << "Breakpoint data: " << data << endl;
+    //cout << "Breakpoint poke: " << poke_exit_break << endl;
 
 
 }
