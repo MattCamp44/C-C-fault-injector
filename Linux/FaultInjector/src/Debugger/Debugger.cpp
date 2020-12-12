@@ -149,14 +149,14 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             // ....read output and put on csvfile
 
 
-            remove("injectedoutput.txt");
+            //remove("injectedoutput.txt");
 
 
         }
 
         else{
             //child
-            freopen("injectedoutput.txt", "w", stdout);
+            //freopen("injectedoutput.txt", "w", stdout);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
         }

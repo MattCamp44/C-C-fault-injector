@@ -38,6 +38,11 @@ int main(int argc, char ** argv){
         
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
+
+
+        for(auto func: functionObjects)
+            cout << func.getname() << endl;
+
         ptrace(PTRACE_CONT, pid, nullptr, nullptr);
         
 
