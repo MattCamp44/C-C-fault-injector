@@ -1,0 +1,6 @@
+{
+    "_comment":"if you want to inject all function place all as unique element of the list",
+    "functions_to_injectasdf":["all"],
+    "max_waiting_time":3,
+    "number_of_injection":1
+}
