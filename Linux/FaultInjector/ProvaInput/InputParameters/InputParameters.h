@@ -18,7 +18,7 @@ class InputParameters{
     std::vector<std::string> GetListOfFunctions();
     int GetMaxWaitingTime();
     int GetNumberOfInjections();
-
+    bool isValid();
 };
 
 #endif

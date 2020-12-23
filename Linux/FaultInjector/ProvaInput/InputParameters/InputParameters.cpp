@@ -13,6 +13,13 @@ InputParameters::InputParameters(std::vector<std::string> ListOfFunctons,int Max
 
 };
 
+bool InputParameters::isValid(){
+    if(this->MaxWaitingTime == NULL && this->NumberOfInjections == NULL){
+        return false;
+    }
+    return true;
+};
+
 std::vector<std::string> InputParameters::GetListOfFunctions(){
     return this->ListOfFunctons;
 };
