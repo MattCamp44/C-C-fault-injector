@@ -7,6 +7,6 @@ injector: objectfiles main.cpp ./FunctionObject/FunctionObject.h ./FunctionObjec
 
 objectfiles: ./debugee/prova.c 
 	gcc -g ./debugee/prova.c -o ./debugee/prova
-	objdump -dl ./debugee/prova > ./Extractor/ObjectFiles/prova/objdump
+	objdump -d ./debugee/prova > ./Extractor/ObjectFiles/prova/objdump
 	dwarfdump ./debugee/prova > ./Extractor/ObjectFiles/prova/dwarfdump
 

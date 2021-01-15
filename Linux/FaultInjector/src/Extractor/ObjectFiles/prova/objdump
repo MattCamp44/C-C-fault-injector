@@ -5,7 +5,6 @@
 Disassembly of section .init:
 
 00000000004003c8 <_init>:
-_init():
   4003c8:	48 83 ec 08          	sub    $0x8,%rsp
   4003cc:	48 8b 05 25 0c 20 00 	mov    0x200c25(%rip),%rax        # 600ff8 <_DYNAMIC+0x1d0>
   4003d3:	48 85 c0             	test   %rax,%rax
@@ -40,7 +39,6 @@ Disassembly of section .plt.got:
 Disassembly of section .text:
 
 0000000000400430 <_start>:
-_start():
   400430:	31 ed                	xor    %ebp,%ebp
   400432:	49 89 d1             	mov    %rdx,%r9
   400435:	5e                   	pop    %rsi
@@ -56,7 +54,6 @@ _start():
   40045a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
 
 0000000000400460 <deregister_tm_clones>:
-deregister_tm_clones():
   400460:	b8 3f 10 60 00       	mov    $0x60103f,%eax
   400465:	55                   	push   %rbp
   400466:	48 2d 38 10 60 00    	sub    $0x601038,%rax
@@ -78,7 +75,6 @@ deregister_tm_clones():
   40049d:	00 00 00 
 
 00000000004004a0 <register_tm_clones>:
-register_tm_clones():
   4004a0:	be 38 10 60 00       	mov    $0x601038,%esi
   4004a5:	55                   	push   %rbp
   4004a6:	48 81 ee 38 10 60 00 	sub    $0x601038,%rsi
@@ -101,7 +97,6 @@ register_tm_clones():
   4004da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
 
 00000000004004e0 <__do_global_dtors_aux>:
-__do_global_dtors_aux():
   4004e0:	80 3d 51 0b 20 00 00 	cmpb   $0x0,0x200b51(%rip)        # 601038 <__TMC_END__>
   4004e7:	75 11                	jne    4004fa <__do_global_dtors_aux+0x1a>
   4004e9:	55                   	push   %rbp
@@ -113,7 +108,6 @@ __do_global_dtors_aux():
   4004fc:	0f 1f 40 00          	nopl   0x0(%rax)
 
 0000000000400500 <frame_dummy>:
-frame_dummy():
   400500:	bf 20 0e 60 00       	mov    $0x600e20,%edi
   400505:	48 83 3f 00          	cmpq   $0x0,(%rdi)
   400509:	75 05                	jne    400510 <frame_dummy+0x10>
@@ -129,40 +123,29 @@ frame_dummy():
   400521:	e9 7a ff ff ff       	jmpq   4004a0 <register_tm_clones>
 
 0000000000400526 <main>:
-main():
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:4
   400526:	55                   	push   %rbp
   400527:	48 89 e5             	mov    %rsp,%rbp
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:7
   40052a:	bf 04 06 40 00       	mov    $0x400604,%edi
   40052f:	e8 cc fe ff ff       	callq  400400 <puts@plt>
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:8
   400534:	bf 08 06 40 00       	mov    $0x400608,%edi
   400539:	e8 c2 fe ff ff       	callq  400400 <puts@plt>
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:9
   40053e:	bf 0c 06 40 00       	mov    $0x40060c,%edi
   400543:	e8 b8 fe ff ff       	callq  400400 <puts@plt>
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:10
   400548:	bf 12 06 40 00       	mov    $0x400612,%edi
   40054d:	e8 ae fe ff ff       	callq  400400 <puts@plt>
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:11
   400552:	bf 17 06 40 00       	mov    $0x400617,%edi
   400557:	e8 a4 fe ff ff       	callq  400400 <puts@plt>
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:12
   40055c:	bf 1c 06 40 00       	mov    $0x40061c,%edi
   400561:	e8 9a fe ff ff       	callq  400400 <puts@plt>
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:16
   400566:	bf 20 06 40 00       	mov    $0x400620,%edi
   40056b:	e8 90 fe ff ff       	callq  400400 <puts@plt>
   400570:	b8 00 00 00 00       	mov    $0x0,%eax
-/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:18
   400575:	5d                   	pop    %rbp
   400576:	c3                   	retq   
   400577:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
   40057e:	00 00 
 
 0000000000400580 <__libc_csu_init>:
-__libc_csu_init():
   400580:	41 57                	push   %r15
   400582:	41 56                	push   %r14
   400584:	41 89 ff             	mov    %edi,%r15d
@@ -203,13 +186,11 @@ __libc_csu_init():
   4005ed:	00 00 00 
 
 00000000004005f0 <__libc_csu_fini>:
-__libc_csu_fini():
   4005f0:	f3 c3                	repz retq 
 
 Disassembly of section .fini:
 
 00000000004005f4 <_fini>:
-_fini():
   4005f4:	48 83 ec 08          	sub    $0x8,%rsp
   4005f8:	48 83 c4 08          	add    $0x8,%rsp
   4005fc:	c3                   	retq   

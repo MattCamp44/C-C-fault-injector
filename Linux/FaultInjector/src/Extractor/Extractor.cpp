@@ -43,7 +43,8 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
             for(auto s : addresses){
                 //cout << s << endl;
                 //addresses_ui.emplace_back(stoull(s,nullptr,16) + base );
-                addresses_ui.emplace_back(stoull(s,nullptr,16) );
+                std::string::size_type sz = 0;
+                addresses_ui.emplace_back(stoull(s,&sz,16) );
             }
             return addresses_ui;
 
@@ -145,9 +146,9 @@ unsigned long int getBaseAddress(int pid){
     
     baseaddr = a.substr(0,8);
 
-    
+    std::string::size_type sz = 0; 
 
-    base = stoull(baseaddr,nullptr,16);
+    base = stoull(baseaddr,&sz,16);
 
     
 

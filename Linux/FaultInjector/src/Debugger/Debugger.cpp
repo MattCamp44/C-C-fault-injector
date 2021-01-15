@@ -54,12 +54,12 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
     vector<unsigned long int> myaddresses;
     vector<unsigned long int> myaddressesinstruction;
     //Check the campaign is working by modifying different lines in each run
-    myaddresses.emplace_back(static_cast<unsigned long int>(0x4005f4));
-    myaddresses.emplace_back(static_cast<unsigned long int>(0x4005f8));
-    myaddresses.emplace_back(static_cast<unsigned long int>(0x4005fc));
-    myaddresses.emplace_back(static_cast<unsigned long int>(0x400602));
-    myaddresses.emplace_back(static_cast<unsigned long int>(0x400607));
+    myaddresses.emplace_back(static_cast<unsigned long int>(0x400604));
+    myaddresses.emplace_back(static_cast<unsigned long int>(0x400608));
     myaddresses.emplace_back(static_cast<unsigned long int>(0x40060c));
+    myaddresses.emplace_back(static_cast<unsigned long int>(0x400612));
+    myaddresses.emplace_back(static_cast<unsigned long int>(0x400617));
+    myaddresses.emplace_back(static_cast<unsigned long int>(0x40061c));
 
     myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40052a));
     myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400534));
