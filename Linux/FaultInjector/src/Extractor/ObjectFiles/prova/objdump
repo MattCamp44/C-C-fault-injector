@@ -5,6 +5,7 @@
 Disassembly of section .init:
 
 00000000004003c8 <_init>:
+_init():
   4003c8:	48 83 ec 08          	sub    $0x8,%rsp
   4003cc:	48 8b 05 25 0c 20 00 	mov    0x200c25(%rip),%rax        # 600ff8 <_DYNAMIC+0x1d0>
   4003d3:	48 85 c0             	test   %rax,%rax
@@ -39,6 +40,7 @@ Disassembly of section .plt.got:
 Disassembly of section .text:
 
 0000000000400430 <_start>:
+_start():
   400430:	31 ed                	xor    %ebp,%ebp
   400432:	49 89 d1             	mov    %rdx,%r9
   400435:	5e                   	pop    %rsi
@@ -46,14 +48,15 @@ Disassembly of section .text:
   400439:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
   40043d:	50                   	push   %rax
   40043e:	54                   	push   %rsp
-  40043f:	49 c7 c0 e0 05 40 00 	mov    $0x4005e0,%r8
-  400446:	48 c7 c1 70 05 40 00 	mov    $0x400570,%rcx
+  40043f:	49 c7 c0 f0 05 40 00 	mov    $0x4005f0,%r8
+  400446:	48 c7 c1 80 05 40 00 	mov    $0x400580,%rcx
   40044d:	48 c7 c7 26 05 40 00 	mov    $0x400526,%rdi
   400454:	e8 b7 ff ff ff       	callq  400410 <__libc_start_main@plt>
   400459:	f4                   	hlt    
   40045a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
 
 0000000000400460 <deregister_tm_clones>:
+deregister_tm_clones():
   400460:	b8 3f 10 60 00       	mov    $0x60103f,%eax
   400465:	55                   	push   %rbp
   400466:	48 2d 38 10 60 00    	sub    $0x601038,%rax
@@ -75,6 +78,7 @@ Disassembly of section .text:
   40049d:	00 00 00 
 
 00000000004004a0 <register_tm_clones>:
+register_tm_clones():
   4004a0:	be 38 10 60 00       	mov    $0x601038,%esi
   4004a5:	55                   	push   %rbp
   4004a6:	48 81 ee 38 10 60 00 	sub    $0x601038,%rsi
@@ -97,6 +101,7 @@ Disassembly of section .text:
   4004da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
 
 00000000004004e0 <__do_global_dtors_aux>:
+__do_global_dtors_aux():
   4004e0:	80 3d 51 0b 20 00 00 	cmpb   $0x0,0x200b51(%rip)        # 601038 <__TMC_END__>
   4004e7:	75 11                	jne    4004fa <__do_global_dtors_aux+0x1a>
   4004e9:	55                   	push   %rbp
@@ -108,6 +113,7 @@ Disassembly of section .text:
   4004fc:	0f 1f 40 00          	nopl   0x0(%rax)
 
 0000000000400500 <frame_dummy>:
+frame_dummy():
   400500:	bf 20 0e 60 00       	mov    $0x600e20,%edi
   400505:	48 83 3f 00          	cmpq   $0x0,(%rdi)
   400509:	75 05                	jne    400510 <frame_dummy+0x10>
@@ -123,71 +129,87 @@ Disassembly of section .text:
   400521:	e9 7a ff ff ff       	jmpq   4004a0 <register_tm_clones>
 
 0000000000400526 <main>:
+main():
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:4
   400526:	55                   	push   %rbp
   400527:	48 89 e5             	mov    %rsp,%rbp
-  40052a:	bf f4 05 40 00       	mov    $0x4005f4,%edi
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:7
+  40052a:	bf 04 06 40 00       	mov    $0x400604,%edi
   40052f:	e8 cc fe ff ff       	callq  400400 <puts@plt>
-  400534:	bf f8 05 40 00       	mov    $0x4005f8,%edi
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:8
+  400534:	bf 08 06 40 00       	mov    $0x400608,%edi
   400539:	e8 c2 fe ff ff       	callq  400400 <puts@plt>
-  40053e:	bf fc 05 40 00       	mov    $0x4005fc,%edi
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:9
+  40053e:	bf 0c 06 40 00       	mov    $0x40060c,%edi
   400543:	e8 b8 fe ff ff       	callq  400400 <puts@plt>
-  400548:	bf 02 06 40 00       	mov    $0x400602,%edi
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:10
+  400548:	bf 12 06 40 00       	mov    $0x400612,%edi
   40054d:	e8 ae fe ff ff       	callq  400400 <puts@plt>
-  400552:	bf 07 06 40 00       	mov    $0x400607,%edi
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:11
+  400552:	bf 17 06 40 00       	mov    $0x400617,%edi
   400557:	e8 a4 fe ff ff       	callq  400400 <puts@plt>
-  40055c:	bf 0c 06 40 00       	mov    $0x40060c,%edi
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:12
+  40055c:	bf 1c 06 40 00       	mov    $0x40061c,%edi
   400561:	e8 9a fe ff ff       	callq  400400 <puts@plt>
-  400566:	b8 00 00 00 00       	mov    $0x0,%eax
-  40056b:	5d                   	pop    %rbp
-  40056c:	c3                   	retq   
-  40056d:	0f 1f 00             	nopl   (%rax)
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:16
+  400566:	bf 20 06 40 00       	mov    $0x400620,%edi
+  40056b:	e8 90 fe ff ff       	callq  400400 <puts@plt>
+  400570:	b8 00 00 00 00       	mov    $0x0,%eax
+/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c:18
+  400575:	5d                   	pop    %rbp
+  400576:	c3                   	retq   
+  400577:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  40057e:	00 00 
 
-0000000000400570 <__libc_csu_init>:
-  400570:	41 57                	push   %r15
-  400572:	41 56                	push   %r14
-  400574:	41 89 ff             	mov    %edi,%r15d
-  400577:	41 55                	push   %r13
-  400579:	41 54                	push   %r12
-  40057b:	4c 8d 25 8e 08 20 00 	lea    0x20088e(%rip),%r12        # 600e10 <__frame_dummy_init_array_entry>
-  400582:	55                   	push   %rbp
-  400583:	48 8d 2d 8e 08 20 00 	lea    0x20088e(%rip),%rbp        # 600e18 <__init_array_end>
-  40058a:	53                   	push   %rbx
-  40058b:	49 89 f6             	mov    %rsi,%r14
-  40058e:	49 89 d5             	mov    %rdx,%r13
-  400591:	4c 29 e5             	sub    %r12,%rbp
-  400594:	48 83 ec 08          	sub    $0x8,%rsp
-  400598:	48 c1 fd 03          	sar    $0x3,%rbp
-  40059c:	e8 27 fe ff ff       	callq  4003c8 <_init>
-  4005a1:	48 85 ed             	test   %rbp,%rbp
-  4005a4:	74 20                	je     4005c6 <__libc_csu_init+0x56>
-  4005a6:	31 db                	xor    %ebx,%ebx
-  4005a8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
-  4005af:	00 
-  4005b0:	4c 89 ea             	mov    %r13,%rdx
-  4005b3:	4c 89 f6             	mov    %r14,%rsi
-  4005b6:	44 89 ff             	mov    %r15d,%edi
-  4005b9:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
-  4005bd:	48 83 c3 01          	add    $0x1,%rbx
-  4005c1:	48 39 eb             	cmp    %rbp,%rbx
-  4005c4:	75 ea                	jne    4005b0 <__libc_csu_init+0x40>
-  4005c6:	48 83 c4 08          	add    $0x8,%rsp
-  4005ca:	5b                   	pop    %rbx
-  4005cb:	5d                   	pop    %rbp
-  4005cc:	41 5c                	pop    %r12
-  4005ce:	41 5d                	pop    %r13
-  4005d0:	41 5e                	pop    %r14
-  4005d2:	41 5f                	pop    %r15
-  4005d4:	c3                   	retq   
-  4005d5:	90                   	nop
-  4005d6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
-  4005dd:	00 00 00 
+0000000000400580 <__libc_csu_init>:
+__libc_csu_init():
+  400580:	41 57                	push   %r15
+  400582:	41 56                	push   %r14
+  400584:	41 89 ff             	mov    %edi,%r15d
+  400587:	41 55                	push   %r13
+  400589:	41 54                	push   %r12
+  40058b:	4c 8d 25 7e 08 20 00 	lea    0x20087e(%rip),%r12        # 600e10 <__frame_dummy_init_array_entry>
+  400592:	55                   	push   %rbp
+  400593:	48 8d 2d 7e 08 20 00 	lea    0x20087e(%rip),%rbp        # 600e18 <__init_array_end>
+  40059a:	53                   	push   %rbx
+  40059b:	49 89 f6             	mov    %rsi,%r14
+  40059e:	49 89 d5             	mov    %rdx,%r13
+  4005a1:	4c 29 e5             	sub    %r12,%rbp
+  4005a4:	48 83 ec 08          	sub    $0x8,%rsp
+  4005a8:	48 c1 fd 03          	sar    $0x3,%rbp
+  4005ac:	e8 17 fe ff ff       	callq  4003c8 <_init>
+  4005b1:	48 85 ed             	test   %rbp,%rbp
+  4005b4:	74 20                	je     4005d6 <__libc_csu_init+0x56>
+  4005b6:	31 db                	xor    %ebx,%ebx
+  4005b8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  4005bf:	00 
+  4005c0:	4c 89 ea             	mov    %r13,%rdx
+  4005c3:	4c 89 f6             	mov    %r14,%rsi
+  4005c6:	44 89 ff             	mov    %r15d,%edi
+  4005c9:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  4005cd:	48 83 c3 01          	add    $0x1,%rbx
+  4005d1:	48 39 eb             	cmp    %rbp,%rbx
+  4005d4:	75 ea                	jne    4005c0 <__libc_csu_init+0x40>
+  4005d6:	48 83 c4 08          	add    $0x8,%rsp
+  4005da:	5b                   	pop    %rbx
+  4005db:	5d                   	pop    %rbp
+  4005dc:	41 5c                	pop    %r12
+  4005de:	41 5d                	pop    %r13
+  4005e0:	41 5e                	pop    %r14
+  4005e2:	41 5f                	pop    %r15
+  4005e4:	c3                   	retq   
+  4005e5:	90                   	nop
+  4005e6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  4005ed:	00 00 00 
 
-00000000004005e0 <__libc_csu_fini>:
-  4005e0:	f3 c3                	repz retq 
+00000000004005f0 <__libc_csu_fini>:
+__libc_csu_fini():
+  4005f0:	f3 c3                	repz retq 
 
 Disassembly of section .fini:
 
-00000000004005e4 <_fini>:
-  4005e4:	48 83 ec 08          	sub    $0x8,%rsp
-  4005e8:	48 83 c4 08          	add    $0x8,%rsp
-  4005ec:	c3                   	retq   
+00000000004005f4 <_fini>:
+_fini():
+  4005f4:	48 83 ec 08          	sub    $0x8,%rsp
+  4005f8:	48 83 c4 08          	add    $0x8,%rsp
+  4005fc:	c3                   	retq   

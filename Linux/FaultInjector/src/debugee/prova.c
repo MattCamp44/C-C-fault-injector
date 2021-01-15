@@ -9,6 +9,7 @@ int main(){
     printf("Three\n");
     printf("Four\n");
     printf("Five\n");
+    printf("Six\n");
 
 
 
