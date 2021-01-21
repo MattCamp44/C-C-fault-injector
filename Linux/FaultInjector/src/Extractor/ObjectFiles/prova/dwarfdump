@@ -77,9 +77,9 @@ IA=val ISA number, DI=val discriminator value
 0x00400548  [  10, 0] NS
 0x00400552  [  11, 0] NS
 0x0040055c  [  12, 0] NS
-0x00400566  [  16, 0] NS
-0x00400575  [  18, 0] NS
-0x00400577  [  18, 0] NS ET
+0x00400566  [  15, 0] NS
+0x00400575  [  17, 0] NS
+0x00400577  [  17, 0] NS ET
 
 .debug_pubnames
 
@@ -87,15 +87,15 @@ IA=val ISA number, DI=val discriminator value
 
 .debug_string
 name at offset 0x00000000, length   17 is 'long unsigned int'
-name at offset 0x00000012, length   18 is 'short unsigned int'
-name at offset 0x00000025, length    9 is 'short int'
-name at offset 0x0000002f, length   79 is 'GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong'
-name at offset 0x0000007f, length   82 is '/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src'
-name at offset 0x000000d2, length   13 is 'unsigned char'
-name at offset 0x000000e0, length    8 is 'long int'
-name at offset 0x000000e9, length    8 is 'sizetype'
-name at offset 0x000000f2, length    4 is 'main'
-name at offset 0x000000f7, length   17 is './debugee/prova.c'
+name at offset 0x00000012, length   17 is './debugee/prova.c'
+name at offset 0x00000024, length    4 is 'main'
+name at offset 0x00000029, length   82 is '/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src'
+name at offset 0x0000007c, length   13 is 'unsigned char'
+name at offset 0x0000008a, length    8 is 'long int'
+name at offset 0x00000093, length    8 is 'sizetype'
+name at offset 0x0000009c, length    9 is 'short int'
+name at offset 0x000000a6, length   79 is 'GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong'
+name at offset 0x000000f6, length   18 is 'short unsigned int'
 
 .debug_aranges
 

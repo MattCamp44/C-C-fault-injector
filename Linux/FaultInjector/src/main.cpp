@@ -40,9 +40,11 @@ int main(int argc, char ** argv){
 
 
 
-        for(auto func: functionObjects)
+        for(auto func: functionObjects){
             cout << func.getname() << endl;
-
+            for(auto addr : func.getaddresses())
+                cout << addr << endl;
+        }
         ptrace(PTRACE_CONT, pid, nullptr, nullptr);
         
 
@@ -57,7 +59,7 @@ int main(int argc, char ** argv){
         
         
         //TODO: remove goldenoutput and injectedoutput files after comparing them
-            remove("goldenoutput.txt");
+            // remove("goldenoutput.txt");
 
         
         
