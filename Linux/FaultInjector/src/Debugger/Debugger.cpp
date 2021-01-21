@@ -67,25 +67,11 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
     int pid;
     
-    // vector<unsigned long int> myaddresses;
-    // vector<unsigned long int> myaddressesinstruction;
-    //Check the campaign is working by modifying different lines in each run
-    // myaddresses.emplace_back(static_cast<unsigned long int>(0x400604));
-    // myaddresses.emplace_back(static_cast<unsigned long int>(0x400608));
-    // myaddresses.emplace_back(static_cast<unsigned long int>(0x40060c));
-    // myaddresses.emplace_back(static_cast<unsigned long int>(0x400612));
-    // myaddresses.emplace_back(static_cast<unsigned long int>(0x400617));
-    // myaddresses.emplace_back(static_cast<unsigned long int>(0x40061c));
-
-    // myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40052a));
-    // myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400534));
-    // myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40053e));
-    // myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400548));
-    // myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x400552));
-    // myaddressesinstruction.emplace_back(static_cast<unsigned long int>(0x40055c));
+    
 
     int index=0;
     for(auto i : FunctionObjects[0].getaddresses()){
+        for( auto j = 0; j < 2; j++ ){
     // for(auto i : myaddresses) {
         cout << "Injecting " << hex << i << endl;
         pid = fork();
@@ -179,6 +165,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             execl(prog,prog,nullptr);
         }
     }
+
+} //for
 
     return;
 

@@ -1,5 +1,15 @@
 # FaultInjector
 
+
+## Dependencies
+
+- Boost
+    https://www.boost.org/doc/libs/1_75_0/more/getting_started/index.html
+- Dwarfdump
+    
+
+
+
 DONE:
 - Trycopyfile (cambiare nome magari) legge il file binario e lo riscrive in un altro file
 
