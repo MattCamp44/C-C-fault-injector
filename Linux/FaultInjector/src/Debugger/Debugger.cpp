@@ -110,10 +110,10 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             //Pop head
             unsigned long int breakpointAddress = i;
             // addresses.erase(addresses.begin());
+            EnableInjectionPoint(pid,i);
             BreakPoint breakpoint(pid,breakpointAddress);
             
             breakpoint.Enable();
-            EnableInjectionPoint(pid,i);
 
             sleep(1);
             //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
