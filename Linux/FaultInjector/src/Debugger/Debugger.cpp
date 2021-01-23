@@ -77,6 +77,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
         pid = fork();
         if(pid){
             //Parent
+            //Parte il thread
             waitpid(pid,nullptr,0);
 
             
@@ -130,13 +131,12 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             //cout << "Program counter after singlestep: " << regs.rip << endl;
 
-
+            
             waitpid(pid,nullptr,0);
 
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             // waitpid(pid,nullptr,0);
-
             // ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             //waitpid(pid,nullptr,0);
