@@ -14,14 +14,19 @@ InjectionPoint::InjectionPoint(int pid, unsigned long int address){
 void InjectionPoint::InjectFirstBit(){
 
     auto data = ptrace(PTRACE_PEEKDATA, pid, address,0);
-    cout << hex << "Injectionpoint data: " << data << endl;
+    if(data == -1)
+        cout << "PEEKDATA gone wrong\n";
+    // cout << hex << "Injectionpoint data: " << data << endl;
     // data = data ^ ( 1 << (std::rand() % length )  )
     data = data ^ (1 << 16);
-    cout << hex << "Breakpoint data after xor: " << data << endl;
+    // cout << hex << "Breakpoint data after xor: " << data << endl;
     auto ret = ptrace(PTRACE_POKEDATA, pid, address, data);
-    cout << hex << "Return poke: " << ret << endl;
-    cout << "InjectionPoint enabled\n";
-    cout << "STO INIETTANDO\n";
+    if(ret == -1)
+        cout << "POKEDATA gone wrong\n";
+
+        // cout << hex << "Return poke: " << ret << endl;
+    // cout << "InjectionPoint enabled\n";
+    // cout << "STO INIETTANDO\n";
 
 }
 

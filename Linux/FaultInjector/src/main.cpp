@@ -19,13 +19,21 @@ using namespace std;
 int main(int argc, char ** argv){
 
 
-    if(argc != 2){
+    if(argc < 2){
 
         std::cout << "I need the debugee (compiled with -g)\n";
         return 1;
 
     }
     
+    // char * const  argumentsVector[20];
+    // if(argc >= 2){
+    //     for(auto i = 1; i < argc; i++)
+    //         argumentsVector[i] = argv[i];
+    // }
+
+    
+
     setbuf(stdout, 0);
     int pid;
 
@@ -42,11 +50,11 @@ int main(int argc, char ** argv){
 
 
 
-        for(auto func: functionObjects){
-            cout << func.getname() << endl;
-            for(auto addr : func.getaddresses())
-                cout << addr << endl;
-        }
+        // for(auto func: functionObjects){
+        //     cout << func.getname() << endl;
+        //     for(auto addr : func.getaddresses())
+        //         cout << addr << endl;
+        // }
         ptrace(PTRACE_CONT, pid, nullptr, nullptr);
         
 
@@ -54,9 +62,9 @@ int main(int argc, char ** argv){
         //Get offsets, timer etc.
         waitpid(pid,nullptr,0);
 
+        int NinjectionsPerAddress = 2;
 
-
-        Debugger(functionObjects , argv[1]);
+        Debugger(functionObjects , argv[1], NinjectionsPerAddress);
 
         
         
@@ -79,6 +87,7 @@ int main(int argc, char ** argv){
     
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);
+        // execv(argv[1],argumentsVector);
 
     }
 
