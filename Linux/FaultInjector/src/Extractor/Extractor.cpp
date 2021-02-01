@@ -166,9 +166,12 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
 
     string dumpPath = "./Extractor/Objectfiles/";
     //TODO -> take out path from progname
-    //dumpPath.append(progname);
-    dumpPath.append("prova");
-    
+    string prognamestring = progname;
+
+    string progNameWithoutPath = prognamestring.substr(prognamestring.find_last_of("/\\") + 1);
+
+    dumpPath.append(progNameWithoutPath);
+
     
     dumpPath.append("/dwarfdump");
 

@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include "./Debugger/Debugger.h"
 #include <sys/uio.h>
-
+#include<experimental/filesystem>
 
 using namespace std;
 
@@ -32,7 +32,11 @@ int main(int argc, char ** argv){
     //         argumentsVector[i] = argv[i];
     // }
 
-    
+    char * newargv[20];
+
+    for( auto i=1; i < argc; i++ ){
+        newargv[i-1] = argv[i];
+    }
 
     setbuf(stdout, 0);
     int pid;
@@ -46,6 +50,8 @@ int main(int argc, char ** argv){
 
         //sleep(1);
         
+        // filesystem::exists("helloworld.txt");
+
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
 
 
@@ -87,7 +93,7 @@ int main(int argc, char ** argv){
     
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);
-        // execv(argv[1],argumentsVector);
+        // execv(argv[1],newargv);
 
     }
 

@@ -1,7 +1,13 @@
 #include<stdio.h>
 #include <unistd.h>
 
-int main(){
+int main(int argc, char **argv){
+
+    // if(argc < 2){
+    //     printf("%d \n",argc);
+    //     return 1;
+
+    // }
 
     //sleep(2);
     printf("One\n");

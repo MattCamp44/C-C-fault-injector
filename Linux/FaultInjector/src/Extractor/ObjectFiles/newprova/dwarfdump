@@ -5,10 +5,10 @@ COMPILE_UNIT<header overall offset = 0x00000000>:
 < 0><0x0000000b>  DW_TAG_compile_unit
                     DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  "./debugee/prova.c"
-                    DW_AT_comp_dir              "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src"
+                    DW_AT_name                  "newprova.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/debugee"
                     DW_AT_low_pc                0x00400526
-                    DW_AT_high_pc               <offset-from-lowpc>92
+                    DW_AT_high_pc               <offset-from-lowpc>26
                     DW_AT_stmt_list             0x00000000
 
 LOCAL_SYMBOLS:
@@ -48,40 +48,20 @@ LOCAL_SYMBOLS:
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
                       DW_AT_name                  "sizetype"
-< 1><0x0000006c>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x00000072>
-< 1><0x00000072>    DW_TAG_base_type
+< 1><0x0000006c>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
                       DW_AT_name                  "char"
-< 1><0x00000079>    DW_TAG_subprogram
+< 1><0x00000073>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
                       DW_AT_name                  "main"
-                      DW_AT_decl_file             0x00000001 ./debugee/prova.c
+                      DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/debugee/newprova.c
                       DW_AT_decl_line             0x00000004
-                      DW_AT_prototyped            yes(1)
                       DW_AT_type                  <0x00000057>
                       DW_AT_low_pc                0x00400526
-                      DW_AT_high_pc               <offset-from-lowpc>92
+                      DW_AT_high_pc               <offset-from-lowpc>26
                       DW_AT_frame_base            len 0x0001: 9c: DW_OP_call_frame_cfa
                       DW_AT_GNU_all_tail_call_sitesyes(1)
-                      DW_AT_sibling               <0x000000b7>
-< 2><0x0000009a>      DW_TAG_formal_parameter
-                        DW_AT_name                  "argc"
-                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
-                        DW_AT_decl_line             0x00000004
-                        DW_AT_type                  <0x00000057>
-                        DW_AT_location              len 0x0002: 916c: DW_OP_fbreg -20
-< 2><0x000000a8>      DW_TAG_formal_parameter
-                        DW_AT_name                  "argv"
-                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
-                        DW_AT_decl_line             0x00000004
-                        DW_AT_type                  <0x000000b7>
-                        DW_AT_location              len 0x0002: 9160: DW_OP_fbreg -32
-< 1><0x000000b7>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x0000006c>
 
 .debug_line: line number info for a single cu
 Source lines (from CU-DIE at .debug_info offset 0x0000000b):
@@ -90,34 +70,27 @@ Source lines (from CU-DIE at .debug_info offset 0x0000000b):
 NS new statement, BB new basic block, ET end of text sequence
 PE prologue end, EB epilogue begin
 IA=val ISA number, DI=val discriminator value
-0x00400526  [   4, 0] NS uri: "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c"
-0x00400535  [  13, 0] NS
-0x0040053f  [  14, 0] NS
-0x00400549  [  15, 0] NS
-0x00400553  [  16, 0] NS
-0x0040055d  [  17, 0] NS
-0x00400567  [  18, 0] NS
-0x00400571  [  21, 0] NS
-0x00400580  [  23, 0] NS
-0x00400582  [  23, 0] NS ET
+0x00400526  [   4, 0] NS uri: "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/debugee/newprova.c"
+0x0040052a  [   6, 0] NS
+0x00400539  [   9, 0] NS
+0x0040053e  [  13, 0] NS
+0x00400540  [  13, 0] NS ET
 
 .debug_pubnames
 
 .debug_macinfo
 
 .debug_string
-name at offset 0x00000000, length    4 is 'main'
-name at offset 0x00000005, length   82 is '/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src'
-name at offset 0x00000058, length   17 is 'long unsigned int'
-name at offset 0x0000006a, length   17 is './debugee/prova.c'
-name at offset 0x0000007c, length   13 is 'unsigned char'
-name at offset 0x0000008a, length    8 is 'long int'
-name at offset 0x00000093, length    4 is 'argc'
-name at offset 0x00000098, length   79 is 'GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong'
-name at offset 0x000000e8, length   18 is 'short unsigned int'
-name at offset 0x000000fb, length    9 is 'short int'
-name at offset 0x00000105, length    8 is 'sizetype'
-name at offset 0x0000010e, length    4 is 'argv'
+name at offset 0x00000000, length   17 is 'long unsigned int'
+name at offset 0x00000012, length   18 is 'short unsigned int'
+name at offset 0x00000025, length    9 is 'short int'
+name at offset 0x0000002f, length   10 is 'newprova.c'
+name at offset 0x0000003a, length   13 is 'unsigned char'
+name at offset 0x00000048, length    8 is 'long int'
+name at offset 0x00000051, length    8 is 'sizetype'
+name at offset 0x0000005a, length    4 is 'main'
+name at offset 0x0000005f, length   79 is 'GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong'
+name at offset 0x000000af, length   90 is '/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/debugee'
 
 .debug_aranges
 
@@ -125,14 +98,14 @@ COMPILE_UNIT<header overall offset = 0x00000000>:
 < 0><0x0000000b>  DW_TAG_compile_unit
                     DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  "./debugee/prova.c"
-                    DW_AT_comp_dir              "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src"
+                    DW_AT_name                  "newprova.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/debugee"
                     DW_AT_low_pc                0x00400526
-                    DW_AT_high_pc               <offset-from-lowpc>92
+                    DW_AT_high_pc               <offset-from-lowpc>26
                     DW_AT_stmt_list             0x00000000
 
 
-arange starts at 0x00400526, length of 0x0000005c, cu_die_offset = 0x0000000b
+arange starts at 0x00400526, length of 0x0000001a, cu_die_offset = 0x0000000b
 arange end
 .debug_frame
 

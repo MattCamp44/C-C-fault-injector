@@ -205,6 +205,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // freopen("injectedoutput.txt", "w", stdout);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
+            // execv(argv[1],newargv);
+
         }
     }
 

@@ -11,6 +11,7 @@ objectfilesprova: ./debugee/prova.c
 	dwarfdump ./debugee/prova > ./Extractor/ObjectFiles/prova/dwarfdump
 
 objectfiles: 
+	mkdir -p ./Extractor/ObjectFiles/$(debugee)/
 	objdump -d ./debugee/$(debugee) > ./Extractor/ObjectFiles/$(debugee)/objdump
 	dwarfdump ./debugee/$(debugee) > ./Extractor/ObjectFiles/$(debugee)/dwarfdump
 
