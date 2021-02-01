@@ -1,5 +1,6 @@
-# FaultInjector
+# Cyringe 
 
+Cyringe is a software fault injector for C and C++ programs.
 
 ## Dependencies
 
