@@ -33,8 +33,12 @@ The output is expressed through a .csv file. Each line represents a run in which
 
 ## Documentation
 
-- [Debugger](./Documentation/Debugger.md)
 - [Extractor](./Documentation/Extractor.md)
-
-
+- [Debugger](./Documentation/Debugger.md)
+- [AddressSelector](./Documentation/AddressSelector.md)
+- [BreakPoint](./Documentation/Breakpoint.md)
+- [InjectionPoint](./Documentation/InjectionPoint.md)
+- [FunctionObject](./Documentation/FunctionObject.md)
+- [CompareFiles](./Documentation/CompareFiles.md)
+- [Debugee](./Documentation/Debugee.md)
 
