@@ -26,7 +26,7 @@ Run
 The output is expressed through a .csv file. Each line represents a run in which one address has been injected. Each row has the following form:
 | Function/variable name       | Address     | Column 3     |
 | :------------- | :----------: | -----------: |
-|  Cell Contents | More Stuff   | And Again    |
-| You Can Also   | Put Pipes In | Like this \| |
+|   |   |     |
+|
 
 
