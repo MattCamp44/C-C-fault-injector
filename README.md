@@ -24,9 +24,9 @@ Run
 
 ## Output
 The output is expressed through a .csv file. Each line represents a run in which one address has been injected. Each row has the following form:
-| Function/variable name       | Address     | Column 3     |
-| :------------- | :----------: | -----------: |
-|   |   |     |
+| Function/variable name       | Address     | Run is correct     | Output is different     | Timeout  | Error |
+| :------------- | :----------: | -----------: | :------------- | :----------: | -----------: |
+|   |   |     |   |   |     |
 |
 
 
