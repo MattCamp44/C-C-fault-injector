@@ -216,10 +216,12 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             ifstream ifile;
             ifile.open("injectedoutputstderr.txt");
-            if(ifile && ifile.peek() == std::ifstream::traits_type::eof()) {
+            if(ifile && ifile.peek() != std::ifstream::traits_type::eof()) {
+                cout << ifile.peek() ;
                 errorGenerated = 1;
                 cout<<"Errors\n";
             } else {
+                cout << ifile.peek() ;
                 cout<<"No errors\n";
             }
 

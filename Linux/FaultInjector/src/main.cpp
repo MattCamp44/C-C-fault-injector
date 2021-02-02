@@ -50,17 +50,17 @@ int main(int argc, char ** argv){
 
         //sleep(1);
         
-        // filesystem::exists("helloworld.txt");
-
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
+        // filesystem::exists("helloworld.txt");
+        
 
 
-
-        // for(auto func: functionObjects){
-        //     cout << func.getname() << endl;
-        //     for(auto addr : func.getaddresses())
-        //         cout << addr << endl;
-        // }
+        for(auto func: functionObjects){
+            cout << func.getname() << endl;
+            for(auto addr : func.getaddresses())
+                cout << hex << addr << endl;
+        }
+        // return 1;
         ptrace(PTRACE_CONT, pid, nullptr, nullptr);
         
 
