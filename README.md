@@ -14,10 +14,10 @@ Download the repository, go into src/ directory and use
 make main (???)
 
 ## Usage
-Compile your executable with -g flag and place it into src/debugee/ then run 
+Compile your executable with -g flag and place it into src/debugee/ then run   
 `make objectfiles debugee="name of your file"`
 
-Run
+Run  
 `./Injector "name of your file"`
 
 
