@@ -15,10 +15,10 @@ make main (???)
 
 ## Usage
 Compile your executable with -g flag and place it into src/debugee/ then run 
-make objectfiles debugee="name of your file"
+`make objectfiles debugee="name of your file"`
 
 Run
-./Injector "name of your file"
+`./Injector "name of your file"`
 
 
 
