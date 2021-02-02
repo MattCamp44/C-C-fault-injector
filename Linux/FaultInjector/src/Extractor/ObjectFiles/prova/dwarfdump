@@ -3,571 +3,162 @@
 
 COMPILE_UNIT<header overall offset = 0x00000000>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C17 9.3.0 -mtune=generic -march=x86-64 -g -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  ./debugee/prova.c
-                    DW_AT_comp_dir              /home/campa/injector/FaultInjector/Linux/FaultInjector/src
-                    DW_AT_low_pc                0x00001149
-                    DW_AT_high_pc               <offset-from-lowpc>110
+                    DW_AT_name                  "./debugee/prova.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src"
+                    DW_AT_low_pc                0x00400526
+                    DW_AT_high_pc               <offset-from-lowpc>92
                     DW_AT_stmt_list             0x00000000
 
 LOCAL_SYMBOLS:
-< 1><0x0000002d>    DW_TAG_typedef
-                      DW_AT_name                  size_t
-                      DW_AT_decl_file             0x00000002 /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h
-                      DW_AT_decl_line             0x000000d1
-                      DW_AT_decl_column           0x00000017
-                      DW_AT_type                  <0x00000039>
-< 1><0x00000039>    DW_TAG_base_type
+< 1><0x0000002d>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long unsigned int
-< 1><0x00000040>    DW_TAG_base_type
-                      DW_AT_byte_size             0x00000004
-                      DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  unsigned int
-< 1><0x00000047>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-< 1><0x00000049>    DW_TAG_base_type
+                      DW_AT_name                  "long unsigned int"
+< 1><0x00000034>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_unsigned_char
-                      DW_AT_name                  unsigned char
-< 1><0x00000050>    DW_TAG_base_type
+                      DW_AT_name                  "unsigned char"
+< 1><0x0000003b>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  short unsigned int
-< 1><0x00000057>    DW_TAG_base_type
+                      DW_AT_name                  "short unsigned int"
+< 1><0x00000042>    DW_TAG_base_type
+                      DW_AT_byte_size             0x00000004
+                      DW_AT_encoding              DW_ATE_unsigned
+                      DW_AT_name                  "unsigned int"
+< 1><0x00000049>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  signed char
-< 1><0x0000005e>    DW_TAG_base_type
+                      DW_AT_name                  "signed char"
+< 1><0x00000050>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  short int
-< 1><0x00000065>    DW_TAG_base_type
+                      DW_AT_name                  "short int"
+< 1><0x00000057>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  int
-< 1><0x0000006c>    DW_TAG_base_type
+                      DW_AT_name                  "int"
+< 1><0x0000005e>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long int
-< 1><0x00000073>    DW_TAG_typedef
-                      DW_AT_name                  __off_t
-                      DW_AT_decl_file             0x00000003 /usr/include/x86_64-linux-gnu/bits/types.h
-                      DW_AT_decl_line             0x00000098
-                      DW_AT_decl_column           0x00000019
-                      DW_AT_type                  <0x0000006c>
-< 1><0x0000007f>    DW_TAG_typedef
-                      DW_AT_name                  __off64_t
-                      DW_AT_decl_file             0x00000003 /usr/include/x86_64-linux-gnu/bits/types.h
-                      DW_AT_decl_line             0x00000099
-                      DW_AT_decl_column           0x0000001b
-                      DW_AT_type                  <0x0000006c>
-< 1><0x0000008b>    DW_TAG_pointer_type
+                      DW_AT_name                  "long int"
+< 1><0x00000065>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x00000091>
-< 1><0x00000091>    DW_TAG_base_type
+                      DW_AT_encoding              DW_ATE_unsigned
+                      DW_AT_name                  "sizetype"
+< 1><0x0000006c>    DW_TAG_pointer_type
+                      DW_AT_byte_size             0x00000008
+                      DW_AT_type                  <0x00000072>
+< 1><0x00000072>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  char
-< 1><0x00000098>    DW_TAG_const_type
-                      DW_AT_type                  <0x00000091>
-< 1><0x0000009d>    DW_TAG_structure_type
-                      DW_AT_name                  _IO_FILE
-                      DW_AT_byte_size             0x000000d8
-                      DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                      DW_AT_decl_line             0x00000031
-                      DW_AT_decl_column           0x00000008
-                      DW_AT_sibling               <0x00000224>
-< 2><0x000000aa>      DW_TAG_member
-                        DW_AT_name                  _flags
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000033
-                        DW_AT_decl_column           0x00000007
-                        DW_AT_type                  <0x00000065>
-                        DW_AT_data_member_location  0
-< 2><0x000000b7>      DW_TAG_member
-                        DW_AT_name                  _IO_read_ptr
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000036
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  8
-< 2><0x000000c4>      DW_TAG_member
-                        DW_AT_name                  _IO_read_end
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000037
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  16
-< 2><0x000000d1>      DW_TAG_member
-                        DW_AT_name                  _IO_read_base
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000038
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  24
-< 2><0x000000de>      DW_TAG_member
-                        DW_AT_name                  _IO_write_base
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000039
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  32
-< 2><0x000000eb>      DW_TAG_member
-                        DW_AT_name                  _IO_write_ptr
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000003a
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  40
-< 2><0x000000f8>      DW_TAG_member
-                        DW_AT_name                  _IO_write_end
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000003b
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  48
-< 2><0x00000105>      DW_TAG_member
-                        DW_AT_name                  _IO_buf_base
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000003c
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  56
-< 2><0x00000112>      DW_TAG_member
-                        DW_AT_name                  _IO_buf_end
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000003d
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  64
-< 2><0x0000011f>      DW_TAG_member
-                        DW_AT_name                  _IO_save_base
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000040
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  72
-< 2><0x0000012c>      DW_TAG_member
-                        DW_AT_name                  _IO_backup_base
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000041
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  80
-< 2><0x00000139>      DW_TAG_member
-                        DW_AT_name                  _IO_save_end
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000042
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x0000008b>
-                        DW_AT_data_member_location  88
-< 2><0x00000146>      DW_TAG_member
-                        DW_AT_name                  _markers
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000044
-                        DW_AT_decl_column           0x00000016
-                        DW_AT_type                  <0x0000023d>
-                        DW_AT_data_member_location  96
-< 2><0x00000153>      DW_TAG_member
-                        DW_AT_name                  _chain
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000046
-                        DW_AT_decl_column           0x00000014
-                        DW_AT_type                  <0x00000243>
-                        DW_AT_data_member_location  104
-< 2><0x00000160>      DW_TAG_member
-                        DW_AT_name                  _fileno
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000048
-                        DW_AT_decl_column           0x00000007
-                        DW_AT_type                  <0x00000065>
-                        DW_AT_data_member_location  112
-< 2><0x0000016d>      DW_TAG_member
-                        DW_AT_name                  _flags2
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000049
-                        DW_AT_decl_column           0x00000007
-                        DW_AT_type                  <0x00000065>
-                        DW_AT_data_member_location  116
-< 2><0x0000017a>      DW_TAG_member
-                        DW_AT_name                  _old_offset
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000004a
-                        DW_AT_decl_column           0x0000000b
-                        DW_AT_type                  <0x00000073>
-                        DW_AT_data_member_location  120
-< 2><0x00000187>      DW_TAG_member
-                        DW_AT_name                  _cur_column
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000004d
-                        DW_AT_decl_column           0x00000012
-                        DW_AT_type                  <0x00000050>
-                        DW_AT_data_member_location  128 (-128)
-< 2><0x00000194>      DW_TAG_member
-                        DW_AT_name                  _vtable_offset
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000004e
-                        DW_AT_decl_column           0x0000000f
-                        DW_AT_type                  <0x00000057>
-                        DW_AT_data_member_location  130 (-126)
-< 2><0x000001a1>      DW_TAG_member
-                        DW_AT_name                  _shortbuf
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000004f
-                        DW_AT_decl_column           0x00000008
-                        DW_AT_type                  <0x00000249>
-                        DW_AT_data_member_location  131 (-125)
-< 2><0x000001ae>      DW_TAG_member
-                        DW_AT_name                  _lock
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000051
-                        DW_AT_decl_column           0x0000000f
-                        DW_AT_type                  <0x00000259>
-                        DW_AT_data_member_location  136 (-120)
-< 2><0x000001bb>      DW_TAG_member
-                        DW_AT_name                  _offset
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000059
-                        DW_AT_decl_column           0x0000000d
-                        DW_AT_type                  <0x0000007f>
-                        DW_AT_data_member_location  144 (-112)
-< 2><0x000001c8>      DW_TAG_member
-                        DW_AT_name                  _codecvt
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000005b
-                        DW_AT_decl_column           0x00000017
-                        DW_AT_type                  <0x00000264>
-                        DW_AT_data_member_location  152 (-104)
-< 2><0x000001d5>      DW_TAG_member
-                        DW_AT_name                  _wide_data
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000005c
-                        DW_AT_decl_column           0x00000019
-                        DW_AT_type                  <0x0000026f>
-                        DW_AT_data_member_location  160 (-96)
-< 2><0x000001e2>      DW_TAG_member
-                        DW_AT_name                  _freeres_list
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000005d
-                        DW_AT_decl_column           0x00000014
-                        DW_AT_type                  <0x00000243>
-                        DW_AT_data_member_location  168 (-88)
-< 2><0x000001ef>      DW_TAG_member
-                        DW_AT_name                  _freeres_buf
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000005e
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x00000047>
-                        DW_AT_data_member_location  176 (-80)
-< 2><0x000001fc>      DW_TAG_member
-                        DW_AT_name                  __pad5
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x0000005f
-                        DW_AT_decl_column           0x0000000a
-                        DW_AT_type                  <0x0000002d>
-                        DW_AT_data_member_location  184 (-72)
-< 2><0x00000209>      DW_TAG_member
-                        DW_AT_name                  _mode
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000060
-                        DW_AT_decl_column           0x00000007
-                        DW_AT_type                  <0x00000065>
-                        DW_AT_data_member_location  192 (-64)
-< 2><0x00000216>      DW_TAG_member
-                        DW_AT_name                  _unused2
-                        DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                        DW_AT_decl_line             0x00000062
-                        DW_AT_decl_column           0x00000008
-                        DW_AT_type                  <0x00000275>
-                        DW_AT_data_member_location  196 (-60)
-< 1><0x00000224>    DW_TAG_typedef
-                      DW_AT_name                  FILE
-                      DW_AT_decl_file             0x00000005 /usr/include/x86_64-linux-gnu/bits/types/FILE.h
-                      DW_AT_decl_line             0x00000007
-                      DW_AT_decl_column           0x00000019
-                      DW_AT_type                  <0x0000009d>
-< 1><0x00000230>    DW_TAG_typedef
-                      DW_AT_name                  _IO_lock_t
-                      DW_AT_decl_file             0x00000004 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
-                      DW_AT_decl_line             0x0000002b
-                      DW_AT_decl_column           0x0000000e
-< 1><0x00000238>    DW_TAG_structure_type
-                      DW_AT_name                  _IO_marker
-                      DW_AT_declaration           yes(1)
-< 1><0x0000023d>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x00000238>
-< 1><0x00000243>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x0000009d>
-< 1><0x00000249>    DW_TAG_array_type
-                      DW_AT_type                  <0x00000091>
-                      DW_AT_sibling               <0x00000259>
-< 2><0x00000252>      DW_TAG_subrange_type
-                        DW_AT_type                  <0x00000039>
-                        DW_AT_upper_bound           0
-< 1><0x00000259>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x00000230>
-< 1><0x0000025f>    DW_TAG_structure_type
-                      DW_AT_name                  _IO_codecvt
-                      DW_AT_declaration           yes(1)
-< 1><0x00000264>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x0000025f>
-< 1><0x0000026a>    DW_TAG_structure_type
-                      DW_AT_name                  _IO_wide_data
-                      DW_AT_declaration           yes(1)
-< 1><0x0000026f>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x0000026a>
-< 1><0x00000275>    DW_TAG_array_type
-                      DW_AT_type                  <0x00000091>
-                      DW_AT_sibling               <0x00000285>
-< 2><0x0000027e>      DW_TAG_subrange_type
-                        DW_AT_type                  <0x00000039>
-                        DW_AT_upper_bound           19
-< 1><0x00000285>    DW_TAG_variable
-                      DW_AT_name                  stdin
-                      DW_AT_decl_file             0x00000006 /usr/include/stdio.h
-                      DW_AT_decl_line             0x00000089
-                      DW_AT_decl_column           0x0000000e
-                      DW_AT_type                  <0x00000291>
+                      DW_AT_name                  "char"
+< 1><0x00000079>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x00000291>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x00000224>
-< 1><0x00000297>    DW_TAG_variable
-                      DW_AT_name                  stdout
-                      DW_AT_decl_file             0x00000006 /usr/include/stdio.h
-                      DW_AT_decl_line             0x0000008a
-                      DW_AT_decl_column           0x0000000e
-                      DW_AT_type                  <0x00000291>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x000002a3>    DW_TAG_variable
-                      DW_AT_name                  stderr
-                      DW_AT_decl_file             0x00000006 /usr/include/stdio.h
-                      DW_AT_decl_line             0x0000008b
-                      DW_AT_decl_column           0x0000000e
-                      DW_AT_type                  <0x00000291>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x000002af>    DW_TAG_variable
-                      DW_AT_name                  sys_nerr
-                      DW_AT_decl_file             0x00000007 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
-                      DW_AT_decl_line             0x0000001a
-                      DW_AT_decl_column           0x0000000c
-                      DW_AT_type                  <0x00000065>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x000002bb>    DW_TAG_array_type
-                      DW_AT_type                  <0x000002d1>
-                      DW_AT_sibling               <0x000002c6>
-< 2><0x000002c4>      DW_TAG_subrange_type
-< 1><0x000002c6>    DW_TAG_const_type
-                      DW_AT_type                  <0x000002bb>
-< 1><0x000002cb>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x00000098>
-< 1><0x000002d1>    DW_TAG_const_type
-                      DW_AT_type                  <0x000002cb>
-< 1><0x000002d6>    DW_TAG_variable
-                      DW_AT_name                  sys_errlist
-                      DW_AT_decl_file             0x00000007 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
-                      DW_AT_decl_line             0x0000001b
-                      DW_AT_decl_column           0x0000001a
-                      DW_AT_type                  <0x000002c6>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x000002e2>    DW_TAG_variable
-                      DW_AT_name                  __environ
-                      DW_AT_decl_file             0x00000008 /usr/include/unistd.h
-                      DW_AT_decl_line             0x0000021f
-                      DW_AT_decl_column           0x0000000f
-                      DW_AT_type                  <0x000002ef>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x000002ef>    DW_TAG_pointer_type
-                      DW_AT_byte_size             0x00000008
-                      DW_AT_type                  <0x0000008b>
-< 1><0x000002f5>    DW_TAG_variable
-                      DW_AT_name                  optarg
-                      DW_AT_decl_file             0x00000009 /usr/include/x86_64-linux-gnu/bits/getopt_core.h
-                      DW_AT_decl_line             0x00000024
-                      DW_AT_decl_column           0x0000000e
-                      DW_AT_type                  <0x0000008b>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x00000301>    DW_TAG_variable
-                      DW_AT_name                  optind
-                      DW_AT_decl_file             0x00000009 /usr/include/x86_64-linux-gnu/bits/getopt_core.h
-                      DW_AT_decl_line             0x00000032
-                      DW_AT_decl_column           0x0000000c
-                      DW_AT_type                  <0x00000065>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x0000030d>    DW_TAG_variable
-                      DW_AT_name                  opterr
-                      DW_AT_decl_file             0x00000009 /usr/include/x86_64-linux-gnu/bits/getopt_core.h
-                      DW_AT_decl_line             0x00000037
-                      DW_AT_decl_column           0x0000000c
-                      DW_AT_type                  <0x00000065>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x00000319>    DW_TAG_variable
-                      DW_AT_name                  optopt
-                      DW_AT_decl_file             0x00000009 /usr/include/x86_64-linux-gnu/bits/getopt_core.h
-                      DW_AT_decl_line             0x0000003b
-                      DW_AT_decl_column           0x0000000c
-                      DW_AT_type                  <0x00000065>
-                      DW_AT_external              yes(1)
-                      DW_AT_declaration           yes(1)
-< 1><0x00000325>    DW_TAG_subprogram
-                      DW_AT_external              yes(1)
-                      DW_AT_name                  main
-                      DW_AT_decl_file             0x00000001 /home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c
+                      DW_AT_name                  "main"
+                      DW_AT_decl_file             0x00000001 ./debugee/prova.c
                       DW_AT_decl_line             0x00000004
-                      DW_AT_decl_column           0x00000005
                       DW_AT_prototyped            yes(1)
-                      DW_AT_type                  <0x00000065>
-                      DW_AT_low_pc                0x00001149
-                      DW_AT_high_pc               <offset-from-lowpc>110
+                      DW_AT_type                  <0x00000057>
+                      DW_AT_low_pc                0x00400526
+                      DW_AT_high_pc               <offset-from-lowpc>92
                       DW_AT_frame_base            len 0x0001: 9c: DW_OP_call_frame_cfa
-                      DW_AT_GNU_all_tail_call_sites yes(1)
-                      DW_AT_sibling               <0x00000384>
-< 2><0x00000347>      DW_TAG_formal_parameter
-                        DW_AT_name                  argc
-                        DW_AT_decl_file             0x00000001 /home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c
+                      DW_AT_GNU_all_tail_call_sitesyes(1)
+                      DW_AT_sibling               <0x000000d2>
+< 2><0x0000009a>      DW_TAG_formal_parameter
+                        DW_AT_name                  "argc"
+                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
                         DW_AT_decl_line             0x00000004
-                        DW_AT_decl_column           0x0000000e
-                        DW_AT_type                  <0x00000065>
+                        DW_AT_type                  <0x00000057>
                         DW_AT_location              len 0x0002: 916c: DW_OP_fbreg -20
-< 2><0x00000356>      DW_TAG_formal_parameter
-                        DW_AT_name                  argv
-                        DW_AT_decl_file             0x00000001 /home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c
+< 2><0x000000a8>      DW_TAG_formal_parameter
+                        DW_AT_name                  "argv"
+                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
                         DW_AT_decl_line             0x00000004
-                        DW_AT_decl_column           0x0000001b
-                        DW_AT_type                  <0x000002ef>
+                        DW_AT_type                  <0x000000d2>
                         DW_AT_location              len 0x0002: 9160: DW_OP_fbreg -32
-< 2><0x00000365>      DW_TAG_variable
-                        DW_AT_name                  a
-                        DW_AT_decl_file             0x00000001 /home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c
+< 2><0x000000b6>      DW_TAG_variable
+                        DW_AT_name                  "a"
+                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
                         DW_AT_decl_line             0x0000000b
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x00000065>
-< 2><0x0000036f>      DW_TAG_variable
-                        DW_AT_name                  b
-                        DW_AT_decl_file             0x00000001 /home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c
+                        DW_AT_type                  <0x00000057>
+< 2><0x000000bf>      DW_TAG_variable
+                        DW_AT_name                  "b"
+                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
                         DW_AT_decl_line             0x0000000c
-                        DW_AT_decl_column           0x00000009
-                        DW_AT_type                  <0x00000065>
-< 2><0x00000379>      DW_TAG_variable
-                        DW_AT_name                  c
-                        DW_AT_decl_file             0x00000001 /home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c
+                        DW_AT_type                  <0x00000057>
+< 2><0x000000c8>      DW_TAG_variable
+                        DW_AT_name                  "c"
+                        DW_AT_decl_file             0x00000001 ./debugee/prova.c
                         DW_AT_decl_line             0x0000000d
-                        DW_AT_decl_column           0x0000000c
-                        DW_AT_type                  <0x00000384>
-< 1><0x00000384>    DW_TAG_base_type
+                        DW_AT_type                  <0x000000d8>
+< 1><0x000000d2>    DW_TAG_pointer_type
+                      DW_AT_byte_size             0x00000008
+                      DW_AT_type                  <0x0000006c>
+< 1><0x000000d8>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  double
+                      DW_AT_name                  "double"
 
 .debug_line: line number info for a single cu
 Source lines (from CU-DIE at .debug_info offset 0x0000000b):
 
-            NS new statement, BB new basic block, ET end of text sequence
-            PE prologue end, EB epilogue begin
-            IS=val ISA number, DI=val discriminator value
-<pc>        [lno,col] NS BB ET PE EB IS= DI= uri: "filepath"
-0x00001149  [   4,32] NS uri: "/home/campa/injector/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c"
-0x0000115c  [  15, 5] NS
-0x00001168  [  16, 5] NS
-0x00001174  [  17, 5] NS
-0x00001180  [  18, 5] NS
-0x0000118c  [  19, 5] NS
-0x00001198  [  20, 5] NS
-0x000011a4  [  23, 5] NS
-0x000011b5  [  25, 1] NS
-0x000011b7  [  25, 1] NS ET
+<pc>        [row,col] NS BB ET PE EB IS= DI= uri: "filepath"
+NS new statement, BB new basic block, ET end of text sequence
+PE prologue end, EB epilogue begin
+IA=val ISA number, DI=val discriminator value
+0x00400526  [   4, 0] NS uri: "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src/./debugee/prova.c"
+0x00400535  [  15, 0] NS
+0x0040053f  [  16, 0] NS
+0x00400549  [  17, 0] NS
+0x00400553  [  18, 0] NS
+0x0040055d  [  19, 0] NS
+0x00400567  [  20, 0] NS
+0x00400571  [  23, 0] NS
+0x00400580  [  25, 0] NS
+0x00400582  [  25, 0] NS ET
 
-.debug_str
-name at offset 0x00000000, length    6 is 'optind'
-name at offset 0x00000007, length    6 is 'optarg'
-name at offset 0x0000000e, length  140 is 'GNU C17 9.3.0 -mtune=generic -march=x86-64 -g -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection'
-name at offset 0x0000009b, length    8 is '_IO_FILE'
-name at offset 0x000000a4, length    8 is 'sys_nerr'
-name at offset 0x000000ad, length   12 is '_IO_save_end'
-name at offset 0x000000ba, length    9 is 'short int'
-name at offset 0x000000c4, length    6 is 'size_t'
-name at offset 0x000000cb, length   17 is './debugee/prova.c'
-name at offset 0x000000dd, length   13 is '_IO_write_ptr'
-name at offset 0x000000eb, length    6 is '_flags'
-name at offset 0x000000f2, length   12 is '_IO_buf_base'
-name at offset 0x000000ff, length    6 is 'double'
-name at offset 0x00000106, length    9 is '__environ'
-name at offset 0x00000110, length    8 is '_markers'
-name at offset 0x00000119, length   12 is '_IO_read_end'
-name at offset 0x00000126, length   12 is '_freeres_buf'
-name at offset 0x00000133, length    6 is 'stderr'
-name at offset 0x0000013a, length    5 is '_lock'
-name at offset 0x00000140, length    8 is 'long int'
-name at offset 0x00000149, length   11 is '_cur_column'
-name at offset 0x00000155, length    4 is 'argv'
-name at offset 0x0000015a, length   11 is '_old_offset'
-name at offset 0x00000166, length   13 is 'unsigned char'
-name at offset 0x00000174, length    4 is 'argc'
-name at offset 0x00000179, length   10 is '_IO_marker'
-name at offset 0x00000184, length    9 is '_shortbuf'
-name at offset 0x0000018e, length   14 is '_IO_write_base'
-name at offset 0x0000019d, length    8 is '_unused2'
-name at offset 0x000001a6, length    6 is 'opterr'
-name at offset 0x000001ad, length   11 is '_IO_buf_end'
-name at offset 0x000001b9, length   58 is '/home/campa/injector/FaultInjector/Linux/FaultInjector/src'
-name at offset 0x000001f4, length    4 is 'main'
-name at offset 0x000001f9, length   13 is '_freeres_list'
-name at offset 0x00000207, length    6 is '__pad5'
-name at offset 0x0000020e, length   18 is 'short unsigned int'
-name at offset 0x00000221, length   17 is 'long unsigned int'
-name at offset 0x00000233, length   13 is '_IO_write_end'
-name at offset 0x00000241, length    9 is '__off64_t'
-name at offset 0x0000024b, length    7 is '_fileno'
-name at offset 0x00000253, length    6 is '_chain'
-name at offset 0x0000025a, length   13 is '_IO_wide_data'
-name at offset 0x00000268, length    5 is '_mode'
-name at offset 0x0000026e, length    7 is '__off_t'
-name at offset 0x00000276, length   15 is '_IO_backup_base'
-name at offset 0x00000286, length    5 is 'stdin'
-name at offset 0x0000028c, length    7 is '_flags2'
-name at offset 0x00000294, length   11 is '_IO_codecvt'
-name at offset 0x000002a0, length   13 is '_IO_read_base'
-name at offset 0x000002ae, length   14 is '_vtable_offset'
-name at offset 0x000002bd, length   13 is '_IO_save_base'
-name at offset 0x000002cb, length   11 is 'sys_errlist'
-name at offset 0x000002d7, length    6 is 'optopt'
-name at offset 0x000002de, length   12 is '_IO_read_ptr'
-name at offset 0x000002eb, length    6 is 'stdout'
-name at offset 0x000002f2, length   10 is '_IO_lock_t'
+.debug_pubnames
+
+.debug_macinfo
+
+.debug_string
+name at offset 0x00000000, length   18 is 'short unsigned int'
+name at offset 0x00000013, length    4 is 'main'
+name at offset 0x00000018, length   82 is '/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src'
+name at offset 0x0000006b, length   79 is 'GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong'
+name at offset 0x000000bb, length   17 is 'long unsigned int'
+name at offset 0x000000cd, length   17 is './debugee/prova.c'
+name at offset 0x000000df, length   13 is 'unsigned char'
+name at offset 0x000000ed, length    8 is 'long int'
+name at offset 0x000000f6, length    6 is 'double'
+name at offset 0x000000fd, length    4 is 'argc'
+name at offset 0x00000102, length    9 is 'short int'
+name at offset 0x0000010c, length    8 is 'sizetype'
+name at offset 0x00000115, length    4 is 'argv'
 
 .debug_aranges
 
 COMPILE_UNIT<header overall offset = 0x00000000>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C17 9.3.0 -mtune=generic -march=x86-64 -g -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  ./debugee/prova.c
-                    DW_AT_comp_dir              /home/campa/injector/FaultInjector/Linux/FaultInjector/src
-                    DW_AT_low_pc                0x00001149
-                    DW_AT_high_pc               <offset-from-lowpc>110
+                    DW_AT_name                  "./debugee/prova.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/OneDrive/Dokumente/GitHub/FaultInjector/Linux/FaultInjector/src"
+                    DW_AT_low_pc                0x00400526
+                    DW_AT_high_pc               <offset-from-lowpc>92
                     DW_AT_stmt_list             0x00000000
 
 
-arange starts at 0x00001149, length of 0x0000006e, cu_die_offset = 0x0000000b
+arange starts at 0x00400526, length of 0x0000005c, cu_die_offset = 0x0000000b
 arange end
-
 .debug_frame
+
+.debug_static_func
+
+.debug_static_vars
+
+.debug_weaknames
 

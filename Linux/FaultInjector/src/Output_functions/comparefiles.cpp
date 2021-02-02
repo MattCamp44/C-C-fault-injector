@@ -1,16 +1,31 @@
 #include "./comparefiles.h"
 #include<stdio.h>
-
+#include<iostream>
 void compareFiles() 
 { 
     FILE *fp1 = fopen("goldenoutput.txt", "r"); 
     FILE *fp2 = fopen("injectedoutput.txt", "r"); 
   
-    if (fp1 == NULL || fp2 == NULL) 
-    { 
-       printf("Error : Files not open"); 
-       return ; 
-    } 
+    // if (fp1 == NULL || fp2 == NULL) 
+    // { 
+    //    printf("Error : Files not open"); 
+    //    return ; 
+    // } 
+
+    int errorOpen = 0;
+
+    if(fp1 == NULL){
+        errorOpen=1;
+        std::cout << "Goldenoutput not open\n";
+    }
+    
+    if(fp2 == NULL){
+        errorOpen = 1;
+        std::cout << "injectedoutput not open\n";
+    }
+
+    if(errorOpen)
+        return;
     // fetching character of two file 
     // in two variable ch1 and ch2 
     char ch1 = getc(fp1); 

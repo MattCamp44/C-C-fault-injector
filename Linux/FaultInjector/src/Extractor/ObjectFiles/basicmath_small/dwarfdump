@@ -3,10 +3,10 @@
 
 COMPILE_UNIT<header overall offset = 0x00000000>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  basicmath_small.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "basicmath_small.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x004007f6
                     DW_AT_high_pc               <offset-from-lowpc>1896
                     DW_AT_stmt_list             0x00000000
@@ -15,85 +15,85 @@ LOCAL_SYMBOLS:
 < 1><0x0000002d>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  float
+                      DW_AT_name                  "float"
 < 1><0x00000034>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  double
+                      DW_AT_name                  "double"
 < 1><0x0000003b>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  unsigned int
+                      DW_AT_name                  "unsigned int"
 < 1><0x00000042>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  int
+                      DW_AT_name                  "int"
 < 1><0x00000049>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  char
+                      DW_AT_name                  "char"
 < 1><0x00000050>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long unsigned int
+                      DW_AT_name                  "long unsigned int"
 < 1><0x00000057>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_unsigned_char
-                      DW_AT_name                  unsigned char
+                      DW_AT_name                  "unsigned char"
 < 1><0x0000005e>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  short unsigned int
+                      DW_AT_name                  "short unsigned int"
 < 1><0x00000065>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  signed char
+                      DW_AT_name                  "signed char"
 < 1><0x0000006c>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  short int
+                      DW_AT_name                  "short int"
 < 1><0x00000073>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long int
+                      DW_AT_name                  "long int"
 < 1><0x0000007a>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  sizetype
+                      DW_AT_name                  "sizetype"
 < 1><0x00000081>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long long int
+                      DW_AT_name                  "long long int"
 < 1><0x00000088>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long long unsigned int
+                      DW_AT_name                  "long long unsigned int"
 < 1><0x0000008f>    DW_TAG_pointer_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_type                  <0x00000095>
 < 1><0x00000095>    DW_TAG_const_type
                       DW_AT_type                  <0x00000049>
 < 1><0x0000009a>    DW_TAG_structure_type
-                      DW_AT_name                  int_sqrt
+                      DW_AT_name                  "int_sqrt"
                       DW_AT_byte_size             0x00000008
                       DW_AT_decl_file             0x00000002 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/snipmath.h
                       DW_AT_decl_line             0x00000043
                       DW_AT_sibling               <0x000000bf>
 < 2><0x000000a6>      DW_TAG_member
-                        DW_AT_name                  sqrt
+                        DW_AT_name                  "sqrt"
                         DW_AT_decl_file             0x00000002 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/snipmath.h
                         DW_AT_decl_line             0x00000044
                         DW_AT_type                  <0x0000003b>
                         DW_AT_data_member_location  0
 < 2><0x000000b2>      DW_TAG_member
-                        DW_AT_name                  frac
+                        DW_AT_name                  "frac"
                         DW_AT_decl_file             0x00000002 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/snipmath.h
                         DW_AT_decl_line             0x00000045
                         DW_AT_type                  <0x0000003b>
                         DW_AT_data_member_location  4
 < 1><0x000000bf>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
-                      DW_AT_name                  main
+                      DW_AT_name                  "main"
                       DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                       DW_AT_decl_line             0x00000006
                       DW_AT_prototyped            yes(1)
@@ -101,149 +101,149 @@ LOCAL_SYMBOLS:
                       DW_AT_low_pc                0x004007f6
                       DW_AT_high_pc               <offset-from-lowpc>1896
                       DW_AT_frame_base            len 0x0001: 9c: DW_OP_call_frame_cfa
-                      DW_AT_GNU_all_tail_call_sites yes(1)
+                      DW_AT_GNU_all_tail_call_sitesyes(1)
                       DW_AT_sibling               <0x0000023e>
 < 2><0x000000e0>      DW_TAG_variable
-                        DW_AT_name                  a1
+                        DW_AT_name                  "a1"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000008
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91b87e: DW_OP_fbreg -200
 < 2><0x000000ee>      DW_TAG_variable
-                        DW_AT_name                  b1
+                        DW_AT_name                  "b1"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000008
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91c07e: DW_OP_fbreg -192
 < 2><0x000000fc>      DW_TAG_variable
-                        DW_AT_name                  c1
+                        DW_AT_name                  "c1"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000008
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91c87e: DW_OP_fbreg -184
 < 2><0x0000010a>      DW_TAG_variable
-                        DW_AT_name                  d1
+                        DW_AT_name                  "d1"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000008
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91d07e: DW_OP_fbreg -176
 < 2><0x00000118>      DW_TAG_variable
-                        DW_AT_name                  a2
+                        DW_AT_name                  "a2"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000009
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91e07e: DW_OP_fbreg -160
 < 2><0x00000126>      DW_TAG_variable
-                        DW_AT_name                  b2
+                        DW_AT_name                  "b2"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000009
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91e87e: DW_OP_fbreg -152
 < 2><0x00000134>      DW_TAG_variable
-                        DW_AT_name                  c2
+                        DW_AT_name                  "c2"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000009
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91f07e: DW_OP_fbreg -144
 < 2><0x00000142>      DW_TAG_variable
-                        DW_AT_name                  d2
+                        DW_AT_name                  "d2"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000009
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91f87e: DW_OP_fbreg -136
 < 2><0x00000150>      DW_TAG_variable
-                        DW_AT_name                  a3
+                        DW_AT_name                  "a3"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000a
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91807f: DW_OP_fbreg -128
 < 2><0x0000015e>      DW_TAG_variable
-                        DW_AT_name                  b3
+                        DW_AT_name                  "b3"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000a
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91887f: DW_OP_fbreg -120
 < 2><0x0000016c>      DW_TAG_variable
-                        DW_AT_name                  c3
+                        DW_AT_name                  "c3"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000a
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91907f: DW_OP_fbreg -112
 < 2><0x0000017a>      DW_TAG_variable
-                        DW_AT_name                  d3
+                        DW_AT_name                  "d3"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000a
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91987f: DW_OP_fbreg -104
 < 2><0x00000188>      DW_TAG_variable
-                        DW_AT_name                  a4
+                        DW_AT_name                  "a4"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000b
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91a07f: DW_OP_fbreg -96
 < 2><0x00000196>      DW_TAG_variable
-                        DW_AT_name                  b4
+                        DW_AT_name                  "b4"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000b
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91a87f: DW_OP_fbreg -88
 < 2><0x000001a4>      DW_TAG_variable
-                        DW_AT_name                  c4
+                        DW_AT_name                  "c4"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000b
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91b07f: DW_OP_fbreg -80
 < 2><0x000001b2>      DW_TAG_variable
-                        DW_AT_name                  d4
+                        DW_AT_name                  "d4"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000b
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91b87f: DW_OP_fbreg -72
 < 2><0x000001c0>      DW_TAG_variable
-                        DW_AT_name                  x
+                        DW_AT_name                  "x"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000c
                         DW_AT_type                  <0x0000023e>
                         DW_AT_location              len 0x0002: 9150: DW_OP_fbreg -48
 < 2><0x000001cc>      DW_TAG_variable
-                        DW_AT_name                  X
+                        DW_AT_name                  "X"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000d
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91d87e: DW_OP_fbreg -168
 < 2><0x000001d9>      DW_TAG_variable
-                        DW_AT_name                  solutions
+                        DW_AT_name                  "solutions"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000e
                         DW_AT_type                  <0x00000042>
                         DW_AT_location              len 0x0003: 91a87e: DW_OP_fbreg -216
 < 2><0x000001e8>      DW_TAG_variable
-                        DW_AT_name                  i
+                        DW_AT_name                  "i"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x0000000f
                         DW_AT_type                  <0x00000042>
                         DW_AT_location              len 0x0003: 91ac7e: DW_OP_fbreg -212
 < 2><0x000001f5>      DW_TAG_variable
-                        DW_AT_name                  l
+                        DW_AT_name                  "l"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000010
                         DW_AT_type                  <0x00000050>
                         DW_AT_location              len 0x0002: 9140: DW_OP_fbreg -64
 < 2><0x00000201>      DW_TAG_variable
-                        DW_AT_name                  q
+                        DW_AT_name                  "q"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000011
                         DW_AT_type                  <0x0000009a>
                         DW_AT_location              len 0x0003: 91b07e: DW_OP_fbreg -208
 < 2><0x0000020e>      DW_TAG_variable
-                        DW_AT_name                  n
+                        DW_AT_name                  "n"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c
                         DW_AT_decl_line             0x00000012
                         DW_AT_type                  <0x00000073>
                         DW_AT_location              len 0x0002: 9148: DW_OP_fbreg -56
 < 2><0x0000021a>      DW_TAG_subprogram
                         DW_AT_external              yes(1)
-                        DW_AT_name                  printf
+                        DW_AT_name                  "printf"
                         DW_AT_decl_file             0x00000003 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/<built-in>
                         DW_AT_decl_line             0x00000000
                         DW_AT_prototyped            yes(1)
@@ -255,7 +255,7 @@ LOCAL_SYMBOLS:
 < 3><0x0000022e>        DW_TAG_unspecified_parameters
 < 2><0x00000230>      DW_TAG_subprogram
                         DW_AT_external              yes(1)
-                        DW_AT_name                  puts
+                        DW_AT_name                  "puts"
                         DW_AT_decl_file             0x00000003 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/<built-in>
                         DW_AT_decl_line             0x00000000
                         DW_AT_type                  <0x00000042>
@@ -270,10 +270,10 @@ LOCAL_SYMBOLS:
 .debug_line: line number info for a single cu
 Source lines (from CU-DIE at .debug_info offset 0x0000000b):
 
-            NS new statement, BB new basic block, ET end of text sequence
-            PE prologue end, EB epilogue begin
-            IS=val ISA number, DI=val discriminator value
-<pc>        [lno,col] NS BB ET PE EB IS= DI= uri: "filepath"
+<pc>        [row,col] NS BB ET PE EB IS= DI= uri: "filepath"
+NS new statement, BB new basic block, ET end of text sequence
+PE prologue end, EB epilogue begin
+IA=val ISA number, DI=val discriminator value
 0x004007f6  [   7, 0] NS uri: "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/basicmath_small.c"
 0x00400801  [   7, 0] NS
 0x00400810  [   8, 0] NS
@@ -354,10 +354,10 @@ Source lines (from CU-DIE at .debug_info offset 0x0000000b):
 
 COMPILE_UNIT<header overall offset = 0x0000024b>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  rad2deg.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "rad2deg.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x00400f5e
                     DW_AT_high_pc               <offset-from-lowpc>80
                     DW_AT_stmt_list             0x00000180
@@ -366,62 +366,62 @@ LOCAL_SYMBOLS:
 < 1><0x0000002d>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  float
+                      DW_AT_name                  "float"
 < 1><0x00000034>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  double
+                      DW_AT_name                  "double"
 < 1><0x0000003b>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  unsigned int
+                      DW_AT_name                  "unsigned int"
 < 1><0x00000042>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  int
+                      DW_AT_name                  "int"
 < 1><0x00000049>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  char
+                      DW_AT_name                  "char"
 < 1><0x00000050>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long unsigned int
+                      DW_AT_name                  "long unsigned int"
 < 1><0x00000057>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_unsigned_char
-                      DW_AT_name                  unsigned char
+                      DW_AT_name                  "unsigned char"
 < 1><0x0000005e>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  short unsigned int
+                      DW_AT_name                  "short unsigned int"
 < 1><0x00000065>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  signed char
+                      DW_AT_name                  "signed char"
 < 1><0x0000006c>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  short int
+                      DW_AT_name                  "short int"
 < 1><0x00000073>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long int
+                      DW_AT_name                  "long int"
 < 1><0x0000007a>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  sizetype
+                      DW_AT_name                  "sizetype"
 < 1><0x00000081>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long long int
+                      DW_AT_name                  "long long int"
 < 1><0x00000088>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long long unsigned int
+                      DW_AT_name                  "long long unsigned int"
 < 1><0x0000008f>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
-                      DW_AT_name                  rad2deg
+                      DW_AT_name                  "rad2deg"
                       DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/rad2deg.c
                       DW_AT_decl_line             0x0000000d
                       DW_AT_prototyped            yes(1)
@@ -432,14 +432,14 @@ LOCAL_SYMBOLS:
                       DW_AT_GNU_all_call_sites    yes(1)
                       DW_AT_sibling               <0x000000bf>
 < 2><0x000000b0>      DW_TAG_formal_parameter
-                        DW_AT_name                  rad
+                        DW_AT_name                  "rad"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/rad2deg.c
                         DW_AT_decl_line             0x0000000d
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0002: 9168: DW_OP_fbreg -24
 < 1><0x000000bf>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
-                      DW_AT_name                  deg2rad
+                      DW_AT_name                  "deg2rad"
                       DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/rad2deg.c
                       DW_AT_decl_line             0x00000012
                       DW_AT_prototyped            yes(1)
@@ -449,7 +449,7 @@ LOCAL_SYMBOLS:
                       DW_AT_frame_base            len 0x0001: 9c: DW_OP_call_frame_cfa
                       DW_AT_GNU_all_call_sites    yes(1)
 < 2><0x000000dc>      DW_TAG_formal_parameter
-                        DW_AT_name                  deg
+                        DW_AT_name                  "deg"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/rad2deg.c
                         DW_AT_decl_line             0x00000012
                         DW_AT_type                  <0x00000034>
@@ -458,10 +458,10 @@ LOCAL_SYMBOLS:
 .debug_line: line number info for a single cu
 Source lines (from CU-DIE at .debug_info offset 0x00000256):
 
-            NS new statement, BB new basic block, ET end of text sequence
-            PE prologue end, EB epilogue begin
-            IS=val ISA number, DI=val discriminator value
-<pc>        [lno,col] NS BB ET PE EB IS= DI= uri: "filepath"
+<pc>        [row,col] NS BB ET PE EB IS= DI= uri: "filepath"
+NS new statement, BB new basic block, ET end of text sequence
+PE prologue end, EB epilogue begin
+IA=val ISA number, DI=val discriminator value
 0x00400f5e  [  14, 0] NS uri: "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/rad2deg.c"
 0x00400f67  [  15, 0] NS
 0x00400f84  [  16, 0] NS
@@ -472,10 +472,10 @@ Source lines (from CU-DIE at .debug_info offset 0x00000256):
 
 COMPILE_UNIT<header overall offset = 0x00000337>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  cubic.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "cubic.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x00400fae
                     DW_AT_high_pc               <offset-from-lowpc>1051
                     DW_AT_stmt_list             0x000001c4
@@ -484,147 +484,147 @@ LOCAL_SYMBOLS:
 < 1><0x0000002d>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  float
+                      DW_AT_name                  "float"
 < 1><0x00000034>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  double
+                      DW_AT_name                  "double"
 < 1><0x0000003b>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  unsigned int
+                      DW_AT_name                  "unsigned int"
 < 1><0x00000042>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  int
+                      DW_AT_name                  "int"
 < 1><0x00000049>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  char
+                      DW_AT_name                  "char"
 < 1><0x00000050>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long unsigned int
+                      DW_AT_name                  "long unsigned int"
 < 1><0x00000057>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_unsigned_char
-                      DW_AT_name                  unsigned char
+                      DW_AT_name                  "unsigned char"
 < 1><0x0000005e>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  short unsigned int
+                      DW_AT_name                  "short unsigned int"
 < 1><0x00000065>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  signed char
+                      DW_AT_name                  "signed char"
 < 1><0x0000006c>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  short int
+                      DW_AT_name                  "short int"
 < 1><0x00000073>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long int
+                      DW_AT_name                  "long int"
 < 1><0x0000007a>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  sizetype
+                      DW_AT_name                  "sizetype"
 < 1><0x00000081>    DW_TAG_pointer_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_type                  <0x00000042>
 < 1><0x00000087>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long long int
+                      DW_AT_name                  "long long int"
 < 1><0x0000008e>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long long unsigned int
+                      DW_AT_name                  "long long unsigned int"
 < 1><0x00000095>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
-                      DW_AT_name                  SolveCubic
+                      DW_AT_name                  "SolveCubic"
                       DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                       DW_AT_decl_line             0x0000000c
                       DW_AT_prototyped            yes(1)
                       DW_AT_low_pc                0x00400fae
                       DW_AT_high_pc               <offset-from-lowpc>1051
                       DW_AT_frame_base            len 0x0001: 9c: DW_OP_call_frame_cfa
-                      DW_AT_GNU_all_tail_call_sites yes(1)
+                      DW_AT_GNU_all_tail_call_sitesyes(1)
                       DW_AT_sibling               <0x00000163>
 < 2><0x000000b2>      DW_TAG_formal_parameter
-                        DW_AT_name                  a
+                        DW_AT_name                  "a"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x0000000c
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91f87e: DW_OP_fbreg -136
 < 2><0x000000bf>      DW_TAG_formal_parameter
-                        DW_AT_name                  b
+                        DW_AT_name                  "b"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x0000000d
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91f07e: DW_OP_fbreg -144
 < 2><0x000000cc>      DW_TAG_formal_parameter
-                        DW_AT_name                  c
+                        DW_AT_name                  "c"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x0000000e
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91e87e: DW_OP_fbreg -152
 < 2><0x000000d9>      DW_TAG_formal_parameter
-                        DW_AT_name                  d
+                        DW_AT_name                  "d"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x0000000f
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91e07e: DW_OP_fbreg -160
 < 2><0x000000e6>      DW_TAG_formal_parameter
-                        DW_AT_name                  solutions
+                        DW_AT_name                  "solutions"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000010
                         DW_AT_type                  <0x00000081>
                         DW_AT_location              len 0x0003: 91d87e: DW_OP_fbreg -168
 < 2><0x000000f5>      DW_TAG_formal_parameter
-                        DW_AT_name                  x
+                        DW_AT_name                  "x"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000011
                         DW_AT_type                  <0x00000163>
                         DW_AT_location              len 0x0003: 91d07e: DW_OP_fbreg -176
 < 2><0x00000102>      DW_TAG_variable
-                        DW_AT_name                  a1
+                        DW_AT_name                  "a1"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000013
                         DW_AT_type                  <0x00000169>
                         DW_AT_location              len 0x0003: 91907f: DW_OP_fbreg -112
 < 2><0x00000110>      DW_TAG_variable
-                        DW_AT_name                  a2
+                        DW_AT_name                  "a2"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000013
                         DW_AT_type                  <0x00000169>
                         DW_AT_location              len 0x0003: 91a07f: DW_OP_fbreg -96
 < 2><0x0000011e>      DW_TAG_variable
-                        DW_AT_name                  a3
+                        DW_AT_name                  "a3"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000013
                         DW_AT_type                  <0x00000169>
                         DW_AT_location              len 0x0003: 91b07f: DW_OP_fbreg -80
 < 2><0x0000012c>      DW_TAG_variable
-                        DW_AT_name                  Q
+                        DW_AT_name                  "Q"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000014
                         DW_AT_type                  <0x00000169>
                         DW_AT_location              len 0x0002: 9140: DW_OP_fbreg -64
 < 2><0x00000138>      DW_TAG_variable
-                        DW_AT_name                  R
+                        DW_AT_name                  "R"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000015
                         DW_AT_type                  <0x00000169>
                         DW_AT_location              len 0x0002: 9150: DW_OP_fbreg -48
 < 2><0x00000144>      DW_TAG_variable
-                        DW_AT_name                  R2_Q3
+                        DW_AT_name                  "R2_Q3"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000016
                         DW_AT_type                  <0x00000034>
                         DW_AT_location              len 0x0003: 91807f: DW_OP_fbreg -128
 < 2><0x00000153>      DW_TAG_variable
-                        DW_AT_name                  theta
+                        DW_AT_name                  "theta"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c
                         DW_AT_decl_line             0x00000018
                         DW_AT_type                  <0x00000034>
@@ -635,15 +635,15 @@ LOCAL_SYMBOLS:
 < 1><0x00000169>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000010
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  long double
+                      DW_AT_name                  "long double"
 
 .debug_line: line number info for a single cu
 Source lines (from CU-DIE at .debug_info offset 0x00000342):
 
-            NS new statement, BB new basic block, ET end of text sequence
-            PE prologue end, EB epilogue begin
-            IS=val ISA number, DI=val discriminator value
-<pc>        [lno,col] NS BB ET PE EB IS= DI= uri: "filepath"
+<pc>        [row,col] NS BB ET PE EB IS= DI= uri: "filepath"
+NS new statement, BB new basic block, ET end of text sequence
+PE prologue end, EB epilogue begin
+IA=val ISA number, DI=val discriminator value
 0x00400fae  [  18, 0] NS uri: "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/cubic.c"
 0x00400fe2  [  19, 0] NS
 0x00401039  [  20, 0] NS
@@ -669,10 +669,10 @@ Source lines (from CU-DIE at .debug_info offset 0x00000342):
 
 COMPILE_UNIT<header overall offset = 0x000004a8>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  isqrt.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "isqrt.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x004013c9
                     DW_AT_high_pc               <offset-from-lowpc>201
                     DW_AT_stmt_list             0x00000243
@@ -681,120 +681,120 @@ LOCAL_SYMBOLS:
 < 1><0x0000002d>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long unsigned int
+                      DW_AT_name                  "long unsigned int"
 < 1><0x00000034>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  sizetype
+                      DW_AT_name                  "sizetype"
 < 1><0x0000003b>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  short unsigned int
+                      DW_AT_name                  "short unsigned int"
 < 1><0x00000042>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  int
+                      DW_AT_name                  "int"
 < 1><0x00000049>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  char
+                      DW_AT_name                  "char"
 < 1><0x00000050>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  float
+                      DW_AT_name                  "float"
 < 1><0x00000057>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_float
-                      DW_AT_name                  double
+                      DW_AT_name                  "double"
 < 1><0x0000005e>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000004
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  unsigned int
+                      DW_AT_name                  "unsigned int"
 < 1><0x00000065>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_unsigned_char
-                      DW_AT_name                  unsigned char
+                      DW_AT_name                  "unsigned char"
 < 1><0x0000006c>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000001
                       DW_AT_encoding              DW_ATE_signed_char
-                      DW_AT_name                  signed char
+                      DW_AT_name                  "signed char"
 < 1><0x00000073>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000002
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  short int
+                      DW_AT_name                  "short int"
 < 1><0x0000007a>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long int
+                      DW_AT_name                  "long int"
 < 1><0x00000081>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_signed
-                      DW_AT_name                  long long int
+                      DW_AT_name                  "long long int"
 < 1><0x00000088>    DW_TAG_base_type
                       DW_AT_byte_size             0x00000008
                       DW_AT_encoding              DW_ATE_unsigned
-                      DW_AT_name                  long long unsigned int
+                      DW_AT_name                  "long long unsigned int"
 < 1><0x0000008f>    DW_TAG_structure_type
-                      DW_AT_name                  int_sqrt
+                      DW_AT_name                  "int_sqrt"
                       DW_AT_byte_size             0x00000008
                       DW_AT_decl_file             0x00000002 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/snipmath.h
                       DW_AT_decl_line             0x00000043
                       DW_AT_sibling               <0x000000b4>
 < 2><0x0000009b>      DW_TAG_member
-                        DW_AT_name                  sqrt
+                        DW_AT_name                  "sqrt"
                         DW_AT_decl_file             0x00000002 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/snipmath.h
                         DW_AT_decl_line             0x00000044
                         DW_AT_type                  <0x0000005e>
                         DW_AT_data_member_location  0
 < 2><0x000000a7>      DW_TAG_member
-                        DW_AT_name                  frac
+                        DW_AT_name                  "frac"
                         DW_AT_decl_file             0x00000002 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/snipmath.h
                         DW_AT_decl_line             0x00000045
                         DW_AT_type                  <0x0000005e>
                         DW_AT_data_member_location  4
 < 1><0x000000b4>    DW_TAG_subprogram
                       DW_AT_external              yes(1)
-                      DW_AT_name                  usqrt
+                      DW_AT_name                  "usqrt"
                       DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                       DW_AT_decl_line             0x0000002d
                       DW_AT_prototyped            yes(1)
                       DW_AT_low_pc                0x004013c9
                       DW_AT_high_pc               <offset-from-lowpc>201
                       DW_AT_frame_base            len 0x0001: 9c: DW_OP_call_frame_cfa
-                      DW_AT_GNU_all_tail_call_sites yes(1)
+                      DW_AT_GNU_all_tail_call_sitesyes(1)
                       DW_AT_sibling               <0x0000011c>
 < 2><0x000000d1>      DW_TAG_formal_parameter
-                        DW_AT_name                  x
+                        DW_AT_name                  "x"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                         DW_AT_decl_line             0x0000002d
                         DW_AT_type                  <0x0000002d>
                         DW_AT_location              len 0x0003: 91b87f: DW_OP_fbreg -72
 < 2><0x000000de>      DW_TAG_formal_parameter
-                        DW_AT_name                  q
+                        DW_AT_name                  "q"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                         DW_AT_decl_line             0x0000002d
                         DW_AT_type                  <0x0000011c>
                         DW_AT_location              len 0x0003: 91b07f: DW_OP_fbreg -80
 < 2><0x000000eb>      DW_TAG_variable
-                        DW_AT_name                  a
+                        DW_AT_name                  "a"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                         DW_AT_decl_line             0x0000002f
                         DW_AT_type                  <0x0000002d>
                         DW_AT_location              len 0x0002: 9150: DW_OP_fbreg -48
 < 2><0x000000f7>      DW_TAG_variable
-                        DW_AT_name                  r
+                        DW_AT_name                  "r"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                         DW_AT_decl_line             0x00000030
                         DW_AT_type                  <0x0000002d>
                         DW_AT_location              len 0x0002: 9158: DW_OP_fbreg -40
 < 2><0x00000103>      DW_TAG_variable
-                        DW_AT_name                  e
+                        DW_AT_name                  "e"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                         DW_AT_decl_line             0x00000031
                         DW_AT_type                  <0x0000002d>
                         DW_AT_location              len 0x0002: 9160: DW_OP_fbreg -32
 < 2><0x0000010f>      DW_TAG_variable
-                        DW_AT_name                  i
+                        DW_AT_name                  "i"
                         DW_AT_decl_file             0x00000001 /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c
                         DW_AT_decl_line             0x00000033
                         DW_AT_type                  <0x00000042>
@@ -806,10 +806,10 @@ LOCAL_SYMBOLS:
 .debug_line: line number info for a single cu
 Source lines (from CU-DIE at .debug_info offset 0x000004b3):
 
-            NS new statement, BB new basic block, ET end of text sequence
-            PE prologue end, EB epilogue begin
-            IS=val ISA number, DI=val discriminator value
-<pc>        [lno,col] NS BB ET PE EB IS= DI= uri: "filepath"
+<pc>        [row,col] NS BB ET PE EB IS= DI= uri: "filepath"
+NS new statement, BB new basic block, ET end of text sequence
+PE prologue end, EB epilogue begin
+IA=val ISA number, DI=val discriminator value
 0x004013c9  [  46, 0] NS uri: "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath/isqrt.c"
 0x004013d9  [  46, 0] NS
 0x004013e8  [  47, 0] NS
@@ -828,7 +828,11 @@ Source lines (from CU-DIE at .debug_info offset 0x000004b3):
 0x0040147b  [  65, 0] NS
 0x00401492  [  65, 0] NS ET
 
-.debug_str
+.debug_pubnames
+
+.debug_macinfo
+
+.debug_string
 name at offset 0x00000000, length    5 is 'float'
 name at offset 0x00000006, length   13 is 'unsigned char'
 name at offset 0x00000014, length   18 is 'short unsigned int'
@@ -860,10 +864,10 @@ name at offset 0x00000171, length    7 is 'isqrt.c'
 
 COMPILE_UNIT<header overall offset = 0x00000000>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  basicmath_small.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "basicmath_small.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x004007f6
                     DW_AT_high_pc               <offset-from-lowpc>1896
                     DW_AT_stmt_list             0x00000000
@@ -871,13 +875,12 @@ COMPILE_UNIT<header overall offset = 0x00000000>:
 
 arange starts at 0x004007f6, length of 0x00000768, cu_die_offset = 0x0000000b
 arange end
-
 COMPILE_UNIT<header overall offset = 0x0000024b>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  rad2deg.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "rad2deg.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x00400f5e
                     DW_AT_high_pc               <offset-from-lowpc>80
                     DW_AT_stmt_list             0x00000180
@@ -885,13 +888,12 @@ COMPILE_UNIT<header overall offset = 0x0000024b>:
 
 arange starts at 0x00400f5e, length of 0x00000050, cu_die_offset = 0x00000256
 arange end
-
 COMPILE_UNIT<header overall offset = 0x00000337>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  cubic.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "cubic.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x00400fae
                     DW_AT_high_pc               <offset-from-lowpc>1051
                     DW_AT_stmt_list             0x000001c4
@@ -899,13 +901,12 @@ COMPILE_UNIT<header overall offset = 0x00000337>:
 
 arange starts at 0x00400fae, length of 0x0000041b, cu_die_offset = 0x00000342
 arange end
-
 COMPILE_UNIT<header overall offset = 0x000004a8>:
 < 0><0x0000000b>  DW_TAG_compile_unit
-                    DW_AT_producer              GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong
+                    DW_AT_producer              "GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -fstack-protector-strong"
                     DW_AT_language              DW_LANG_C99
-                    DW_AT_name                  isqrt.c
-                    DW_AT_comp_dir              /mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath
+                    DW_AT_name                  "isqrt.c"
+                    DW_AT_comp_dir              "/mnt/c/Users/mattc/Desktop/Current_Uni/automotive/basicmath"
                     DW_AT_low_pc                0x004013c9
                     DW_AT_high_pc               <offset-from-lowpc>201
                     DW_AT_stmt_list             0x00000243
@@ -913,6 +914,11 @@ COMPILE_UNIT<header overall offset = 0x000004a8>:
 
 arange starts at 0x004013c9, length of 0x000000c9, cu_die_offset = 0x000004b3
 arange end
-
 .debug_frame
+
+.debug_static_func
+
+.debug_static_vars
+
+.debug_weaknames
 

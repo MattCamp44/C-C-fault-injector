@@ -63,7 +63,7 @@ int main(int argc, char ** argv){
             cout << "EFAULT\n" ;
         if(data == EINVAL)
             cout << "EINVAL\n";
-        return 1;
+        // return 1;
 
         for(auto func: functionObjects){
             cout << func.getname() << endl;
@@ -101,7 +101,7 @@ int main(int argc, char ** argv){
         //personality(ADDR_NO_RANDOMIZE);
         //pause();
         FILE * fp;
-        // freopen("goldenoutput.txt", "w", stdout);
+        freopen("goldenoutput.txt", "w", stdout);
     
         ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
         execl(argv[1],argv[1],nullptr);
