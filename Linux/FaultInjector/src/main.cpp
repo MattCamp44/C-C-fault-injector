@@ -60,6 +60,8 @@ int main(int argc, char ** argv){
             for(auto addr : func.getaddresses())
                 cout << hex << addr << endl;
         }
+
+        cout << "Here\n" ;
         // return 1;
         ptrace(PTRACE_CONT, pid, nullptr, nullptr);
         

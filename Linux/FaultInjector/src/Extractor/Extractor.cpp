@@ -21,7 +21,7 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
     fstream objdumpfile;
 
-    string dumpPath = "./Extractor/Objectfiles/";
+    string dumpPath = "./Extractor/ObjectFiles/";
 
     string prognamestring = progname;
 
@@ -86,7 +86,7 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
 
         while(getline(ObjDumpFile, line) ) { 
                 
-
+            // cout << line << endl;
 
            if (line.find(FIND_SYMBOL_STRING, 0) != string::npos) {
                     getline(ObjDumpFile, line); 
@@ -180,7 +180,7 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
 
     fstream ObjDumpFile;
 
-    string dumpPath = "./Extractor/Objectfiles/";
+    string dumpPath = "./Extractor/ObjectFiles/";
 
 
     string prognamestring = progname;
@@ -192,11 +192,11 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
     
     dumpPath.append("/dwarfdump");
 
-
+    cout << dumpPath << endl;
 
     ObjDumpFile.open(dumpPath,ios::in);
 
-    if(!ObjDumpFile){
+    if(!ObjDumpFile.good()){
         cout << "dwarfdump file not found. Run make objectfiles debugee={your program name} to generate it\n";
 
     }
