@@ -34,7 +34,7 @@ void * resetThread(void * p){
 
 }
 
-int main(){
+int main(int argc,char ** argv){
 
         int pid;
         int wait_status;
@@ -56,13 +56,15 @@ int main(){
             cout << "[Parent] starting killer thread" << endl;
             
             pthread_t t1;
+            /*
             if(pthread_create(&t1,NULL,resetThread,(void *) &para ) != 0){
                 cout << "[Parent] error creating the thread, exit.." << endl;
                 return -1;
             }
+            */
 
             waitpid(pid, &wait_status, options);
-            pthread_cancel(t1); // se il processo termina prima del contatore del thread da errore ma pacenza
+            //pthread_cancel(t1); // se il processo termina prima del contatore del thread da errore ma pacenza
             
             
             if(wait_status){
@@ -73,9 +75,18 @@ int main(){
 
         }else{
             cout << "[Child] i'm the Child" << endl;
-            int *arg = (int *) 10;
-            sleep(20);
-            cout << "[Child] if you see this i had a good life" << endl;          
+            const char * arg = (char *) 10;
+            int *arg1 = (int *) 10;
+            int *arg2 = (int *) 10;
+            int *arg3 = (int *) 10;
+            
+            //sleep(20);
+            //cout << "[Child] if you see this i had a good life" << endl;   
+
+            char *const parmList[] = {argv[1],argv[2], "/u/userid/dirname", NULL};       
+            
+            execv("./argumentProva",parmList);
+
         }
         cout << endl;
         }
