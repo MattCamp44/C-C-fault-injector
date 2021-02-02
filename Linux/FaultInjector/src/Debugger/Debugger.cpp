@@ -78,7 +78,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
         if(pid){
             //Parent
             waitpid(pid,nullptr,0);
-
+            
             
 
             
