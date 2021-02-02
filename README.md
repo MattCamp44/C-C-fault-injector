@@ -34,6 +34,7 @@ The output is expressed through a .csv file. Each line represents a run in which
 ## Documentation
 
 - [Debugger](./Documentation/Debugger.md)
+- [Extractor](./Documentation/Extractor.md)
 
 
 
