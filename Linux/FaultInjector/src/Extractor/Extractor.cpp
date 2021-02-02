@@ -12,22 +12,41 @@ using namespace std;
 
 #define FIND_SYMBOL_STRING "subprogram"
 
-vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned long int base){
+vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned long int base, char * progname){
     
     
-
+    cout << "Extract addresses with:" << functionobject.getlinkagename() << endl;
     vector<string> addresses;
     vector<unsigned long> addresses_ui;
 
     fstream objdumpfile;
-    objdumpfile.open("./Extractor/ObjectFiles/prova/objdump",ios::in);
+
+    string dumpPath = "./Extractor/ObjectFiles/";
+
+    string prognamestring = progname;
+
+    string progNameWithoutPath = prognamestring.substr(prognamestring.find_last_of("/\\") + 1);
+
+    dumpPath.append(progNameWithoutPath);
+
+    
+    dumpPath.append("/objdump");
+
+    // dumpPath.append(prognamestring);
+
+    cout << dumpPath << endl;
+
+    objdumpfile.open(dumpPath,ios::in);
 
 
     string line;
 
+    string functiObjectLinkageName = functionobject.getlinkagename();
+    functiObjectLinkageName.append(":");
+
     while(getline(objdumpfile, line) ) { 
-        
-       if (line.find(functionobject.getlinkagename(), 0) != string::npos) {
+       if (line.find(functiObjectLinkageName, 0) != string::npos) {
+            cout << "Found in objdump: " << functionobject.getlinkagename() << endl;
 
             while(line != ""){
                 getline(objdumpfile, line) ;
@@ -52,6 +71,7 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
         }
     
+    return addresses_ui;
     
     
     }
@@ -60,7 +80,7 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
 
 
-vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long int base){
+vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long int base , char * progname){
 
     vector<FunctionObject> FunctionObjects;
 
@@ -70,14 +90,14 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
 
         while(getline(ObjDumpFile, line) ) { 
                 
-
+            // cout << line << endl;
 
            if (line.find(FIND_SYMBOL_STRING, 0) != string::npos) {
                     getline(ObjDumpFile, line); 
                     getline(ObjDumpFile, line); 
                     
                     functionname = line.substr(50);
-
+                    cout << functionname << endl;
                     functionname.erase( remove( functionname.begin(), functionname.end(), '"') , functionname.end() );
 
                     if(functionname.find("main") == string::npos){
@@ -94,10 +114,10 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
 
                 }
                     else 
-   
                         linkagename = "<main>";
+   
 
-                    vector<unsigned long> addresses = ExtractAddresses(FunctionObject(functionname,linkagename),base);
+                    vector<unsigned long> addresses = ExtractAddresses(FunctionObject(functionname,linkagename),base, progname);
                     FunctionObjects.emplace_back(FunctionObject(functionname,linkagename,addresses));
 
             }
@@ -164,20 +184,33 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
 
     fstream ObjDumpFile;
 
-    string dumpPath = "./Extractor/Objectfiles/";
-    //TODO -> take out path from progname
-    //dumpPath.append(progname);
-    dumpPath.append("prova");
-    
+    string dumpPath = "./Extractor/ObjectFiles/";
+
+
+    string prognamestring = progname;
+
+    string progNameWithoutPath = prognamestring.substr(prognamestring.find_last_of("/\\") + 1);
+
+    dumpPath.append(progNameWithoutPath);
+
     
     dumpPath.append("/dwarfdump");
 
+    cout << dumpPath << endl;
 
     ObjDumpFile.open(dumpPath,ios::in);
 
+    if(!ObjDumpFile.good()){
+        cout << "dwarfdump file not found. Run make objectfiles debugee={your program name} to generate it\n";
+
+    }
+
+
+
+
     unsigned long int base = getBaseAddress(pid);
 
-    vector<FunctionObject> FunctionObjectVector = ExtractFunctionNames(ObjDumpFile, base);
+    vector<FunctionObject> FunctionObjectVector = ExtractFunctionNames(ObjDumpFile, base , progname);
 
     char curdir[500];
     getcwd(curdir,sizeof(curdir)); 

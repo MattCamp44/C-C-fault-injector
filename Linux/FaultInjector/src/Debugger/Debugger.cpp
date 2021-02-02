@@ -11,6 +11,12 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include<stdio.h>
+#include "../Output_functions/comparefiles.h"
+#include<fstream>
+
+
+
+
 using namespace std;
 
 void continue_execution(int pid) {
@@ -23,6 +29,31 @@ void continue_execution(int pid) {
 }
 
 
+struct params {
+    int pid; // pid of Deguee program
+    int goldenExTime; // time golden ex
+    int molt; // moltiplicator (input)
+};
+
+
+void * resetThread(void * p){
+    // cout << "[Thread] i'm the killer thread" << endl;
+    struct params * para;
+    para = (struct params *) p;
+    int exit;
+    sleep(para->goldenExTime * para->molt);
+
+    if(kill(para->pid, SIGKILL) == 0){
+        cout << "[Thread] now i kill the child process" << endl;
+        exit = 1;
+    }else{
+        cout << "[Thread] child process is immortal" << endl;
+        exit = -1;
+    }
+
+    pthread_exit((void *) &exit);
+
+}
 
 
 
@@ -44,19 +75,19 @@ void EnableInjectionPoint(int pid, unsigned long int address ){
     
 
     
-
     InjectionPoint injPoint = InjectionPoint(pid,address);
-    injPoint.InjectFirstBit();
+
     
+    injPoint.InjectFirstBit();
 
 
 }
 
 
-void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
+void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress){
 
 
-    
+
 
 
     vector<unsigned long int> addresses;
@@ -70,13 +101,15 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
     
 
     int index=0;
+    cout << FunctionObjects[0].getaddresses().size() << endl;
     for(auto i : FunctionObjects[0].getaddresses()){
-        for( auto j = 0; j < 2; j++ ){
+        for( auto j = 0; j < NinjectionsPerAddress; j++ ){
     // for(auto i : myaddresses) {
-        cout << "Injecting " << hex << i << endl;
+        // cout << "Injecting " << hex << i << endl;
         pid = fork();
         if(pid){
             //Parent
+            //Parte il thread
             waitpid(pid,nullptr,0);
             
             
@@ -91,7 +124,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             // assert(!addresses.empty());
             
-            cout << "Here\n";
+            // cout << "Here\n";
             
             //Pop head
             unsigned long int breakpointAddress = i;
@@ -101,7 +134,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
             
             breakpoint.Enable();
 
-            sleep(1);
+            // sleep(1);
             //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
@@ -119,24 +152,39 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             ptrace(PTRACE_GETREGS, pid, nullptr, &regs);
 
-            //regs.rip = 0x400543 ;
+            //reset program counter
             regs.rip = breakpointAddress ;
 
             ptrace(PTRACE_SETREGS, pid, nullptr, &regs);
 
-            //cout << "Program counter before singlestep: " << regs.rip << endl;
-            //sleep(1);
+            
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
-            //cout << "Program counter after singlestep: " << regs.rip << endl;
+            //To get from main..
+            int goldenExecutionTime = 100;
+            int maxTimerMultiplicator = 4;
 
+            struct params para;
+            para.goldenExTime = 3;
+            para.molt = 1;
+            para.pid = pid;
 
+            pthread_t t1;
+
+            if(pthread_create(&t1,NULL,resetThread,(void *) &para ) != 0){
+                cout << "[Parent] error creating the thread, exit.." << endl;
+                return ;
+            }
+
+            // Wait for program to exit
             waitpid(pid,nullptr,0);
 
-            ptrace(PTRACE_CONT, pid, nullptr, nullptr);
+            //kill thread 
+            pthread_cancel(t1);
+
+            // ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             // waitpid(pid,nullptr,0);
-
             // ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             //waitpid(pid,nullptr,0);
@@ -152,17 +200,51 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog){
 
             //popen("diff goldenoutput.txt injectedoutput.txt")
             // ....read output and put on csvfile
+            // fstream objdumpfile;
+            // objdumpfile.open("./Extractor/ObjectFiles/prova/objdump",ios::in);
+            // fstream fgoldenoutput;
+            // fgoldenoutput.open("../goldenoutput.txt",ios::in);            
+            // fstream finjectedoutput;
+            // finjectedoutput.open("./injectedoutput.txt",ios::in);
 
+            // cout << fgoldenoutput << endl;
+            // cout << finjectedoutput << endl;
 
-            //remove("injectedoutput.txt");
+            compareFiles();
+
+            int errorGenerated = 0;
+
+            ifstream ifile;
+            ifile.open("injectedoutputstderr.txt");
+            if(ifile && ifile.peek() != std::ifstream::traits_type::eof()) {
+                cout << ifile.peek() ;
+                errorGenerated = 1;
+                cout<<"Errors\n";
+            } else {
+                cout << ifile.peek() ;
+                cout<<"No errors\n";
+            }
+
+            //appendLineOutputFile(  );
+
+            remove("injectedoutput.txt");
+            remove("injectedoutputstderr.txt");
             cout << "Done injecting\n";
+
+
+
+
         }
 
         else{
             //child
-            // freopen("injectedoutput.txt", "w", stdout);
+            freopen("injectedoutput.txt", "w", stdout);
+            // freopen("injectedoutput.txt", "w", stderr);
+            freopen("injectedoutputstderr.txt", "w", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
+            // execv(argv[1],newargv);
+
         }
     }
 
