@@ -212,18 +212,26 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             compareFiles();
 
+            int errorGenerated = 0;
+
             ifstream ifile;
             ifile.open("injectedoutputstderr.txt");
             if(ifile && ifile.peek() == std::ifstream::traits_type::eof()) {
-                
+                errorGenerated = 1;
                 cout<<"Errors\n";
             } else {
                 cout<<"No errors\n";
             }
 
+            //appendLineOutputFile(  );
+
             remove("injectedoutput.txt");
             remove("injectedoutputstderr.txt");
             cout << "Done injecting\n";
+
+
+
+
         }
 
         else{

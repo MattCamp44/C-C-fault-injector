@@ -8,7 +8,9 @@ int main(int argc, char **argv){
     //     return 1;
 
     // }
-
+    int a;
+    int b;
+    double c;
     //sleep(2);
     printf("One\n");
     printf("Two\n");
