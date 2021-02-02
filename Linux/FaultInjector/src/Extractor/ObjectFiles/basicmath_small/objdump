@@ -6,69 +6,69 @@ Disassembly of section .init:
 
 0000000000400630 <_init>:
   400630:	48 83 ec 08          	sub    $0x8,%rsp
-  400634:	48 8b 05 bd 19 20 00 	mov    0x2019bd(%rip),%rax        # 601ff8 <_DYNAMIC+0x1e0>
+  400634:	48 8b 05 bd 19 20 00 	mov    0x2019bd(%rip),%rax        # 601ff8 <__gmon_start__>
   40063b:	48 85 c0             	test   %rax,%rax
   40063e:	74 05                	je     400645 <_init+0x15>
-  400640:	e8 ab 00 00 00       	callq  4006f0 <sqrt@plt+0x10>
+  400640:	e8 ab 00 00 00       	callq  4006f0 <__gmon_start__@plt>
   400645:	48 83 c4 08          	add    $0x8,%rsp
   400649:	c3                   	retq   
 
 Disassembly of section .plt:
 
-0000000000400650 <putchar@plt-0x10>:
+0000000000400650 <.plt>:
   400650:	ff 35 b2 19 20 00    	pushq  0x2019b2(%rip)        # 602008 <_GLOBAL_OFFSET_TABLE_+0x8>
   400656:	ff 25 b4 19 20 00    	jmpq   *0x2019b4(%rip)        # 602010 <_GLOBAL_OFFSET_TABLE_+0x10>
   40065c:	0f 1f 40 00          	nopl   0x0(%rax)
 
 0000000000400660 <putchar@plt>:
-  400660:	ff 25 b2 19 20 00    	jmpq   *0x2019b2(%rip)        # 602018 <_GLOBAL_OFFSET_TABLE_+0x18>
+  400660:	ff 25 b2 19 20 00    	jmpq   *0x2019b2(%rip)        # 602018 <putchar@GLIBC_2.2.5>
   400666:	68 00 00 00 00       	pushq  $0x0
-  40066b:	e9 e0 ff ff ff       	jmpq   400650 <_init+0x20>
+  40066b:	e9 e0 ff ff ff       	jmpq   400650 <.plt>
 
 0000000000400670 <puts@plt>:
-  400670:	ff 25 aa 19 20 00    	jmpq   *0x2019aa(%rip)        # 602020 <_GLOBAL_OFFSET_TABLE_+0x20>
+  400670:	ff 25 aa 19 20 00    	jmpq   *0x2019aa(%rip)        # 602020 <puts@GLIBC_2.2.5>
   400676:	68 01 00 00 00       	pushq  $0x1
-  40067b:	e9 d0 ff ff ff       	jmpq   400650 <_init+0x20>
+  40067b:	e9 d0 ff ff ff       	jmpq   400650 <.plt>
 
 0000000000400680 <__stack_chk_fail@plt>:
-  400680:	ff 25 a2 19 20 00    	jmpq   *0x2019a2(%rip)        # 602028 <_GLOBAL_OFFSET_TABLE_+0x28>
+  400680:	ff 25 a2 19 20 00    	jmpq   *0x2019a2(%rip)        # 602028 <__stack_chk_fail@GLIBC_2.4>
   400686:	68 02 00 00 00       	pushq  $0x2
-  40068b:	e9 c0 ff ff ff       	jmpq   400650 <_init+0x20>
+  40068b:	e9 c0 ff ff ff       	jmpq   400650 <.plt>
 
 0000000000400690 <printf@plt>:
-  400690:	ff 25 9a 19 20 00    	jmpq   *0x20199a(%rip)        # 602030 <_GLOBAL_OFFSET_TABLE_+0x30>
+  400690:	ff 25 9a 19 20 00    	jmpq   *0x20199a(%rip)        # 602030 <printf@GLIBC_2.2.5>
   400696:	68 03 00 00 00       	pushq  $0x3
-  40069b:	e9 b0 ff ff ff       	jmpq   400650 <_init+0x20>
+  40069b:	e9 b0 ff ff ff       	jmpq   400650 <.plt>
 
 00000000004006a0 <pow@plt>:
-  4006a0:	ff 25 92 19 20 00    	jmpq   *0x201992(%rip)        # 602038 <_GLOBAL_OFFSET_TABLE_+0x38>
+  4006a0:	ff 25 92 19 20 00    	jmpq   *0x201992(%rip)        # 602038 <pow@GLIBC_2.2.5>
   4006a6:	68 04 00 00 00       	pushq  $0x4
-  4006ab:	e9 a0 ff ff ff       	jmpq   400650 <_init+0x20>
+  4006ab:	e9 a0 ff ff ff       	jmpq   400650 <.plt>
 
 00000000004006b0 <cos@plt>:
-  4006b0:	ff 25 8a 19 20 00    	jmpq   *0x20198a(%rip)        # 602040 <_GLOBAL_OFFSET_TABLE_+0x40>
+  4006b0:	ff 25 8a 19 20 00    	jmpq   *0x20198a(%rip)        # 602040 <cos@GLIBC_2.2.5>
   4006b6:	68 05 00 00 00       	pushq  $0x5
-  4006bb:	e9 90 ff ff ff       	jmpq   400650 <_init+0x20>
+  4006bb:	e9 90 ff ff ff       	jmpq   400650 <.plt>
 
 00000000004006c0 <acos@plt>:
-  4006c0:	ff 25 82 19 20 00    	jmpq   *0x201982(%rip)        # 602048 <_GLOBAL_OFFSET_TABLE_+0x48>
+  4006c0:	ff 25 82 19 20 00    	jmpq   *0x201982(%rip)        # 602048 <acos@GLIBC_2.2.5>
   4006c6:	68 06 00 00 00       	pushq  $0x6
-  4006cb:	e9 80 ff ff ff       	jmpq   400650 <_init+0x20>
+  4006cb:	e9 80 ff ff ff       	jmpq   400650 <.plt>
 
 00000000004006d0 <__libc_start_main@plt>:
-  4006d0:	ff 25 7a 19 20 00    	jmpq   *0x20197a(%rip)        # 602050 <_GLOBAL_OFFSET_TABLE_+0x50>
+  4006d0:	ff 25 7a 19 20 00    	jmpq   *0x20197a(%rip)        # 602050 <__libc_start_main@GLIBC_2.2.5>
   4006d6:	68 07 00 00 00       	pushq  $0x7
-  4006db:	e9 70 ff ff ff       	jmpq   400650 <_init+0x20>
+  4006db:	e9 70 ff ff ff       	jmpq   400650 <.plt>
 
 00000000004006e0 <sqrt@plt>:
-  4006e0:	ff 25 72 19 20 00    	jmpq   *0x201972(%rip)        # 602058 <_GLOBAL_OFFSET_TABLE_+0x58>
+  4006e0:	ff 25 72 19 20 00    	jmpq   *0x201972(%rip)        # 602058 <sqrt@GLIBC_2.2.5>
   4006e6:	68 08 00 00 00       	pushq  $0x8
-  4006eb:	e9 60 ff ff ff       	jmpq   400650 <_init+0x20>
+  4006eb:	e9 60 ff ff ff       	jmpq   400650 <.plt>
 
 Disassembly of section .plt.got:
 
-00000000004006f0 <.plt.got>:
-  4006f0:	ff 25 02 19 20 00    	jmpq   *0x201902(%rip)        # 601ff8 <_DYNAMIC+0x1e0>
+00000000004006f0 <__gmon_start__@plt>:
+  4006f0:	ff 25 02 19 20 00    	jmpq   *0x201902(%rip)        # 601ff8 <__gmon_start__>
   4006f6:	66 90                	xchg   %ax,%ax
 
 Disassembly of section .text:
@@ -949,7 +949,7 @@ Disassembly of section .text:
   4014a9:	41 54                	push   %r12
   4014ab:	4c 8d 25 4e 09 20 00 	lea    0x20094e(%rip),%r12        # 601e00 <__frame_dummy_init_array_entry>
   4014b2:	55                   	push   %rbp
-  4014b3:	48 8d 2d 4e 09 20 00 	lea    0x20094e(%rip),%rbp        # 601e08 <__init_array_end>
+  4014b3:	48 8d 2d 4e 09 20 00 	lea    0x20094e(%rip),%rbp        # 601e08 <__do_global_dtors_aux_fini_array_entry>
   4014ba:	53                   	push   %rbx
   4014bb:	49 89 f6             	mov    %rsi,%r14
   4014be:	49 89 d5             	mov    %rdx,%r13

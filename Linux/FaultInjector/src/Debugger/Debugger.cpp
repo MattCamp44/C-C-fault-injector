@@ -134,7 +134,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             
             breakpoint.Enable();
 
-            // sleep(1);
+            sleep(1);
             //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
@@ -238,9 +238,9 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
         else{
             //child
-            freopen("injectedoutput.txt", "w", stdout);
+            // freopen("injectedoutput.txt", "w", stdout);
             // freopen("injectedoutput.txt", "w", stderr);
-            freopen("injectedoutputstderr.txt", "w", stderr);
+            // freopen("injectedoutputstderr.txt", "w", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
             // execv(argv[1],newargv);

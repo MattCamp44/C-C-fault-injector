@@ -41,8 +41,11 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
     string line;
 
+    string functiObjectLinkageName = functionobject.getlinkagename();
+    functiObjectLinkageName.append(":");
+
     while(getline(objdumpfile, line) ) { 
-       if (line.find(functionobject.getlinkagename(), 0) != string::npos) {
+       if (line.find(functiObjectLinkageName, 0) != string::npos) {
             cout << "Found in objdump: " << functionobject.getlinkagename() << endl;
 
             while(line != ""){
@@ -68,6 +71,7 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
         }
     
+    return addresses_ui;
     
     
     }
