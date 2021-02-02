@@ -11,6 +11,12 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include<stdio.h>
+#include "../Output_functions/comparefiles.h"
+#include<fstream>
+
+
+
+
 using namespace std;
 
 void continue_execution(int pid) {
@@ -194,15 +200,37 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             //popen("diff goldenoutput.txt injectedoutput.txt")
             // ....read output and put on csvfile
+            // fstream objdumpfile;
+            // objdumpfile.open("./Extractor/ObjectFiles/prova/objdump",ios::in);
+            // fstream fgoldenoutput;
+            // fgoldenoutput.open("../goldenoutput.txt",ios::in);            
+            // fstream finjectedoutput;
+            // finjectedoutput.open("./injectedoutput.txt",ios::in);
 
+            // cout << fgoldenoutput << endl;
+            // cout << finjectedoutput << endl;
 
-            //remove("injectedoutput.txt");
+            compareFiles();
+
+            ifstream ifile;
+            ifile.open("injectedoutputstderr.txt");
+            if(ifile && ifile.peek() == std::ifstream::traits_type::eof()) {
+                
+                cout<<"Errors\n";
+            } else {
+                cout<<"No errors\n";
+            }
+
+            remove("injectedoutput.txt");
+            remove("injectedoutputstderr.txt");
             cout << "Done injecting\n";
         }
 
         else{
             //child
-            // freopen("injectedoutput.txt", "w", stdout);
+            freopen("injectedoutput.txt", "w", stdout);
+            // freopen("injectedoutput.txt", "w", stderr);
+            freopen("injectedoutputstderr.txt", "w", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
             // execv(argv[1],newargv);

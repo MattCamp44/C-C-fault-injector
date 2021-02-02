@@ -75,7 +75,7 @@ int main(int argc, char ** argv){
         
         
         //TODO: remove goldenoutput and injectedoutput files after comparing them
-            // remove("goldenoutput.txt");
+            remove("goldenoutput.txt");
 
         
         
