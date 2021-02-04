@@ -34,14 +34,14 @@ int main(int argc, char **argv){
     int a;
     int b;
     double c;
-    //sleep(2);
+    
     printf("One\n");
     printf("Two\n");
     printf("Three\n");
     printf("Four\n");
     printf("Five\n");
     printf("Six\n");
-
+    // sleep(10);
 
     printf("Hello itsme \n");
     

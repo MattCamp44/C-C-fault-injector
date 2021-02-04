@@ -2,11 +2,12 @@
 #define INJECTIONPOINT_H
 
 #include<cstdint>
-
+#include "../InstructionObject/InstructionObject.h"
 
 class InjectionPoint{
 
     unsigned long int address;
+    int length;
     int pid;
     uint8_t saved_data;
 
@@ -14,7 +15,7 @@ class InjectionPoint{
 
     public:
 
-    InjectionPoint(int pid, unsigned long int address );
+    InjectionPoint(int pid, unsigned long int address, int length );
 
     void InjectFirstBit();
     

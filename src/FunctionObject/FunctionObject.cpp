@@ -1,7 +1,7 @@
 #include "FunctionObject.h"
 #include<vector>
 #include<string>
-
+#include "../InstructionObject/InstructionObject.h"
 using namespace std;
 
 FunctionObject::FunctionObject(string FunctionName, string linkageName){
@@ -11,7 +11,7 @@ FunctionObject::FunctionObject(string FunctionName, string linkageName){
 
         }
     
-FunctionObject::FunctionObject(string FunctionName, string linkageName, vector<unsigned long> addresses){
+FunctionObject::FunctionObject(string FunctionName, string linkageName, vector<InstructionObject> addresses){
         
         this->FunctionName = FunctionName;
         this->linkageName = linkageName;
@@ -23,4 +23,4 @@ FunctionObject::FunctionObject(string FunctionName, string linkageName, vector<u
     
     string  FunctionObject::getname(){return this->FunctionName;}
     string FunctionObject::getlinkagename(){return this->linkageName;}
-    vector<unsigned long> FunctionObject::getaddresses(){return this->addresses;}
+    vector<InstructionObject> FunctionObject::getaddresses(){return this->addresses;}

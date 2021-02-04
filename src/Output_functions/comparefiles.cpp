@@ -1,7 +1,7 @@
 #include "./comparefiles.h"
 #include<stdio.h>
 #include<iostream>
-void compareFiles() 
+int compareFiles() 
 { 
     FILE *fp1 = fopen("goldenoutput.txt", "r"); 
     FILE *fp2 = fopen("injectedoutput.txt", "r"); 
@@ -25,7 +25,7 @@ void compareFiles()
     }
 
     if(errorOpen)
-        return;
+        return -1;
     // fetching character of two file 
     // in two variable ch1 and ch2 
     char ch1 = getc(fp1); 
@@ -65,7 +65,9 @@ void compareFiles()
     } 
     fclose(fp1); 
     fclose(fp2); 
-    printf("Total Errors : %d\t", error); 
+    if(error != 0)
+        printf("Total Errors : %d\n", error); 
+    return error;
 } 
   
 // Driver code 

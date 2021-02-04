@@ -1,0 +1,68 @@
+./Extractor/ObjectFiles/prova/dwarfdump
+Function name:"funcA"
+Extract addresses with:<funcA>
+./Extractor/ObjectFiles/prova/objdump
+Found in objdump: <funcA>
+Function name:"funcB"
+Extract addresses with:<funcB>
+./Extractor/ObjectFiles/prova/objdump
+Found in objdump: <funcB>
+Function name:"main"
+Extract addresses with:<main>
+./Extractor/ObjectFiles/prova/objdump
+Found in objdump: <main>
+funcA
+400526
+400527
+40052a
+400531
+400533
+400537
+40053b
+40053d
+400542
+400543
+funcB
+400544
+400545
+400548
+40054d
+40054e
+main
+40054f
+400550
+400553
+400557
+40055a
+40055e
+400563
+400568
+40056d
+400572
+400577
+40057c
+400581
+400586
+40058b
+400590
+400595
+40059a
+40059f
+4005a4
+4005a9
+4005aa
+4005ab
+Here
+ptraceContReturnValue: 0
+Total Errors : 34
+Total Errors : 35
+Total Errors : 32
+Total Errors : 31
+Total Errors : 31
+Total Errors : 24
+Total Errors : 22
+Total Errors : 4
+Total Errors : 2
+Total Errors : 13
+Total Errors : 5
+Total Errors : 11

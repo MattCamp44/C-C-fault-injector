@@ -7,7 +7,7 @@
 #include<vector>
 #include<string>
 #include<iostream>
-
+#include "../InstructionObject/InstructionObject.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ class FunctionObject {
     string FunctionName;
 
     //unsigned long addresses[2];  //beginning, end
-    vector<unsigned long> addresses;
+    vector<InstructionObject> addresses;
     
     string linkageName;
     
@@ -24,13 +24,13 @@ class FunctionObject {
     
     FunctionObject(string FunctionName, string linkageName);
     
-    FunctionObject(string FunctionName, string linkageName, vector<unsigned long> addresses);
+    FunctionObject(string FunctionName, string linkageName, vector<InstructionObject> addresses);
 
     
     
     string getname();
     string getlinkagename();
-    vector<unsigned long> getaddresses();
+    vector<InstructionObject> getaddresses();
 
     };
 

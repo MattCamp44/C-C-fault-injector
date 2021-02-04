@@ -3,7 +3,7 @@
 
 
 
-void compareFiles();
+int compareFiles();
 
 
 

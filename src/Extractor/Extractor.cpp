@@ -7,18 +7,20 @@
 #include <unistd.h>
 #include <stdio.h>
 #include<string.h>
+#include "../InstructionObject/InstructionObject.h"
 
 using namespace std;
 
 #define FIND_SYMBOL_STRING "subprogram"
 
-vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned long int base, char * progname){
+vector<InstructionObject> ExtractAddresses(FunctionObject functionobject, unsigned long int base, char * progname){
     
     
     cout << "Extract addresses with:" << functionobject.getlinkagename() << endl;
     vector<string> addresses;
     vector<unsigned long> addresses_ui;
-
+    vector<InstructionObject> Instructions;
+    vector<int> Lengths;
     fstream objdumpfile;
 
     string dumpPath = "./Extractor/ObjectFiles/";
@@ -43,6 +45,8 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
     string functiObjectLinkageName = functionobject.getlinkagename();
     functiObjectLinkageName.append(":");
+    
+    int instructionLength;
 
     while(getline(objdumpfile, line) ) { 
        if (line.find(functiObjectLinkageName, 0) != string::npos) {
@@ -50,28 +54,41 @@ vector<unsigned long> ExtractAddresses(FunctionObject functionobject, unsigned l
 
             while(line != ""){
                 getline(objdumpfile, line) ;
-
+                instructionLength = 0;
                 if(line!= "" ){
                     
-
+                    
                     addresses.emplace_back(line.substr(2,6));
-                
+                    cout << line.substr(10,22) ;
+
+                    for(char c : line.substr(10,22))
+                        if(c != ' ')
+                            instructionLength++;
+                    cout << instructionLength - 1 << endl;
+                    Lengths.emplace_back(instructionLength - 1);
+
+                    
                 }
             }
-            
-            for(auto s : addresses){
+            if(addresses.size() != Lengths.size()){
+                cout << "Different sizes\n";
+                
+            }
+
+            for(auto s = 0; s<  addresses.size(); s++){
                 //cout << s << endl;
                 //addresses_ui.emplace_back(stoull(s,nullptr,16) + base );
                 std::string::size_type sz = 0;
-                addresses_ui.emplace_back(stoull(s,&sz,16) );
+                // addresses_ui.emplace_back(stoull(s,&sz,16) );
+                Instructions.emplace_back(InstructionObject(stoull(addresses[s],&sz,16),Lengths[s]));
             }
-            return addresses_ui;
+            return Instructions;
 
             }
 
         }
     
-    return addresses_ui;
+    return Instructions;
     
     
     }
@@ -120,7 +137,7 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
                         linkagename = "<main>";
    
 
-                    vector<unsigned long> addresses = ExtractAddresses(FunctionObject(functionname,linkagename),base, progname);
+                    vector<InstructionObject> addresses = ExtractAddresses(FunctionObject(functionname,linkagename),base, progname);
                     FunctionObjects.emplace_back(FunctionObject(functionname,linkagename,addresses));
 
             }

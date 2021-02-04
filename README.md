@@ -46,3 +46,18 @@ The output is expressed through a .csv file. Each line represents a run in which
 - [CompareFiles](./Documentation/CompareFiles.md)
 - [Debugee](./Documentation/Debugee.md)
 
+
+
+
+
+
+## Bibliography
+
+-  The core functionality of this project is a readaptation of this tutorial:
+https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/
+
+- The samples programs found in ./debugeee have been take from
+http://vhosts.eecs.umich.edu/mibench/
+
+
+

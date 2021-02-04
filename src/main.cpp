@@ -9,7 +9,8 @@
 #include "./Debugger/Debugger.h"
 #include <sys/uio.h>
 #include<experimental/filesystem>
-#include <libexplain/ptrace.h>
+#include "./InstructionObject/InstructionObject.h"
+
 using namespace std;
 
 
@@ -52,25 +53,15 @@ int main(int argc, char ** argv){
         
         vector<FunctionObject> functionObjects = extractObjects(pid,argv[1]);
         // filesystem::exists("helloworld.txt");
-        long long realaddress = static_cast<long long>(functionObjects[0].getaddresses()[0]);
-        int64_t data = ptrace(PTRACE_PEEKTEXT, pid, realaddress,0);
-        cout << data << endl;
-        cout << errno << endl;
-        //fprintf(stderr, "%s\n", explain_ptrace(PTRACE_PEEKTEXT, pid,realaddress,));
-        if(data == EBUSY)
-            cout << "Ebusy\n";
-        if(data == EFAULT)
-            cout << "EFAULT\n" ;
-        if(data == EINVAL)
-            cout << "EINVAL\n";
+        // return 1;
         
 
         for(auto func: functionObjects){
             cout << func.getname() << endl;
             for(auto addr : func.getaddresses())
-                cout << hex << addr << endl;
+                cout << hex << addr.getAddress() << endl;
         }
-        return 1;
+        // return 1;
         cout << "Here\n" ;
         // return 1;
         int ptraceContReturnValue = ptrace(PTRACE_CONT, pid, nullptr, nullptr);
@@ -87,7 +78,7 @@ int main(int argc, char ** argv){
         
         
         //TODO: remove goldenoutput and injectedoutput files after comparing them
-            remove("goldenoutput.txt");
+        remove("goldenoutput.txt");
 
         
         

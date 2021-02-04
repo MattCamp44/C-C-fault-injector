@@ -13,7 +13,7 @@
 #include<stdio.h>
 #include "../Output_functions/comparefiles.h"
 #include<fstream>
-
+#include "../InstructionObject/InstructionObject.h"
 
 
 
@@ -40,14 +40,18 @@ void * resetThread(void * p){
     // cout << "[Thread] i'm the killer thread" << endl;
     struct params * para;
     para = (struct params *) p;
-    int exit;
-    sleep(para->goldenExTime * para->molt);
+    int exit;   
+    // cout << "thread starts sleeping for " << para->goldenExTime * para->molt <<   "...\n";
+    // sleep(para->goldenExTime * para->molt);
+    // sleep(1);
+    // usleep(1000);
+    // cout << "thread woke up\n";
 
     if(kill(para->pid, SIGKILL) == 0){
-        cout << "[Thread] now i kill the child process" << endl;
+        // cout << "[Thread] now i kill the child process" << endl;
         exit = 1;
     }else{
-        cout << "[Thread] child process is immortal" << endl;
+        // cout << "[Thread] child process is immortal" << endl;
         exit = -1;
     }
 
@@ -58,24 +62,24 @@ void * resetThread(void * p){
 
 
 
-void EnableInjectionPoints(int pid, vector<unsigned long int> addresses ){
+// void EnableInjectionPoints(int pid, vector<unsigned long int> addresses ){
 
-    vector<InjectionPoint> InjectionPoints;
+//     vector<InjectionPoint> InjectionPoints;
 
-    for(auto a : addresses)
-        InjectionPoints.emplace_back(InjectionPoint(pid,a));
+//     for(auto a : addresses)
+//         InjectionPoints.emplace_back(InjectionPoint(pid,a));
 
-    for(auto i : InjectionPoints)
-        i.InjectFirstBit();
+//     for(auto i : InjectionPoints)
+//         i.InjectFirstBit();
 
 
-}
-void EnableInjectionPoint(int pid, unsigned long int address ){
-
-    
+// }
+void EnableInjectionPoint(int pid, InstructionObject address ){
 
     
-    InjectionPoint injPoint = InjectionPoint(pid,address);
+
+    
+    InjectionPoint injPoint = InjectionPoint(pid,address.getAddress(),address.getLength());
 
     
     injPoint.InjectFirstBit();
@@ -90,19 +94,20 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
 
 
-    vector<unsigned long int> addresses;
+    // vector<unsigned long int> addresses;
 
-    for(auto addr : FunctionObjects[0].getaddresses()){
-        addresses.emplace_back(addr);
-    }
+    // for(auto addr : FunctionObjects[0].getaddresses()){
+    //     addresses.emplace_back(addr);
+    // }
 
     int pid;
     
     
 
     int index=0;
-    cout << FunctionObjects[0].getaddresses().size() << endl;
-    for(auto i : FunctionObjects[0].getaddresses()){
+    // cout << FunctionObjects[0].getaddresses().size() << endl;
+    for(auto FunctionObject : FunctionObjects)
+    for(auto i : FunctionObject.getaddresses()){
         for( auto j = 0; j < NinjectionsPerAddress; j++ ){
     // for(auto i : myaddresses) {
         // cout << "Injecting " << hex << i << endl;
@@ -127,7 +132,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // cout << "Here\n";
             
             //Pop head
-            unsigned long int breakpointAddress = i;
+            unsigned long int breakpointAddress = i.getAddress();
             // addresses.erase(addresses.begin());
             EnableInjectionPoint(pid,i);
             BreakPoint breakpoint(pid,breakpointAddress);
@@ -141,7 +146,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
 
             waitpid(pid,nullptr,0);
-            
+            // cout << "Breakpoint here\n";
             //sleep(1);
             
 
@@ -157,7 +162,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             ptrace(PTRACE_SETREGS, pid, nullptr, &regs);
 
-            
+            // cout << "Before continuing..." << endl;
+            // sleep(1);
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             //To get from main..
@@ -165,22 +171,54 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             int maxTimerMultiplicator = 4;
 
             struct params para;
-            para.goldenExTime = 3;
+            para.goldenExTime = 1;
             para.molt = 1;
             para.pid = pid;
 
             pthread_t t1;
-
+            // cout << "Starting thread\n";
             if(pthread_create(&t1,NULL,resetThread,(void *) &para ) != 0){
                 cout << "[Parent] error creating the thread, exit.." << endl;
-                return ;
+                return ; //return error code
             }
 
             // Wait for program to exit
-            waitpid(pid,nullptr,0);
+            // sleep(3);
+
+            int status;
+
+            int waitPidReturn = waitpid(pid,&status,0);
+            // if(WIFSIGNALED(status)) cout << "Killed by signal " << WTERMSIG(status) << endl;
+            // cout << "Waitpid return first time: " << waitPidReturn << endl;
+            //Why two waitpid??
+            
 
             //kill thread 
-            pthread_cancel(t1);
+            // pthread_join(t1,NULL);
+
+            
+            pthread_cancel(t1); 
+
+            errno = 0;
+
+
+            // if(kill(pid, SIGKILL) == 0 ){
+
+            //     cout << "process was not killed..." << endl; 
+
+
+            // }
+            // else if(errno == ESRCH) 
+            // cout << "Process was already killed...\n"; 
+
+
+            // waitPidReturn = waitpid(pid,nullptr,0);
+            // cout << "Waitpid return second time: " << waitPidReturn << endl;
+
+            errno = 0;
+
+
+            
 
             // ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
@@ -222,15 +260,15 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
                 errorGenerated = 1;
                 cout<<"Errors\n";
             } else {
-                cout << ifile.peek() ;
-                cout<<"No errors\n";
+                // cout << ifile.peek() ;
+                // cout<<"No errors\n";
             }
             ifile.close();
             //appendLineOutputFile(  );
 
             remove("injectedoutput.txt");
             remove("injectedoutputstderr.txt");
-            cout << "Done injecting\n";
+            // cout << "Done injecting\n";
 
 
 
