@@ -1,2 +1,0 @@
-prova:	main.cpp	./InputParameters/InputParameters.h	./InputParameters/InputParameters.cpp	./InputParser/InputParser.h	./InputParser/InputParser.cpp
-	g++	-g	-pthread	-std=c++17 main.cpp	./InputParameters/InputParameters.h	./InputParameters/InputParameters.cpp	./InputParser/InputParser.h	./InputParser/InputParser.cpp	-o	prova

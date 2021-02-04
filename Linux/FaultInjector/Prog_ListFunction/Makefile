@@ -1,2 +1,0 @@
-prova:	main.cpp	./Extractor/Extractor.h	./Extractor/Extractor.cpp	./FunctionObject/FunctionObject.h	./FunctionObject/FunctionObject.cpp
-	g++	-g	-pthread	-std=c++17 main.cpp	-o	ListFunctions	./Extractor/Extractor.h	./Extractor/Extractor.cpp	./FunctionObject/FunctionObject.h	./FunctionObject/FunctionObject.cpp

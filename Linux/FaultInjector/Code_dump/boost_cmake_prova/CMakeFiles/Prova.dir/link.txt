@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/Prova.dir/Prova.cpp.o  -o Prova  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0 

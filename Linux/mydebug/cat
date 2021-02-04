@@ -1,6 +1,0 @@
-            auto data = ptrace(PTRACE_PEEKDATA, m_pid, m_addr, nullptr);
-            ptrace(PTRACE_POKEDATA, m_pid, m_addr, data_with_int3);
-            auto data = ptrace(PTRACE_PEEKDATA, m_pid, m_addr, nullptr);
-            ptrace(PTRACE_POKEDATA, m_pid, m_addr, restored_data);
-            ptrace(PTRACE_CONT, pid, nullptr, nullptr);
-        ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
