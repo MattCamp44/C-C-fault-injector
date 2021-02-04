@@ -97,19 +97,22 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
                     getline(ObjDumpFile, line); 
                     
                     functionname = line.substr(50);
-                    cout << functionname << endl;
+                    cout << "Function name:" << functionname << endl;
                     functionname.erase( remove( functionname.begin(), functionname.end(), '"') , functionname.end() );
 
                     if(functionname.find("main") == string::npos){
 
-                        getline(ObjDumpFile, line); 
-                        getline(ObjDumpFile, line); 
-                        getline(ObjDumpFile, line); 
+                        // getline(ObjDumpFile, line);
+                        // cout << "Check lines" << line << endl;
+                        // getline(ObjDumpFile, line); 
+                        // cout << "Check lines" << line << endl;
+                        // getline(ObjDumpFile, line); 
+                        // cout << "Check lines" << line << endl;
 
-                        linkagename = line.substr(50); 
-    
-                        linkagename.erase( remove( linkagename.begin(), linkagename.end(), '"') , linkagename.end() );
-
+                        // linkagename = line.substr(50); 
+                        // cout << "LInkagename:" << linkagename << endl;
+                        // linkagename.erase( remove( linkagename.begin(), linkagename.end(), '"') , linkagename.end() );
+                        linkagename = "<" + functionname + ">";
 
 
                 }

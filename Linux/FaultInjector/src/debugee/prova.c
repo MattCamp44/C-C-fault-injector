@@ -1,6 +1,29 @@
 #include<stdio.h>
 #include <unistd.h>
 
+int funcA(){
+
+    int a;
+
+    for(int i = 0; i < 20; i++ );
+
+    return 1;
+
+}
+
+
+int funcB(){
+
+    int b;
+
+    return 2;
+
+
+}
+
+
+
+
 int main(int argc, char **argv){
 
     // if(argc < 2){

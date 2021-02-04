@@ -216,6 +216,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             ifstream ifile;
             ifile.open("injectedoutputstderr.txt");
+            // If file exists and it is not empty -> error
             if(ifile && ifile.peek() != std::ifstream::traits_type::eof()) {
                 cout << ifile.peek() ;
                 errorGenerated = 1;
@@ -224,7 +225,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
                 cout << ifile.peek() ;
                 cout<<"No errors\n";
             }
-
+            ifile.close();
             //appendLineOutputFile(  );
 
             remove("injectedoutput.txt");

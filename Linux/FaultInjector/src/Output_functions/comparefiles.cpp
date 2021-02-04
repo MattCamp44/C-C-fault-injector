@@ -63,7 +63,8 @@ void compareFiles()
         ch1 = getc(fp1); 
         ch2 = getc(fp2); 
     } 
-  
+    fclose(fp1); 
+    fclose(fp2); 
     printf("Total Errors : %d\t", error); 
 } 
   

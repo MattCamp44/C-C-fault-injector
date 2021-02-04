@@ -63,14 +63,14 @@ int main(int argc, char ** argv){
             cout << "EFAULT\n" ;
         if(data == EINVAL)
             cout << "EINVAL\n";
-        // return 1;
+        
 
         for(auto func: functionObjects){
             cout << func.getname() << endl;
             for(auto addr : func.getaddresses())
                 cout << hex << addr << endl;
         }
-
+        return 1;
         cout << "Here\n" ;
         // return 1;
         int ptraceContReturnValue = ptrace(PTRACE_CONT, pid, nullptr, nullptr);
