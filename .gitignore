@@ -4,3 +4,4 @@ Linux/FaultInjector/Prove/prova
 Linux/FaultInjector/.vscode
 ./.vscode
 ./src/injector
+src/injector
