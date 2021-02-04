@@ -37,6 +37,7 @@ struct params {
 
 
 void * resetThread(void * p){
+    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL);
     // cout << "[Thread] i'm the killer thread" << endl;
     struct params * para;
     para = (struct params *) p;
@@ -48,6 +49,7 @@ void * resetThread(void * p){
     // cout << "thread woke up\n";
 
     if(kill(para->pid, SIGKILL) == 0){
+        printf("[Thread] now i kill the child process\n");
         // cout << "[Thread] now i kill the child process" << endl;
         exit = 1;
     }else{
@@ -111,12 +113,13 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
         for( auto j = 0; j < NinjectionsPerAddress; j++ ){
     // for(auto i : myaddresses) {
         // cout << "Injecting " << hex << i << endl;
+        vector<int> pids;
         pid = fork();
         if(pid){
             //Parent
             //Parte il thread
             waitpid(pid,nullptr,0);
-            
+            pids.emplace_back(pid);
             
 
             
@@ -171,8 +174,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             int maxTimerMultiplicator = 4;
 
             struct params para;
-            para.goldenExTime = 1;
-            para.molt = 1;
+            para.goldenExTime = 5;
+            para.molt = 2;
             para.pid = pid;
 
             pthread_t t1;
@@ -186,20 +189,66 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // sleep(3);
 
             int status;
+            int errorGenerated = 0;
+            
+
 
             int waitPidReturn = waitpid(pid,&status,0);
             int timeoutExpired = 0;
-            if(WIFSIGNALED(status) && WTERMSIG(status) == 8) 
+            cout << WIFSIGNALED(status) << " " << WTERMSIG(status) << " " << errno <<  endl;
+            cout << WIFEXITED(status) << " " << WEXITSTATUS(status) << endl;
+            cout << WIFSTOPPED(status) << " " << WSTOPSIG(status) << endl;
+
+
+
+            // A way to detect a stack smashing (since it is not directed to stderr). The values have been derived
+            // "empirically", we don't know if this works for similar errors or what these values mean
+            // if(WIFEXITED(status) == 0 && WEXITSTATUS(status)==6 && WIFSTOPPED(status)==1 && WSTOPSIG(status)==6)
+            //     errorGenerated = 1;
+
+
+            //Even better than above: if the process did not terminate normally something must have happened => error 
+            // (we don't even have to check the stderr?)
+            if(WIFEXITED(status) != 1)
+                errorGenerated = 1;
+
+
+
+            //WTERMSIG(status) == 9 => the process has been killed => timeout expired
+            if(WIFSIGNALED(status) && WTERMSIG(status) == 9) 
                 timeoutExpired=1;
+
+
+
             // cout << "Waitpid return first time: " << waitPidReturn << endl;
             //Why two waitpid??
-            
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
+            // waitpid(pid,&status,0);
 
             //kill thread 
-            // pthread_join(t1,NULL);
+            // void * thread_status;
+            // pthread_join(t1,&thread_status);
+
+            // if(status == 1)
+            //     cout << "Timeout expired" << endl;
 
             
             pthread_cancel(t1); 
+            // waitpid(pid,&status,0);
+
+            while (!WIFEXITED(status) && !WIFSIGNALED(status) && !WIFSTOPPED(status))
+                waitPidReturn = waitpid(pid,&status,0);
+
+            
+           
 
             errno = 0;
 
@@ -250,11 +299,10 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // cout << fgoldenoutput << endl;
             // cout << finjectedoutput << endl;
 
-            kill(pid, SIGKILL);
+            
 
             int comparefiles = compareFiles();
 
-            int errorGenerated = 0;
 
             ifstream ifile;
             ifile.open("injectedoutputstderr.txt");
@@ -274,7 +322,11 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             remove("injectedoutputstderr.txt");
             // cout << "Done injecting\n";
             int runiscorrect = (!comparefiles && !errorGenerated && !timeoutExpired) ? 1 : 0;
-            cout << FunctionObject.getname() << "," << i.getAddress() << "," <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << "Specified Timeout" << "," << timeoutExpired  << "," << errorGenerated << endl ;
+
+            for(auto p : pids)
+                kill(p,SIGKILL);
+
+            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << endl ;
 
 
 

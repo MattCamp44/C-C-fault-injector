@@ -22,7 +22,7 @@ int InjectionPoint::InjectFirstBit(){
     if(data == -1)
         cout << "PEEKDATA gone wrong\n";
     //  cout << hex << "Injectionpoint data: " << data << endl;
-    int bit = (std::rand() % (length*8) ) ;
+    int bit = (std::rand() % (length*4) ) ;
     // cout << "Injecting " << bit << " bit\n";
     data = data ^ ( 1 << bit );
     // data = data ^ (1 << 12);
