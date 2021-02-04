@@ -17,7 +17,7 @@ class InjectionPoint{
 
     InjectionPoint(int pid, unsigned long int address, int length );
 
-    void InjectFirstBit();
+    int InjectFirstBit();
     
     void Enable();
 

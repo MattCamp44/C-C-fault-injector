@@ -13,7 +13,7 @@ InjectionPoint::InjectionPoint(int pid, unsigned long int address, int length){
     this->length = length;
 }
 
-void InjectionPoint::InjectFirstBit(){
+int InjectionPoint::InjectFirstBit(){
 
     // intptr_t realaddress = this->address;
     // cout << "address " << address << endl ;
@@ -22,8 +22,8 @@ void InjectionPoint::InjectFirstBit(){
     if(data == -1)
         cout << "PEEKDATA gone wrong\n";
     //  cout << hex << "Injectionpoint data: " << data << endl;
-    int bit = (std::rand() % length ) ;
-    cout << "Injecting " << bit*8 << " bit\n";
+    int bit = (std::rand() % (length*8) ) ;
+    // cout << "Injecting " << bit << " bit\n";
     data = data ^ ( 1 << bit );
     // data = data ^ (1 << 12);
     // cout << hex << "Breakpoint data after xor: " << data << endl;
@@ -34,7 +34,7 @@ void InjectionPoint::InjectFirstBit(){
         // cout << hex << "Return poke: " << ret << endl;
     // cout << "InjectionPoint enabled\n";
     // cout << "STO INIETTANDO\n";
-
+    return bit;
 }
 
 

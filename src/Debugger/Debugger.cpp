@@ -42,7 +42,7 @@ void * resetThread(void * p){
     para = (struct params *) p;
     int exit;   
     // cout << "thread starts sleeping for " << para->goldenExTime * para->molt <<   "...\n";
-    // sleep(para->goldenExTime * para->molt);
+    sleep(para->goldenExTime * para->molt);
     // sleep(1);
     // usleep(1000);
     // cout << "thread woke up\n";
@@ -74,7 +74,7 @@ void * resetThread(void * p){
 
 
 // }
-void EnableInjectionPoint(int pid, InstructionObject address ){
+int EnableInjectionPoint(int pid, InstructionObject address ){
 
     
 
@@ -82,7 +82,7 @@ void EnableInjectionPoint(int pid, InstructionObject address ){
     InjectionPoint injPoint = InjectionPoint(pid,address.getAddress(),address.getLength());
 
     
-    injPoint.InjectFirstBit();
+    return injPoint.InjectFirstBit();
 
 
 }
@@ -134,7 +134,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             //Pop head
             unsigned long int breakpointAddress = i.getAddress();
             // addresses.erase(addresses.begin());
-            EnableInjectionPoint(pid,i);
+            int bit = EnableInjectionPoint(pid,i);
             BreakPoint breakpoint(pid,breakpointAddress);
             
             breakpoint.Enable();
@@ -188,7 +188,9 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             int status;
 
             int waitPidReturn = waitpid(pid,&status,0);
-            // if(WIFSIGNALED(status)) cout << "Killed by signal " << WTERMSIG(status) << endl;
+            int timeoutExpired = 0;
+            if(WIFSIGNALED(status) && WTERMSIG(status) == 8) 
+                timeoutExpired=1;
             // cout << "Waitpid return first time: " << waitPidReturn << endl;
             //Why two waitpid??
             
@@ -248,7 +250,9 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // cout << fgoldenoutput << endl;
             // cout << finjectedoutput << endl;
 
-            compareFiles();
+            kill(pid, SIGKILL);
+
+            int comparefiles = compareFiles();
 
             int errorGenerated = 0;
 
@@ -269,7 +273,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             remove("injectedoutput.txt");
             remove("injectedoutputstderr.txt");
             // cout << "Done injecting\n";
-
+            int runiscorrect = (!comparefiles && !errorGenerated && !timeoutExpired) ? 1 : 0;
+            cout << FunctionObject.getname() << "," << i.getAddress() << "," <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << "Specified Timeout" << "," << timeoutExpired  << "," << errorGenerated << endl ;
 
 
 
