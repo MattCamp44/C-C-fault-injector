@@ -42,7 +42,7 @@ The output is expressed through a .csv file. Each line represents a run in which
 
 - By running the injector you are running a program with unpredictably modified instruction. There is no way to know what those function may do to your machine. You may want to run this on a virtual machine. Be warned, we do not take any responsibility on the usage of our code.
 
-
+- The behavior of the system call upon which this code is based on, `ptrace()`, seems to be working quite differently across systems. We tested the code on several machines and in some of them the system call simply didn't work as expected. We have no idea of how to fix this, for now.
 
 ## Documentation
 
