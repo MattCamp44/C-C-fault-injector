@@ -14,7 +14,7 @@
 #include "../Output_functions/comparefiles.h"
 #include<fstream>
 #include "../InstructionObject/InstructionObject.h"
-
+#include <algorithm>
 
 
 using namespace std;
@@ -118,6 +118,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
         if(pid){
             //Parent
             //Parte il thread
+            pids.emplace_back(pid);
             waitpid(pid,nullptr,0);
             
 
@@ -210,7 +211,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // (we don't even have to check the stderr?)
             if(WIFEXITED(status) != 1){
                 errorGenerated = 1;
-                pids.emplace_back(pid);
+                
 
             }
                 
@@ -326,16 +327,22 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // cout << "Done injecting\n";
             int runiscorrect = (!comparefiles && !errorGenerated && !timeoutExpired) ? 1 : 0;
 
+            // This is really brute forcing killing all the previous preocesses for every run
+            // But it's the only way we've found not to have plenty of zombie processes
+            int waitpidreturn;
             for(auto p : pids){
-                cout << "Killing process " << p << endl;
+                // cout << "Killing process " << p << endl;
                 kill(p,SIGKILL);
-                waitpid(p,NULL,WNOHANG);
+                waitpidreturn = waitpid(p,NULL,WNOHANG);
+                cout << waitpidreturn << endl;
+                if(waitpidreturn == -1)
+                    pids.erase(remove(pids.begin(),pids.end(),p),pids.end());
             }
 
             // kill(pid,SIGKILL);
             // waitpid(pid,NULL,WNOHANG);
 
-            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << endl ;
+            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
 
 
 
