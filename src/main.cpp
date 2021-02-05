@@ -23,7 +23,7 @@ int main(int argc, char ** argv){
 
     if(argc < 2){
 
-        std::cout << "I need the debugee (compiled with -g)\n";
+        std::cout << "I need the debugee (compiled with -g) (and eventually its arguments )\n";
         return 1;
 
     }
@@ -33,12 +33,11 @@ int main(int argc, char ** argv){
     //     for(auto i = 1; i < argc; i++)
     //         argumentsVector[i] = argv[i];
     // }
-
     char * newargv[20];
-
-    for( auto i=1; i < argc; i++ ){
-        newargv[i-1] = argv[i];
-    }
+    if(argc > 2)
+        for(int iterator = 1; iterator < argc ; iterator++ )
+            newargv[iterator-1] = argv[iterator];
+    
 
     setbuf(stdout, 0);
     int pid;
@@ -71,11 +70,12 @@ int main(int argc, char ** argv){
         //Wait for the golden run to finish
         //Get offsets, timer etc.
         waitpid(pid,nullptr,0);
+        cout << "After waitpid\n";
         double glodenExecutionTime = (double)(clock() -tStart);
 
         int NinjectionsPerAddress = 2;
 
-        Debugger(functionObjects , argv[1], NinjectionsPerAddress,glodenExecutionTime);
+        Debugger(functionObjects , argv[1], NinjectionsPerAddress,glodenExecutionTime, newargv);
 
         
         

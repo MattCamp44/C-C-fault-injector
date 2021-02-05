@@ -80,6 +80,7 @@ vector<InstructionObject> ExtractAddresses(FunctionObject functionobject, unsign
                 //addresses_ui.emplace_back(stoull(s,nullptr,16) + base );
                 std::string::size_type sz = 0;
                 // addresses_ui.emplace_back(stoull(s,&sz,16) );
+                cout << addresses[s] << endl;
                 Instructions.emplace_back(InstructionObject(stoull(addresses[s],&sz,16),Lengths[s]));
             }
             return Instructions;
