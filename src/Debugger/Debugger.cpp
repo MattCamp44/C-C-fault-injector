@@ -47,7 +47,8 @@ void * resetThread(void * p){
 
     // The multiplicator, even at ridiculously high numbers, keeps on killing the child process -> +1
     // printf("Sleeping for %d\n",(int)(para->goldenExTime * para->molt)+1 );
-    sleep((long)(para->goldenExTime* 1000 * para->molt)+1);
+    // sleep((long)(para->goldenExTime* 1000 * para->molt)+1);
+    sleep(2);
     // sleep(1);
     // usleep(1000);
     // cout << "thread woke up\n";
