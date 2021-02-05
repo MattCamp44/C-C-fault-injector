@@ -104,7 +104,7 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
     string line;
     string linkagename;
     string functionname;
-
+    int maxiter = 0;
         while(getline(ObjDumpFile, line) ) { 
                 
             // cout << line << endl;
@@ -112,7 +112,7 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
            if (line.find(FIND_SYMBOL_STRING, 0) != string::npos) {
                     getline(ObjDumpFile, line); 
                     getline(ObjDumpFile, line); 
-                    
+                    while(line.find("DW_AT_name",0) == string::npos || maxiter++ < 20) getline(ObjDumpFile, line);
                     functionname = line.substr(50);
                     cout << "Function name:" << functionname << endl;
                     functionname.erase( remove( functionname.begin(), functionname.end(), '"') , functionname.end() );

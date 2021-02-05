@@ -55,7 +55,7 @@ int main(int argc, char ** argv){
         // filesystem::exists("helloworld.txt");
         // return 1;
         
-
+        return 1;
         for(auto func: functionObjects){
             cout << func.getname() << endl;
             for(auto addr : func.getaddresses())
