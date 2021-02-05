@@ -104,7 +104,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
     int pid;
     
-    
+    vector<int> pids;
 
     int index=0;
     // cout << FunctionObjects[0].getaddresses().size() << endl;
@@ -113,13 +113,12 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
         for( auto j = 0; j < NinjectionsPerAddress; j++ ){
     // for(auto i : myaddresses) {
         // cout << "Injecting " << hex << i << endl;
-        vector<int> pids;
+        
         pid = fork();
         if(pid){
             //Parent
             //Parte il thread
             waitpid(pid,nullptr,0);
-            pids.emplace_back(pid);
             
 
             
@@ -209,8 +208,12 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             //Even better than above: if the process did not terminate normally something must have happened => error 
             // (we don't even have to check the stderr?)
-            if(WIFEXITED(status) != 1)
+            if(WIFEXITED(status) != 1){
                 errorGenerated = 1;
+                pids.emplace_back(pid);
+
+            }
+                
 
 
 
@@ -323,8 +326,14 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // cout << "Done injecting\n";
             int runiscorrect = (!comparefiles && !errorGenerated && !timeoutExpired) ? 1 : 0;
 
-            for(auto p : pids)
+            for(auto p : pids){
+                cout << "Killing process " << p << endl;
                 kill(p,SIGKILL);
+                waitpid(p,NULL,WNOHANG);
+            }
+
+            // kill(pid,SIGKILL);
+            // waitpid(pid,NULL,WNOHANG);
 
             cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << endl ;
 
