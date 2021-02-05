@@ -45,8 +45,9 @@ void * resetThread(void * p){
 
 
 
-
-    sleep((para->goldenExTime * para->molt));
+    // The multiplicator, even at ridiculously high numbers, keeps on killing the child process -> +1
+    // printf("Sleeping for %d\n",(int)(para->goldenExTime * para->molt)+1 );
+    sleep((long)(para->goldenExTime* 1000 * para->molt)+1);
     // sleep(1);
     // usleep(1000);
     // cout << "thread woke up\n";
@@ -288,7 +289,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             //child
             freopen("injectedoutput.txt", "w", stdout);
             // freopen("injectedoutput.txt", "w", stderr);
-            freopen("injectedoutputstderr.txt", "w", stderr);
+            freopen("injectedoutputstderr.txt", "a", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
             // execv(argv[1],newargv);
