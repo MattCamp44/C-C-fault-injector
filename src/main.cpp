@@ -75,7 +75,7 @@ int main(int argc, char ** argv){
 
         int NinjectionsPerAddress = 2;
 
-        Debugger(functionObjects , argv[1], NinjectionsPerAddress,glodenExecutionTime, newargv);
+        Debugger(functionObjects , argv[1], NinjectionsPerAddress,glodenExecutionTime);
 
         
         

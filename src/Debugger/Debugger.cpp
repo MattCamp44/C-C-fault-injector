@@ -85,7 +85,8 @@ int EnableInjectionPoint(int pid, InstructionObject address ){
 
 
 
-void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress,double goldenExecutionTime, char ** newargv){
+void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress,double goldenExecutionTime){
+
 
 
     int totalinstructions = 0;
@@ -115,7 +116,6 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             progress++;
             pids.emplace_back(pid);
             waitpid(pid,nullptr,0);
-    cout << "Debugger\n";
             
 
             
@@ -293,7 +293,6 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             freopen("injectedoutputstderr.txt", "a", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
             execl(prog,prog,nullptr);
-            // execv(prog,newargv);
             // execv(argv[1],newargv);
 
         }
