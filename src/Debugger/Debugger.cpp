@@ -31,7 +31,7 @@ void continue_execution(int pid) {
 
 struct params {
     int pid; // pid of Deguee program
-    int goldenExTime; // time golden ex
+    double goldenExTime; // time golden ex
     int molt; // moltiplicator (input)
 };
 
@@ -42,8 +42,11 @@ void * resetThread(void * p){
     struct params * para;
     para = (struct params *) p;
     int exit;   
-    // cout << "thread starts sleeping for " << para->goldenExTime * para->molt <<   "...\n";
-    sleep(para->goldenExTime * para->molt);
+
+
+
+
+    sleep((para->goldenExTime * para->molt));
     // sleep(1);
     // usleep(1000);
     // cout << "thread woke up\n";
@@ -64,18 +67,7 @@ void * resetThread(void * p){
 
 
 
-// void EnableInjectionPoints(int pid, vector<unsigned long int> addresses ){
 
-//     vector<InjectionPoint> InjectionPoints;
-
-//     for(auto a : addresses)
-//         InjectionPoints.emplace_back(InjectionPoint(pid,a));
-
-//     for(auto i : InjectionPoints)
-//         i.InjectFirstBit();
-
-
-// }
 int EnableInjectionPoint(int pid, InstructionObject address ){
 
     
@@ -90,18 +82,25 @@ int EnableInjectionPoint(int pid, InstructionObject address ){
 }
 
 
-void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress){
+
+void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress,double goldenExecutionTime){
 
 
 
+    int totalinstructions = 0;
 
+    for(auto FunctionObject : FunctionObjects)
+        for(auto i : FunctionObject.getaddresses()){
+            for( auto j = 0; j < NinjectionsPerAddress; j++ ){
+                totalinstructions++;
+            }}
 
     
 
     int pid;
     
     vector<int> pids;
-
+    int progress = 0;
     int index=0;
     for(auto FunctionObject : FunctionObjects)
     for(auto i : FunctionObject.getaddresses()){
@@ -112,7 +111,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
         if(pid){
             //Parent
 
-           
+            progress++;
             pids.emplace_back(pid);
             waitpid(pid,nullptr,0);
             
@@ -162,15 +161,14 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             //To get from main..
-            int goldenExecutionTime = 100;
             int maxTimerMultiplicator = 4;
 
 
 
             // Thread that handles the timeout
             struct params para;
-            para.goldenExTime = 5;
-            para.molt = 2;
+            para.goldenExTime = goldenExecutionTime;
+            para.molt = 3;
             para.pid = pid;
 
             pthread_t t1;
@@ -279,9 +277,10 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // kill(pid,SIGKILL);
             // waitpid(pid,NULL,WNOHANG);
 
-            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
-
-
+            // cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
+           
+            printf("%d of %d injections...\r",progress,totalinstructions); 
+             
 
         }
 

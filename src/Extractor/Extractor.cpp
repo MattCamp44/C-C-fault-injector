@@ -11,12 +11,12 @@
 
 using namespace std;
 
-#define FIND_SYMBOL_STRING "subprogram"
+#define FIND_SYMBOL_STRING "DW_TAG_subprogram"
 
 vector<InstructionObject> ExtractAddresses(FunctionObject functionobject, unsigned long int base, char * progname){
     
     
-    cout << "Extract addresses with:" << functionobject.getlinkagename() << endl;
+    // cout << "Extract addresses with:" << functionobject.getlinkagename() << endl;
     vector<string> addresses;
     vector<unsigned long> addresses_ui;
     vector<InstructionObject> Instructions;
@@ -36,7 +36,7 @@ vector<InstructionObject> ExtractAddresses(FunctionObject functionobject, unsign
 
     // dumpPath.append(prognamestring);
 
-    cout << dumpPath << endl;
+    // cout << dumpPath << endl;
 
     objdumpfile.open(dumpPath,ios::in);
 
@@ -50,7 +50,7 @@ vector<InstructionObject> ExtractAddresses(FunctionObject functionobject, unsign
 
     while(getline(objdumpfile, line) ) { 
        if (line.find(functiObjectLinkageName, 0) != string::npos) {
-            cout << "Found in objdump: " << functionobject.getlinkagename() << endl;
+            // cout << "Found in objdump: " << functionobject.getlinkagename() << endl;
 
             while(line != ""){
                 getline(objdumpfile, line) ;
@@ -59,12 +59,12 @@ vector<InstructionObject> ExtractAddresses(FunctionObject functionobject, unsign
                     
                     
                     addresses.emplace_back(line.substr(2,6));
-                    cout << line.substr(10,22) ;
+                    // cout << line.substr(10,22) ;
 
                     for(char c : line.substr(10,22))
                         if(c != ' ')
                             instructionLength++;
-                    cout << instructionLength - 1 << endl;
+                    // cout << instructionLength - 1 << endl;
                     Lengths.emplace_back(instructionLength - 1);
 
                     
@@ -110,11 +110,14 @@ vector<FunctionObject> ExtractFunctionNames(fstream& ObjDumpFile, unsigned long 
             // cout << line << endl;
 
            if (line.find(FIND_SYMBOL_STRING, 0) != string::npos) {
-                    getline(ObjDumpFile, line); 
-                    getline(ObjDumpFile, line); 
-                    while(line.find("DW_AT_name",0) == string::npos || maxiter++ < 20) getline(ObjDumpFile, line);
+                    // getline(ObjDumpFile, line); 
+                    // getline(ObjDumpFile, line); 
+                    while(line.find("DW_AT_name",0) == string::npos && maxiter++ < 10) getline(ObjDumpFile, line);
+                    if(maxiter == 10) cout << "error\n";
+                    maxiter = 0;
+                    cout << line << endl;
                     functionname = line.substr(50);
-                    cout << "Function name:" << functionname << endl;
+                    // cout << "Function name:" << functionname << endl;
                     functionname.erase( remove( functionname.begin(), functionname.end(), '"') , functionname.end() );
 
                     if(functionname.find("main") == string::npos){
@@ -216,7 +219,7 @@ vector<FunctionObject> extractObjects(int pid,char * progname){
     
     dumpPath.append("/dwarfdump");
 
-    cout << dumpPath << endl;
+    // cout << dumpPath << endl;
 
     ObjDumpFile.open(dumpPath,ios::in);
 

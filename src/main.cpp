@@ -10,6 +10,7 @@
 #include <sys/uio.h>
 #include<experimental/filesystem>
 #include "./InstructionObject/InstructionObject.h"
+#include <time.h>
 
 using namespace std;
 
@@ -44,7 +45,7 @@ int main(int argc, char ** argv){
 
     if(pid = fork()){
         //parent
-        
+        clock_t tStart = clock();
 
         
         waitpid(pid,nullptr,0);
@@ -55,25 +56,26 @@ int main(int argc, char ** argv){
         // filesystem::exists("helloworld.txt");
         // return 1;
         
-        return 1;
-        for(auto func: functionObjects){
-            cout << func.getname() << endl;
-            for(auto addr : func.getaddresses())
-                cout << hex << addr.getAddress() << endl;
-        }
         // return 1;
-        cout << "Here\n" ;
+        // for(auto func: functionObjects){
+        //     cout << func.getname() << endl;
+        //     for(auto addr : func.getaddresses())
+        //         cout << hex << addr.getAddress() << endl;
+        // }
+        // return 1;
+        // cout << "Here\n" ;
         // return 1;
         int ptraceContReturnValue = ptrace(PTRACE_CONT, pid, nullptr, nullptr);
-        cout << "ptraceContReturnValue: " << ptraceContReturnValue << endl;
+        // cout << "ptraceContReturnValue: " << ptraceContReturnValue << endl;
 
         //Wait for the golden run to finish
         //Get offsets, timer etc.
         waitpid(pid,nullptr,0);
+        double glodenExecutionTime = (double)(clock() -tStart);
 
         int NinjectionsPerAddress = 2;
 
-        Debugger(functionObjects , argv[1], NinjectionsPerAddress);
+        Debugger(functionObjects , argv[1], NinjectionsPerAddress,glodenExecutionTime);
 
         
         
