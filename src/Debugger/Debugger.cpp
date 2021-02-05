@@ -96,61 +96,53 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
 
 
-    // vector<unsigned long int> addresses;
-
-    // for(auto addr : FunctionObjects[0].getaddresses()){
-    //     addresses.emplace_back(addr);
-    // }
+    
 
     int pid;
     
     vector<int> pids;
 
     int index=0;
-    // cout << FunctionObjects[0].getaddresses().size() << endl;
     for(auto FunctionObject : FunctionObjects)
     for(auto i : FunctionObject.getaddresses()){
         for( auto j = 0; j < NinjectionsPerAddress; j++ ){
-    // for(auto i : myaddresses) {
-        // cout << "Injecting " << hex << i << endl;
+    
         
         pid = fork();
         if(pid){
             //Parent
-            //Parte il thread
+
+           
             pids.emplace_back(pid);
             waitpid(pid,nullptr,0);
             
 
             
-            //addresses = AddressSelector(FunctionObjects);
-            //addresses[0] = i;
-            //addresses[1] = i;
             
-            // addresses.emplace_back(myaddressesinstruction[index++]);
-            // addresses.emplace_back(i);
-
-            // assert(!addresses.empty());
             
-            // cout << "Here\n";
-            
-            //Pop head
             unsigned long int breakpointAddress = i.getAddress();
-            // addresses.erase(addresses.begin());
-            int bit = EnableInjectionPoint(pid,i);
+
+
+
+            int InjectedBit = EnableInjectionPoint(pid,i);
+
+
+
             BreakPoint breakpoint(pid,breakpointAddress);
             
+
+
+
+
             breakpoint.Enable();
 
-            // sleep(1);
-            //Da qui il programma continua con il breakpoint inserito -> breakpoint e injection point sono inseriti in due momenti diversi damn
+            // From here the child process continues with the breakpoint inserted
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
 
-
+            // Wait for the child process to arrive at the breakpoint
             waitpid(pid,nullptr,0);
-            // cout << "Breakpoint here\n";
-            //sleep(1);
+            
             
 
             user_regs_struct regs;
@@ -158,46 +150,48 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             breakpoint.Release();
 
+            //Get current registers
             ptrace(PTRACE_GETREGS, pid, nullptr, &regs);
 
             //reset program counter
             regs.rip = breakpointAddress ;
-
             ptrace(PTRACE_SETREGS, pid, nullptr, &regs);
 
-            // cout << "Before continuing..." << endl;
-            // sleep(1);
+
+            //The child process proceeds with the injected instruction    
             ptrace(PTRACE_CONT, pid, nullptr, nullptr);
 
             //To get from main..
             int goldenExecutionTime = 100;
             int maxTimerMultiplicator = 4;
 
+
+
+            // Thread that handles the timeout
             struct params para;
             para.goldenExTime = 5;
             para.molt = 2;
             para.pid = pid;
 
             pthread_t t1;
-            // cout << "Starting thread\n";
+            
             if(pthread_create(&t1,NULL,resetThread,(void *) &para ) != 0){
                 cout << "[Parent] error creating the thread, exit.." << endl;
                 return ; //return error code
             }
 
-            // Wait for program to exit
-            // sleep(3);
+            
 
             int status;
             int errorGenerated = 0;
             
 
-
+            // Wait for the child process to terminate
             int waitPidReturn = waitpid(pid,&status,0);
-            int timeoutExpired = 0;
-            cout << WIFSIGNALED(status) << " " << WTERMSIG(status) << " " << errno <<  endl;
-            cout << WIFEXITED(status) << " " << WEXITSTATUS(status) << endl;
-            cout << WIFSTOPPED(status) << " " << WSTOPSIG(status) << endl;
+
+
+
+            
 
 
 
@@ -211,138 +205,81 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // (we don't even have to check the stderr?)
             if(WIFEXITED(status) != 1){
                 errorGenerated = 1;
-                
-
             }
                 
 
+                
+
+            int timeoutExpired = 0;
 
 
             //WTERMSIG(status) == 9 => the process has been killed => timeout expired
-            if(WIFSIGNALED(status) && WTERMSIG(status) == 9) 
+            if(WIFSIGNALED(status) && WTERMSIG(status) == 9){
                 timeoutExpired=1;
+                //The child process has been killed -> The thread has terminated
+                pthread_join(t1,NULL);
+            } 
 
 
-
-            // cout << "Waitpid return first time: " << waitPidReturn << endl;
-            //Why two waitpid??
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-            // waitpid(pid,&status,0);
-
-            //kill thread 
-            // void * thread_status;
-            // pthread_join(t1,&thread_status);
-
-            // if(status == 1)
-            //     cout << "Timeout expired" << endl;
 
             
-            pthread_cancel(t1); 
-            // waitpid(pid,&status,0);
 
-            while (!WIFEXITED(status) && !WIFSIGNALED(status) && !WIFSTOPPED(status))
-                waitPidReturn = waitpid(pid,&status,0);
+            //Cancel the timeout thread
+            pthread_cancel(t1); 
+
+            
 
             
            
 
-            errno = 0;
-
-
-            // if(kill(pid, SIGKILL) == 0 ){
-
-            //     cout << "process was not killed..." << endl; 
-
-
-            // }
-            // else if(errno == ESRCH) 
-            // cout << "Process was already killed...\n"; 
-
-
-            // waitPidReturn = waitpid(pid,nullptr,0);
-            // cout << "Waitpid return second time: " << waitPidReturn << endl;
-
-            errno = 0;
-
-
             
-
-            // ptrace(PTRACE_CONT, pid, nullptr, nullptr);
-
-            // waitpid(pid,nullptr,0);
-            // ptrace(PTRACE_CONT, pid, nullptr, nullptr);
-
-            //waitpid(pid,nullptr,0);
-            //cout << "Program counter after continue: " << regs.rip << endl;
-            //waitpid(pid,nullptr,0);
-            //for(auto i : FunctionObjects[0].getaddresses())
-                //cout << i << " : " <<ptrace(PTRACE_PEEKDATA, pid, i, nullptr) << endl;
-
-            //continue_execution(pid);
-            // addresses.erase(addresses.begin());
-
-            //Compare the two files
-
-            //popen("diff goldenoutput.txt injectedoutput.txt")
-            // ....read output and put on csvfile
-            // fstream objdumpfile;
-            // objdumpfile.open("./Extractor/ObjectFiles/prova/objdump",ios::in);
-            // fstream fgoldenoutput;
-            // fgoldenoutput.open("../goldenoutput.txt",ios::in);            
-            // fstream finjectedoutput;
-            // finjectedoutput.open("./injectedoutput.txt",ios::in);
-
-            // cout << fgoldenoutput << endl;
-            // cout << finjectedoutput << endl;
-
-            
-
+            // Compare the stdout of the golden run and the injected run -> return number of different chars
             int comparefiles = compareFiles();
 
 
-            ifstream ifile;
-            ifile.open("injectedoutputstderr.txt");
-            // If file exists and it is not empty -> error
-            if(ifile && ifile.peek() != std::ifstream::traits_type::eof()) {
-                cout << ifile.peek() ;
-                errorGenerated = 1;
-                cout<<"Errors\n";
-            } else {
-                // cout << ifile.peek() ;
-                // cout<<"No errors\n";
-            }
-            ifile.close();
-            //appendLineOutputFile(  );
+
+            // The commented section below was supposed to detect an error by checking if
+            // stderr of the child process (redirected to injectedoutputstderr.txt) is 
+            // empty or not. We used another strategy but this may come handy
+
+            // ifstream ifile;
+            // ifile.open("injectedoutputstderr.txt");
+            // // If file exists and it is not empty -> error
+            // if(ifile && ifile.peek() != std::ifstream::traits_type::eof()) {
+            //     cout << ifile.peek() ;
+            //     errorGenerated = 1;
+            // } else {
+            //     // cout << ifile.peek() ;
+            //     // cout<<"No errors\n";
+            // }
+            // ifile.close();
+            // remove("injectedoutputstderr.txt");
+            
 
             remove("injectedoutput.txt");
-            remove("injectedoutputstderr.txt");
             // cout << "Done injecting\n";
             int runiscorrect = (!comparefiles && !errorGenerated && !timeoutExpired) ? 1 : 0;
 
-            // This is really brute forcing killing all the previous preocesses for every run
+            // This is really brute forcing killing the last 10 preocesses for every run
             // But it's the only way we've found not to have plenty of zombie processes
             int waitpidreturn;
-            for(auto p : pids){
+           
+            int beginpoint = pids.size() < 10 ? 0 : pids.size() - 10;
+            int endpoint = pids.size();
+
+            for(auto p = beginpoint; p < endpoint ; p++){
                 // cout << "Killing process " << p << endl;
-                kill(p,SIGKILL);
-                waitpidreturn = waitpid(p,NULL,WNOHANG);
-                cout << waitpidreturn << endl;
-                if(waitpidreturn == -1)
-                    pids.erase(remove(pids.begin(),pids.end(),p),pids.end());
+                kill(pids[p],SIGKILL);
+                waitpidreturn = waitpid(pids[p],NULL,WNOHANG);
+                // cout << waitpidreturn << endl;
+                // if(waitpidreturn == -1)
+                //     pids.erase(remove(pids.begin(),pids.end(),p),pids.end());
             }
 
             // kill(pid,SIGKILL);
             // waitpid(pid,NULL,WNOHANG);
 
-            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  bit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
+            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
 
 
 
