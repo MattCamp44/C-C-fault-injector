@@ -85,7 +85,7 @@ int EnableInjectionPoint(int pid, InstructionObject address ){
 
 
 
-void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress,double goldenExecutionTime){
+void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int NinjectionsPerAddress,double goldenExecutionTime,char ** newargv){
 
 
 
@@ -292,9 +292,10 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // freopen("injectedoutput.txt", "w", stderr);
             freopen("injectedoutputstderr.txt", "a", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
-            execl(prog,prog,nullptr);
-            // execv(argv[1],newargv);
-
+            // execl(prog,prog,nullptr);
+            execv(prog,newargv);
+            pritnf("Execv failed\n");
+            exit(1);
         }
     }
 

@@ -192,9 +192,9 @@ unsigned long int getBaseAddress(int pid){
 
     std::string::size_type sz = 0; 
 
-    base = stoull(baseaddr,&sz,16);
+    // base = stoull(baseaddr,&sz,16);
 
-    
+    base =0;
 
     return base;
 

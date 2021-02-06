@@ -9,7 +9,7 @@
 
 
 
-void Debugger( vector<FunctionObject> FunctionObjects , char * prog, int NinjectionsPerAddress,double goldenExecutionTime );
+void Debugger( vector<FunctionObject> FunctionObjects , char * prog, int NinjectionsPerAddress,double goldenExecutionTime, char ** newargv );
 
 
 
