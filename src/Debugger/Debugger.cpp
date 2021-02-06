@@ -281,7 +281,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             // cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
            
-            printf("%d of %d injections...\r",progress,totalinstructions); 
+            printf("%d of %d injections...      \r",progress,totalinstructions); 
              
 
         }
