@@ -22,10 +22,17 @@ using namespace std;
 int main(int argc, char ** argv){
 
 
+    char * newargv[20];
+    
+    for(int j = 0; j < 20; j++)
+        newargv[j] = (char *) malloc( 1080*sizeof(char) );
+
+    
     if(argc < 2){
 
         std::cout << "I need the debugee (compiled with -g) (and eventually its arguments )\n";
         return 1;
+        
 
     }
     
@@ -34,17 +41,25 @@ int main(int argc, char ** argv){
     //     for(auto i = 1; i < argc; i++)
     //         argumentsVector[i] = argv[i];
     // }
-    char * newargv[20];
     
-    for(int j = 0; j < 20; j++)
-        newargv[j] = (char *) malloc( 1080*sizeof(char) );
+    if(argc == 2){
+        newargv[0] = argv[1];
+        newargv[1] = NULL;
+
+        // cout << newargv[0] << "," << newargv[1] << endl;
+        // return 1;
+    }
+
 
     if(argc > 2){
 
-        for(int iterator = 2; iterator < argc - 2 ; iterator++ )
-            strcpy(newargv[iterator-2], argv[iterator]);
+        for(int iterator = 1; iterator < argc - 1 ; iterator++ )
+            strcpy(newargv[iterator-1], argv[iterator]);
         newargv[argc -1] = NULL;
     }
+
+
+    
 
     setbuf(stdout, 0);
     int pid;
@@ -108,7 +123,7 @@ int main(int argc, char ** argv){
         // execl(argv[1],argv[1],nullptr);
         execv(argv[1],newargv);
         
-        pritnf("Execv failed\n");
+        cout << "execv failed\n"; 
         exit(1);
     }
 

@@ -33,6 +33,8 @@ The output is expressed through a .csv file. Each line represents a run in which
 |  Function or variable name the address belongs to  | Address that has been injected   | Nth bit injected  | The run did not show any misbehavior compared to the golden run. If its value is 1 the next fields are irrelevant and set to 0  | The run's standard output is different from the golden run's one   | Number of different chars between golden and injected output, to quantify the difference between the two output | User Specified timeout   |The specified timeout has expired  | The program has written something on stderr    |
 
 
+| Function/variable name  | Function or variable name the address belongs to  |
+| :------------- | :----------: |
 
 ## Notes and remarks
 
