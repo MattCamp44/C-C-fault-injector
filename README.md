@@ -71,7 +71,7 @@ The output is expressed through a .csv file. Each line represents a run in which
 
 ## Bibliography
 
--  The core functionality of this project is a readaptation of this tutorial:
+-  We learnt about ptrace here:
 https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/
 
 - The samples programs found in ./debugeee have been take from
