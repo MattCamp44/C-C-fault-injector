@@ -13,6 +13,8 @@
 #include <time.h>
 #include "string.h"
 #include "stdlib.h"
+#include <fstream>
+
 using namespace std;
 
 
@@ -58,8 +60,26 @@ int main(int argc, char ** argv){
         newargv[argc -1] = NULL;
     }
 
+    vector<int> inputParameters;
+    fstream inputFile;
+    inputFile.open("inputfile",ios::in);
 
-    
+    if (inputFile.is_open()){   
+      string tp;
+      while(getline(inputFile, tp)){  
+        inputParameters.emplace_back(stoi(tp));
+      }
+      inputFile.close(); 
+
+    }
+
+    if(inputParameters.size() != 2){
+
+        cout << "Not enough parameters in inputfile\n";
+        return 1;
+
+    }
+
 
     setbuf(stdout, 0);
     int pid;
@@ -95,7 +115,8 @@ int main(int argc, char ** argv){
         cout << "After waitpid\n";
         double glodenExecutionTime = (double)(clock() -tStart);
         // return 1;
-        int NinjectionsPerAddress = 2;
+        int NinjectionsPerAddress = inputParameters[0];
+        int goldenTimeMultiplicator = inputParameters[1];
 
         Debugger(functionObjects , argv[1], NinjectionsPerAddress,glodenExecutionTime,newargv);
 
