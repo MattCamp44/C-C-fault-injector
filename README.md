@@ -37,7 +37,7 @@ The output is expressed through a .csv file. Each line represents a run in which
 | :------------- | :----------: |
 | Function/variable name  | Function or variable name the address belongs to  |
 | Address  | Address that has been injected  |
-| Injected bit | Nth bit injected  |
+| Injected bit | Nth bit injected. If set to `-1` the injection was not successful (ptrace(PEEKDATA,...) or ptrace(POKEDATA,...) failed).  |
 | Function/variable name  | Function or variable name the address belongs to  |
 | Function/variable name  | Function or variable name the address belongs to  |
 | Function/variable name  | Function or variable name the address belongs to  |

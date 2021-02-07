@@ -66,7 +66,7 @@ int compareFiles()
     fclose(fp1); 
     fclose(fp2); 
     // if(error != 0)
-        printf("Total Errors : %d\n", error); 
+        // printf("Total Errors : %d\n", error); 
     return error;
 } 
   
