@@ -278,9 +278,9 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             // kill(pid,SIGKILL);
             // waitpid(pid,NULL,WNOHANG);
-
-            cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ? 1 : 0) << "," << comparefiles << "," << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
-           
+            // if(compareFiles == 0)
+                cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ) << ","  << comparefiles << ","  << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
+            // else cout << compareFiles << endl;
             printf("%d of %d injections...      \r",progress,totalinstructions); 
              
 
