@@ -5,3 +5,4 @@ Linux/FaultInjector/.vscode
 ./.vscode
 ./src/injector
 src/injector
+*.csv
