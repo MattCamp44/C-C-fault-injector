@@ -5,6 +5,10 @@ The informations are extracted from the `dwarfdump` and the `objdump` files gene
 The dwarfdump file is used to extract the names of the functions to be injected, this happens inside. These function names are then used to extract the addresses from the objdump file.
 
 Functions:
+
+
+| Function name | Description  |
+| :------------- | :----------: |
 |  extractObjects | Main functions that starts the extraction. Gets the vector of `FunctionObject` from `ExtractFunctionNames` and returns it. |
 | ExtractFunctionNames | Extracts the function names from `dwarfdump file`. The function then calls the `ExtractAddresses` function|
 | ExtractAddresses | Extracts the addresses from objdump file given the function name |
