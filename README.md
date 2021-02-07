@@ -8,8 +8,7 @@ A software fault injector for C and C++ programs.
 
 ## Dependencies
 
-- Boost
-    https://www.boost.org/doc/libs/1_75_0/more/getting_started/index.html
+
 - Dwarfdump
     
 
