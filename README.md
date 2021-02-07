@@ -38,10 +38,11 @@ The output is expressed through a .csv file. Each line represents a run in which
 | Function/variable name  | Function or variable name the address belongs to  |
 | Address  | Address that has been injected  |
 | Injected bit | Nth bit injected. If set to `-1` the injection was not successful (ptrace(PEEKDATA,...) or ptrace(POKEDATA,...) failed).  |
-| Function/variable name  | Function or variable name the address belongs to  |
-| Function/variable name  | Function or variable name the address belongs to  |
-| Function/variable name  | Function or variable name the address belongs to  |
-| Function/variable name  | Function or variable name the address belongs to  |
+| Run is correct  | ==1 : The run did not show any misbehavior.   |
+| Output is different  | ==1:  The run's standard output is different from the golden run's one  |
+|  Number of different chars | Number of different chars between golden and injected output, to quantify the difference between the two output  |
+|  Specified timeout | User Specified timeout  |
+|  |  |
 
 ## Notes and remarks
 

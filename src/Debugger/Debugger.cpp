@@ -98,6 +98,18 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             }}
 
     
+    fstream outputFile;
+    string outputFilePath = "./output/";
+    string prognamestring = prog;
+    string progNameWithoutPath = prognamestring.substr(prognamestring.find_last_of("/\\") + 1);
+    outputFilePath.append(progNameWithoutPath);
+    outputFilePath.append("/injectorReport.csv");
+    cout << outputFilePath << endl;
+
+    outputFile.open(outputFilePath,ios::out | ios::app); 
+     
+
+
 
     int pid;
     
@@ -279,7 +291,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // kill(pid,SIGKILL);
             // waitpid(pid,NULL,WNOHANG);
             // if(compareFiles == 0)
-                cout << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ) << ","  << comparefiles << ","  << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
+                outputFile << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ) << ","  << comparefiles << ","  << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << endl ;
             // else cout << compareFiles << endl;
             printf("%d of %d injections...      \r",progress,totalinstructions); 
              
@@ -289,10 +301,8 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
         else{
             //child
             freopen("injectedoutput.txt", "w", stdout);
-            // freopen("injectedoutput.txt", "w", stderr);
             freopen("injectedoutputstderr.txt", "a", stderr);
             ptrace(PTRACE_TRACEME,0,nullptr,nullptr);
-            // execl(prog,prog,nullptr);
             execv(prog,newargv);
             cout << "Execv failed\n";
             exit(1);
