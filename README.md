@@ -18,10 +18,13 @@ make main (???)
 
 ## Usage
 Compile your executable with -g flag and place it into src/debugee/ then run   
-`make objectfiles debugee="name of your file"`
+`make objectfiles debugee="name of your file"`  
+
+This will generate the files needed to extract the addresses to be injected and a directory in which the output file will be placed.
+
 
 Run  
-`./Injector "name of your file"`
+`./Injector "path of your file"`
 
 
 
