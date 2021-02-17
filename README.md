@@ -48,7 +48,7 @@ The output is expressed through a .csv file. Each line represents a run in which
 
 ## Notes and remarks
 
-- Some error output from the injected program con be untraced because the error is sent to `/dev/tty`. one example of such error is `*** stack smashing detected ***: ./debugee/basicmath_small terminated`, that cna be replicated by running the `basicmath_small` sample program.
+- Some error output from the injected program can be untraced because the error is sent to `/dev/tty`. one example of such error is `*** stack smashing detected ***: ./debugee/basicmath_small terminated`, that can be replicated by running the `basicmath_small` sample program.
 
 - The main hardship in developing this project was that basically no oracle for testing exists, so we have no sample output to test our program against. This makes debugging and even understanding that the program is doing what is supposed to very hard
 
