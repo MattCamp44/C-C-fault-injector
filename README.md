@@ -48,11 +48,11 @@ The output is expressed through a .csv file. Each line represents a run in which
 
 ## Notes and remarks
 
-- Some error output from the injected program con be untraced because the error is sent to `/dev/tty`. one example of such error is `*** stack smashing detected ***: ./debugee/basicmath_small terminated`, that cna be replicated by running the `basicmath_small` sample program.
+- Some error output from the injected program can be untraced because the error is sent to `/dev/tty`. one example of such error is `*** stack smashing detected ***: ./debugee/basicmath_small terminated`, that can be replicated by running the `basicmath_small` sample program.
 
-- The main hardship in developing this project was that basically no oracle for testing exists, so we have no sample output to test our program against. This makes debugging and even understanding that the program is doing what is supposed to very hard
+- The main hardship in developing this project was that basically no oracle for testing exists, so we have no sample output to test our program against. This makes debugging and even understanding if the program is doing what is supposed to do very hard.
 
-- By running the injector you are running a program with unpredictably modified instruction. There is no way to know what those function may do to your machine. You may want to run this on a virtual machine. Be warned, we do not take any responsibility on the usage of our code.
+- By running the injector you are running a program with unpredictably modified instruction. There is no way to know what those function may cause to your machine. You may want to run this on a virtual machine. Be aware that we do not take any responsibility on the usage of our code.
 
 - The behavior of the system call upon which this code is based on, `ptrace()`, seems to be working quite differently across systems. We tested the code on several machines and in some of them the system call simply didn't work as expected. We have no idea of how to fix this, for now.
 
