@@ -1,0 +1,80 @@
+import matplotlib.pyplot as plt
+import csv
+import time
+
+inputFile = []
+
+
+def readFile():
+    with open("injectorReport.csv", "r") as Report:
+        reader = csv.reader(Report, delimiter=",")
+        for row in reader:
+            inputFile.append(row)
+    print(inputFile)
+
+def BarPlot(x, y,xlabel,ylabel,title):
+    fig = plt.figure()
+
+    #ax = fig.add_axes([0, 0, 1, 1])  # t : 0 ,z : 0 ,y : 1 ,x :1
+    ax = fig.add_subplot(111)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    ax.bar(x, y)
+
+    plt.show()
+
+def FunctionsGraph():
+
+    # this create a bargraph that display the number of injections made in that function
+    # another the number of correct execution
+    # another the number of hang
+
+    # during the simulation
+    listFunctions = [] # functions name
+    NumberOfRun = [] # number of entry simulation
+    NumberOfCorrect = [] # number of corrected execution
+    NumberOfUncorrected = []
+    NumberOfOutputDifferent = []
+    fname = ""
+
+    for row in inputFile: # extract name of functions
+        fname = row[0]
+        if fname not in listFunctions:
+            listFunctions.append(fname)
+
+
+    NumberOfRun = [0 for i in range(len(listFunctions))] # inizializzo liste
+    NumberOfCorrect = [0 for i in range(len(listFunctions))]
+    NumberOfHang = [0 for i in range(len(listFunctions))]
+    NumberOfUncorrected = [0 for i in range(len(listFunctions))]
+    NumberOfOutputDifferent = [0 for i in range(len(listFunctions))]
+
+    for row in inputFile:
+        fname = row[0]
+        pos = listFunctions.index(fname)
+        NumberOfRun[pos] = NumberOfRun[pos] + 1
+        if(row[11] == '1' and row[14] == '0'): # run with no problem
+            NumberOfCorrect[pos] = NumberOfCorrect[pos] + 1
+        if(row[11] == '0' and row[14] == '1'):
+            NumberOfHang[pos] = NumberOfHang[pos] + 1
+        if(row[11] == '0' and row[14] == '0'):
+            NumberOfUncorrected[pos] = NumberOfUncorrected[pos] + 1
+        if (row[4] == '1'):
+            NumberOfOutputDifferent[pos] = NumberOfOutputDifferent[pos] + 1
+    #print(listFunctions)
+    #print(NumberOfCorrect)
+    #print(NumberOfHang)
+
+    BarPlot(listFunctions,NumberOfRun,"Functions","Number of Injection","Tested functions")
+    BarPlot(listFunctions, NumberOfCorrect, "Functions", "Number of Correct functions", "Correct functions distribution")
+    BarPlot(listFunctions, NumberOfHang, "Functions", "Number of Hang", "Hang functions distribution")
+    BarPlot(listFunctions, NumberOfUncorrected, "Functions", "Number of Uncorrected", "Uncorrected functions distribution")
+    BarPlot(listFunctions, NumberOfOutputDifferent, "Functions", "Number of different output","Numeber of different output Functions")
+
+
+if __name__ == "__main__":
+    readFile()
+    #BarPlot(["a", "b"], [1, 2])
+    # first print the number of functions tested
+    FunctionsGraph()
