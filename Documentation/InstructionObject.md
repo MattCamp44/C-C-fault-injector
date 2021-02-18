@@ -6,4 +6,4 @@ functions:
 |Function Name|Description|
 |:----|:---:|
 |getAddress|retrieve address of instruction|
-|getLenght|retrieve lenght of the address|
+|getLength|retrieve length of the address|
