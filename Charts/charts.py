@@ -55,19 +55,18 @@ def FunctionsGraph():
         fname = row[0]
         pos = listFunctions.index(fname)
         NumberOfRun[pos] = NumberOfRun[pos] + 1
-        if(row[4] == '1' and row[8] == '0'): # run with no problem
+        if(row[3] == '1' ): # run with no problem
             NumberOfCorrect[pos] = NumberOfCorrect[pos] + 1
-        if(row[4] == '0' and row[8] == '1'):
+        if(row[3] == '0' and row[7] == '1'):
             NumberOfHang[pos] = NumberOfHang[pos] + 1
-        if(row[4] == '0' and row[8] == '0'):
+        if(row[3] == '0' ):
             NumberOfUncorrected[pos] = NumberOfUncorrected[pos] + 1
-        if (row[5] == '1'):
+        if (row[4] == '1'):
             NumberOfOutputDifferent[pos] = NumberOfOutputDifferent[pos] + 1
     #print(listFunctions)
     #print(NumberOfCorrect)
     #print(NumberOfHang)
 
-    ax = plt.subplot(111)
 
     
 
@@ -77,17 +76,49 @@ def FunctionsGraph():
     # BarPlot(listFunctions, NumberOfUncorrected, "Functions", "Number of Uncorrected", "Different output runs")
     # BarPlot(listFunctions, NumberOfOutputDifferent, "Functions", "Number of different output","Number of different output Functions")
 
+   
     fig = plt.figure()
     
     #ax = fig.add_axes([0, 0, 1, 1])  # t : 0 ,z : 0 ,y : 1 ,x :1
     ax = fig.add_subplot(111)
     ax.set_xlabel("Functions")
     ax.set_ylabel("N of runs")
-    ax.set_title("Runs overview")
+    ax.set_title("Faulty runs over total runs")
     # ax.bar(x, y)
-    ax.bar(listFunctions ,NumberOfRun,width=0.2, color='b', align='center')
-    ax.bar(listFunctions , NumberOfCorrect,width=0.2, color='g', align='center')
-    ax.bar(listFunctions , NumberOfHang,width=0.2, color='y', align='center')
+    ax.bar(listFunctions,NumberOfRun,width=0.2, color='b' )
+    ax.bar(listFunctions, NumberOfUncorrected,width=0.2, color='r' )
+    # ax.bar(listFunctions, NumberOfHang,width=0.2, color='y' )
+    plt.show()
+    
+    
+    
+    
+    fig = plt.figure()
+    
+    #ax = fig.add_axes([0, 0, 1, 1])  # t : 0 ,z : 0 ,y : 1 ,x :1
+    ax = fig.add_subplot(111)
+    ax.set_xlabel("Functions")
+    ax.set_ylabel("N of runs")
+    ax.set_title("Hung runs over faulty runs")
+    # ax.bar(x, y)
+    ax.bar(listFunctions,NumberOfUncorrected,width=0.2, color='r' )
+    ax.bar(listFunctions, NumberOfHang,width=0.2, color='k' )
+    # ax.bar(listFunctions, NumberOfHang,width=0.2, color='y' )
+    plt.show()
+    
+    
+    
+    fig = plt.figure()
+    
+    #ax = fig.add_axes([0, 0, 1, 1])  # t : 0 ,z : 0 ,y : 1 ,x :1
+    ax = fig.add_subplot(111)
+    ax.set_xlabel("Functions")
+    ax.set_ylabel("N of runs")
+    ax.set_title("Faulty output runs over faulty runs")
+    # ax.bar(x, y)
+    ax.bar(listFunctions,NumberOfUncorrected,width=0.2, color='r' )
+    ax.bar(listFunctions, NumberOfOutputDifferent,width=0.2, color='k' )
+    # ax.bar(listFunctions, NumberOfHang,width=0.2, color='y' )
     plt.show()
 
 
