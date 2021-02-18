@@ -35,16 +35,17 @@ The output is expressed through a .csv file. Each line represents a run in which
 |  Function or variable name the address belongs to  | Address that has been injected   | Nth bit injected  | The run did not show any misbehavior compared to the golden run. If its value is 1 the next fields are irrelevant and set to 0  | The run's standard output is different from the golden run's one   | Number of different chars between golden and injected output, to quantify the difference between the two output | User Specified timeout   |The specified timeout has expired  | The program has written something on stderr    |
 
 
-|Field |Meaning  |
-| :------------- | :----------: |
-| Function/variable name  | Function or variable name the address belongs to  |
-| Address  | Address that has been injected  |
-| Injected bit | Nth bit injected. If set to `-1` the injection was not successful (ptrace(PEEKDATA,...) or ptrace(POKEDATA,...) failed).  |
-| Run is correct  | ==1 : The run did not show any misbehavior.   |
-| Output is different  | ==1:  The run's standard output is different from the golden run's one  |
-|  Number of different chars | Number of different chars between golden and injected output, to quantify the difference between the two output  |
-|  Specified timeout | User Specified timeout  |
-|  |  |
+
+| Index |Field |Meaning  |
+| :------------- | :----------: | :----------: |
+|0| Function/variable name  | Function or variable name the address belongs to  |
+|1| Address  | Address that has been injected  |
+|2| Injected bit | Nth bit injected. If set to `-1` the injection was not successful (ptrace(PEEKDATA,...) or ptrace(POKEDATA,...) failed).  |
+|3| Run is correct  | ==1 : The run did not show any misbehavior.   |
+|4| Output is different  | ==1:  The run's standard output is different from the golden run's one  |
+|5|  Number of different chars | Number of different chars between golden and injected output, to quantify the difference between the two output  |
+|6|  Specified timeout | User Specified timeout  |
+|7|  |  |
 
 ## Notes and remarks
 
