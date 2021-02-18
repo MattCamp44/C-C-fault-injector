@@ -55,23 +55,40 @@ def FunctionsGraph():
         fname = row[0]
         pos = listFunctions.index(fname)
         NumberOfRun[pos] = NumberOfRun[pos] + 1
-        if(row[11] == '1' and row[14] == '0'): # run with no problem
+        if(row[4] == '1' and row[8] == '0'): # run with no problem
             NumberOfCorrect[pos] = NumberOfCorrect[pos] + 1
-        if(row[11] == '0' and row[14] == '1'):
+        if(row[4] == '0' and row[8] == '1'):
             NumberOfHang[pos] = NumberOfHang[pos] + 1
-        if(row[11] == '0' and row[14] == '0'):
+        if(row[4] == '0' and row[8] == '0'):
             NumberOfUncorrected[pos] = NumberOfUncorrected[pos] + 1
-        if (row[4] == '1'):
+        if (row[5] == '1'):
             NumberOfOutputDifferent[pos] = NumberOfOutputDifferent[pos] + 1
     #print(listFunctions)
     #print(NumberOfCorrect)
     #print(NumberOfHang)
 
-    BarPlot(listFunctions,NumberOfRun,"Functions","Number of Injection","Tested functions")
-    BarPlot(listFunctions, NumberOfCorrect, "Functions", "Number of Correct functions", "Correct functions distribution")
-    BarPlot(listFunctions, NumberOfHang, "Functions", "Number of Hang", "Hang functions distribution")
-    BarPlot(listFunctions, NumberOfUncorrected, "Functions", "Number of Uncorrected", "Uncorrected functions distribution")
-    BarPlot(listFunctions, NumberOfOutputDifferent, "Functions", "Number of different output","Numeber of different output Functions")
+    ax = plt.subplot(111)
+
+    
+
+    # BarPlot(listFunctions,NumberOfRun,"Functions","Number of Injection","Tested runs")
+    # BarPlot(listFunctions, NumberOfCorrect, "Functions", "Number of Correct functions", "Correct runs")
+    # BarPlot(listFunctions, NumberOfHang, "Functions", "Number of Hang", "Hang runs")
+    # BarPlot(listFunctions, NumberOfUncorrected, "Functions", "Number of Uncorrected", "Different output runs")
+    # BarPlot(listFunctions, NumberOfOutputDifferent, "Functions", "Number of different output","Number of different output Functions")
+
+    fig = plt.figure()
+    
+    #ax = fig.add_axes([0, 0, 1, 1])  # t : 0 ,z : 0 ,y : 1 ,x :1
+    ax = fig.add_subplot(111)
+    ax.set_xlabel("Functions")
+    ax.set_ylabel("N of runs")
+    ax.set_title("Runs overview")
+    # ax.bar(x, y)
+    ax.bar(listFunctions ,NumberOfRun,width=0.2, color='b', align='center')
+    ax.bar(listFunctions , NumberOfCorrect,width=0.2, color='g', align='center')
+    ax.bar(listFunctions , NumberOfHang,width=0.2, color='y', align='center')
+    plt.show()
 
 
 if __name__ == "__main__":
