@@ -194,7 +194,6 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             
 
             int status;
-            int errorGenerated = 0;
             
 
             // Wait for the child process to terminate
@@ -214,9 +213,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             //Even better than above: if the process did not terminate normally something must have happened => error 
             // (we don't even have to check the stderr?)
-            if(WIFEXITED(status) != 1){
-                errorGenerated = 1;
-            }
+           
                 
 
                 
@@ -269,7 +266,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
 
             remove("injectedoutput.txt");
             // cout << "Done injecting\n";
-            int runiscorrect = (!comparefiles && !errorGenerated && !timeoutExpired) ? 1 : 0;
+            int runiscorrect = (!comparefiles && !timeoutExpired) ? 1 : 0;
 
             // This is really brute forcing killing the last 10 preocesses for every run
             // But it's the only way we've found not to have plenty of zombie processes
@@ -290,7 +287,7 @@ void Debugger(vector<FunctionObject> FunctionObjects, char * prog, int Ninjectio
             // kill(pid,SIGKILL);
             // waitpid(pid,NULL,WNOHANG);
             // if(compareFiles == 0)
-            outputFile << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ) << ","  << comparefiles << ","  << goldenExecutionTime << "," << timeoutExpired  << "," << errorGenerated << "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << "," << WCOREDUMP(status) <<  endl ;
+            outputFile << FunctionObject.getname() << "," << hex << i.getAddress() << "," << dec <<  InjectedBit << "," << runiscorrect << "," << (comparefiles != 0 ) << ","  << comparefiles  << "," << timeoutExpired  <<  "," << WIFEXITED(status) << "," << WEXITSTATUS(status) << "," << WIFSIGNALED(status) << "," << WTERMSIG(status) << "," << WIFSTOPPED(status) << "," << WSTOPSIG(status) << "," << WCOREDUMP(status) <<  endl ;
             // else cout << compareFiles << endl;
             printf("%d of %d injections...      \r",progress,totalinstructions); 
              

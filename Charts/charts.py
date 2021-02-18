@@ -57,7 +57,7 @@ def FunctionsGraph():
         NumberOfRun[pos] = NumberOfRun[pos] + 1
         if(row[3] == '1' ): # run with no problem
             NumberOfCorrect[pos] = NumberOfCorrect[pos] + 1
-        if(row[3] == '0' and row[7] == '1'):
+        if(row[3] == '0' and row[6] == '1'):
             NumberOfHang[pos] = NumberOfHang[pos] + 1
         if(row[3] == '0' ):
             NumberOfUncorrected[pos] = NumberOfUncorrected[pos] + 1

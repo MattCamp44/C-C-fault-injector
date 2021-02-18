@@ -13,8 +13,7 @@ A software fault injector for C and C++ programs.
     
 
 ##  Installation
-Download the repository, go into src/ directory and use
-make main (???)
+
 
 ## Usage
 Compile your executable with -g flag and place it into src/debugee/ then run   
@@ -29,10 +28,8 @@ Run
 
 
 ## Output
-The output is expressed through a .csv file. Each line represents a run in which one address has been injected. Each row has the following form:
-| Function/variable name       | Address     | Injected bit |Run is correct     | Output is different     | Number of different chars   | Specified timeout |Timeout  | Error |
-| :------------- | :----------: | -----------: | :------------- | :----------: | -----------: |-----------: |-----------: |-----------: |
-|  Function or variable name the address belongs to  | Address that has been injected   | Nth bit injected  | The run did not show any misbehavior compared to the golden run. If its value is 1 the next fields are irrelevant and set to 0  | The run's standard output is different from the golden run's one   | Number of different chars between golden and injected output, to quantify the difference between the two output | User Specified timeout   |The specified timeout has expired  | The program has written something on stderr    |
+
+Output is written in `src/output/name_of_your_program/injectorReport.csv` as csv rows
 
 
 
@@ -44,8 +41,17 @@ The output is expressed through a .csv file. Each line represents a run in which
 |3| Run is correct  | ==1 : The run did not show any misbehavior.   |
 |4| Output is different  | ==1:  The run's standard output is different from the golden run's one  |
 |5|  Number of different chars | Number of different chars between golden and injected output, to quantify the difference between the two output  |
-|6|  Specified timeout | User Specified timeout  |
-|7|  |  |
+|6|  Timeout is expired | Child process has been terminated by timeout thread  |
+|7| WIFEXITED(status) | Return value of the indicated macro (status is the status recieved from the last waitpid)  |
+|8| WEXITSTATUS(status) | Return value of the indicated macro (status is the status recieved from the last waitpid)  |
+|9| WIFSIGNALED(status)  |Return value of the indicated macro (status is the status recieved from the last waitpid)   |
+|10|  WTERMSIG(status)  | Return value of the indicated macro (status is the status recieved from the last waitpid)  |
+|11|  WIFSTOPPED(status)  | Return value of the indicated macro (status is the status recieved from the last waitpid)  |
+|12|  WSTOPSIG(status)  | Return value of the indicated macro (status is the status recieved from the last waitpid)  |
+|13|  WCOREDUMP(status)  | Return value of the indicated macro (status is the status recieved from the last waitpid)  |
+
+For information about the status value: https://man7.org/linux/man-pages/man2/wait.2.html
+
 
 ## Notes and remarks
 
