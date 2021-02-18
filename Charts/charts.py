@@ -1,16 +1,17 @@
 import matplotlib.pyplot as plt
 import csv
 import time
+import sys
 
 inputFile = []
 
 
-def readFile():
-    with open("injectorReport.csv", "r") as Report:
+def readFile(fileName):
+    with open(fileName, "r") as Report:
         reader = csv.reader(Report, delimiter=",")
         for row in reader:
             inputFile.append(row)
-    print(inputFile)
+    
 
 def BarPlot(x, y,xlabel,ylabel,title):
     fig = plt.figure()
@@ -74,7 +75,14 @@ def FunctionsGraph():
 
 
 if __name__ == "__main__":
-    readFile()
-    #BarPlot(["a", "b"], [1, 2])
-    # first print the number of functions tested
+    
+    if(len(sys.argv) <= 1):
+        print("[Error] give me a csv report")
+        exit(1)
+
+    print("[Main] Starting script")
+    fileName = sys.argv[1]
+    readFile(fileName)
     FunctionsGraph()
+    exit(0)
+    print("[Main] Exit..")
