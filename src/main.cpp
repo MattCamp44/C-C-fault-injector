@@ -73,6 +73,12 @@ int main(int argc, char ** argv){
 
     }
 
+    // if(inputParameters.size() < 1){
+
+    //     cout << "Not enough parameters in inputfile\n";
+    //     return 1;
+
+    // }
     if(inputParameters.size() != 2){
 
         cout << "Not enough parameters in inputfile\n";

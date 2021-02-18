@@ -5,6 +5,13 @@ A software fault injector for C and C++ programs.
 
 ## Overview
 
+The program follows the following steps:
+- Extracts function names of the program, all the addresses of all the instructions and their length
+- Runs a golden run without injection
+- Runs the program N_injection_per_instruction (specified in `inputfile`) times for every instruction address of the program, each time with a flipped bit in at a random position.
+- Creates a report of the injections
+
+
 
 ## Dependencies
 
@@ -15,8 +22,16 @@ A software fault injector for C and C++ programs.
 ##  Installation
 
 
+
+- Edit `inputfile`
+    - First number: number of injections per address
+    - Second number: multiplicator of the golden run execution time, to set the timeout on hanging runs
+- Run `make injector`
+
+
+
 ## Usage
-Compile your executable with -g flag and place it into src/debugee/ then run   
+Compile your program with -g flag and place it into src/debugee/ then run   
 `make objectfiles debugee="name of your file"`  
 
 This will generate the files needed to extract the addresses to be injected and a directory in which the output file will be placed.
@@ -29,7 +44,7 @@ Run
 
 ## Output
 
-Output is written in `src/output/name_of_your_program/injectorReport.csv` as csv rows
+Output is written in `src/output/name_of_your_program/injectorReport.csv` as csv rows.
 
 
 
