@@ -8,4 +8,4 @@ Functions:
 |:----|:--:|
 |getName| retrive the name of the function|
 |getLinkageName|retrive the linkage name of the function|
-|getAddress|retrive the starting adress of the functioin|
+|getAddress|retrive the starting adress of the function|
