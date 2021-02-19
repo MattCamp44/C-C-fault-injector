@@ -82,13 +82,10 @@ For information about the status value: https://man7.org/linux/man-pages/man2/wa
 
 - [Extractor](./Documentation/Extractor.md)
 - [Debugger](./Documentation/Debugger.md)
-- [AddressSelector](./Documentation/AddressSelector.md)
 - [BreakPoint](./Documentation/Breakpoint.md)
 - [InjectionPoint](./Documentation/InjectionPoint.md)
 - [FunctionObject](./Documentation/FunctionObject.md)
 - [CompareFiles](./Documentation/CompareFiles.md)
-- [Debugee](./Documentation/Debugee.md)
-
 
 
 
@@ -99,7 +96,7 @@ For information about the status value: https://man7.org/linux/man-pages/man2/wa
 -  We learnt about ptrace here:
 https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/
 
-- The samples programs found in ./debugeee have been take from
+- The samples programs found in ./debugeee have been taken from
 http://vhosts.eecs.umich.edu/mibench/
 
 
