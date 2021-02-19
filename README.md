@@ -86,6 +86,8 @@ For information about the status value: https://man7.org/linux/man-pages/man2/wa
 - [InjectionPoint](./Documentation/InjectionPoint.md)
 - [FunctionObject](./Documentation/FunctionObject.md)
 - [CompareFiles](./Documentation/CompareFiles.md)
+- [InstructionObject](./Documentation/InstructionObject.md)
+
 
 
 
